@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fda81c46f7c09042877df5802faedda, type: 3}
+  m_Name: cDeckModel
+  m_EditorClassIdentifier: 
+  DeckMax: 14
+  m_selcModel:
+  - {fileID: 11400000, guid: 7028e4c2fe596464382f7e0752ef9433, type: 2}
+  - {fileID: 11400000, guid: 08037607708ba8d4aa0572b8a1d59ec7, type: 2}
+  - {fileID: 11400000, guid: c6875a2f6cfa90f49bcb55189ee9ddef, type: 2}
+  m_bcModel: {fileID: 11400000, guid: 2f36d88133df2564da6c468ee332f455, type: 2}

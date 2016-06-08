@@ -1,0 +1,52 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class cGameSceneManager : MonoBehaviour {
+
+	//ゲームシーン
+	public enum eGameScene{
+		GameScene_Title, //タイトルシーン
+		GameScene_Game, //ゲームシーン
+	}
+
+	private static GameObject m_SceneManager;
+
+	//現在のシーン
+	public eGameScene m_GameScene;
+
+	//シーン
+	public cSceneBase[] m_Scene;
+
+	void Awake(){
+		//ゲームシーンマネージャーは一つだけしか作らない
+		if (m_SceneManager == null) {
+			DontDestroyOnLoad (gameObject);
+
+			m_SceneManager = gameObject;
+		} else {
+			Destroy (gameObject);
+			return;
+		}
+
+		//フレームレート設定
+		//Application.targetFrameRate = 60;
+	}
+
+	// Use this for initialization
+	void Start () {
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		//返り値が現在のシーン番号と違う場合はシーンを切り替える
+
+		eGameScene nextScene = eGameScene.GameScene_Title;
+
+		m_Scene [1].SceneExec ();
+
+		if (nextScene != m_GameScene) {
+			UnityEngine.SceneManagement.SceneManager.LoadScene ((int)nextScene);
+			m_GameScene = nextScene;
+		}
+	}
+}
