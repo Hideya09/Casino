@@ -26,6 +26,8 @@ public class cEnemyDeckModel : ScriptableObject {
 			number = Random.Range (0, 14);
 		} while(m_Deck [number] == true);
 
+		m_Deck [number] = false;
+
 		m_bcModel.m_CardNumber = number;
 		m_bcModel.SetCard ();
 	}

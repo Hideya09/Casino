@@ -132,6 +132,8 @@ public class cGameScene : cSceneBase {
 	}
 
 	private void Calc(){
+		m_dModel.DuelEnd ();
+
 		int playerPower = m_dModel.GetBattleCardNumber ();
 		int enemyPower = m_edModel.GetBattleCardNumber ();
 
