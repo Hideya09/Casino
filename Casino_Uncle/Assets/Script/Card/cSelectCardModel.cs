@@ -32,7 +32,7 @@ public class cSelectCardModel : cCardModel {
 		m_BufPosition = m_Position;
 	}
 
-	public void ConfirmCard( Vector2 position ){
+	public void ConfirmCard(){
 		if (m_TapFlag == true) {
 			m_OutLineMode = eOutLineMode.eOutLineMode_None;
 
@@ -44,10 +44,13 @@ public class cSelectCardModel : cCardModel {
 			}
 		} else if (m_MoveFlag == true) {
 			m_TapFlag = true;
-			m_BufPosition = position;
 
 			m_Size = eSize.eSize_Large;
 		}
+	}
+
+	public void SetPosition( Vector2 position ){
+		m_BufPosition = position;
 	}
 
 	public void UnTapCard(){
@@ -60,7 +63,7 @@ public class cSelectCardModel : cCardModel {
 	public bool MoveSelectCard( Vector2 position ){
 		m_Position = position;
 
-		m_DrawMode = eDrawMode.eDrawMode_Front;
+		m_DrawMode = eDrawMode.eDrawMode_None;
 
 		m_Size = eSize.eSize_Medium;
 

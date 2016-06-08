@@ -13,12 +13,18 @@ public class cDeckModel : ScriptableObject {
 
 	private int m_SelectNumber;
 
+	public bool m_LastBattle{ get; private set; }
+
 	public void Init(){
+		m_bcModel.Init ();
+
 		m_Deck = new bool[DeckMax];
 
 		for (int i = 0; i < DeckMax; ++i) {
 			m_Deck[i] = false;
 		}
+
+		m_LastBattle = false;
 	}
 
 	public void RandomSet(){
@@ -26,6 +32,18 @@ public class cDeckModel : ScriptableObject {
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
 			random [i] = 14;
+		}
+
+		int deckCheck = 0;
+
+		for (int i = 0; i < DeckMax; ++i) {
+			if (m_Deck [i] == false) {
+				++deckCheck;
+			}
+		}
+
+		if (deckCheck == 3) {
+			m_LastBattle = true;
 		}
 
 		int setNumber = 0;

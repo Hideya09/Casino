@@ -10,6 +10,7 @@ public class cGameScene : cSceneBase {
 		eGameSceneList_Shuffle,
 		eGameSceneList_Select,
 		eGameSceneList_Move,
+		eGameSceneList_End,
 		eGameSceneList_FadeIn,
 	}
 
@@ -37,6 +38,15 @@ public class cGameScene : cSceneBase {
 			break;
 		case eGameSceneList.eGameSceneList_Move:
 			m_dModel.CardMove ();
+			++m_State;
+			break;
+		case eGameSceneList.eGameSceneList_End:
+			m_dModel.DuelEnd ();
+			if (m_dModel.m_LastBattle == true) {
+				m_State = eGameSceneList.eGameSceneList_FadeIn;
+			} else {
+				m_State = eGameSceneList.eGameSceneList_Shuffle;
+			}
 			break;
 		}
 		return cGameSceneManager.eGameScene.GameScene_Game;

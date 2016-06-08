@@ -16,14 +16,16 @@ public class cCardControl : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetMouseButtonDown (0)) {
-			if (m_HitFlag == false) {
+			if (m_HitFlag == true) {
+				m_cModel.SetPosition (Input.mousePosition);
+			} else {
 				m_cModel.UnTapCard ();
 			}
 		}
 
 		if (Input.GetMouseButtonUp (0)) {
 			if (m_HitFlag == true) {
-				m_cModel.ConfirmCard (Input.mousePosition);
+				m_cModel.ConfirmCard ();
 			}
 		}
 
