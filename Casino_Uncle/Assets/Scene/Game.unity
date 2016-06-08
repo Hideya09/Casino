@@ -868,6 +868,7 @@ GameObject:
   - 222: {fileID: 2100642497}
   - 114: {fileID: 2100642496}
   - 114: {fileID: 2100642494}
+  - 114: {fileID: 2100642495}
   m_Layer: 5
   m_Name: BattleCard2
   m_TagString: Untagged
@@ -906,6 +907,19 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
+--- !u!114 &2100642495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2100642492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c10cc0ab76c876e4f8d6f43a18e68d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_cModel: {fileID: 11400000, guid: be09d90e5c268104488305ca39649760, type: 2}
+  m_Sprite: {fileID: 11400000, guid: 0487766a3325e20489b885b02210fd35, type: 2}
 --- !u!114 &2100642496
 MonoBehaviour:
   m_ObjectHideFlags: 0

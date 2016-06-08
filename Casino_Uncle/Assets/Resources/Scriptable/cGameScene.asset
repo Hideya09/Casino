@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: cGameScene
   m_EditorClassIdentifier: 
   m_dModel: {fileID: 11400000, guid: 34d5ade43284197418d82362b2b74d50, type: 2}
+  m_edModel: {fileID: 11400000, guid: 68bfa3187d066dd4fa94cc4e1fb68b6c, type: 2}
+  m_gData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
