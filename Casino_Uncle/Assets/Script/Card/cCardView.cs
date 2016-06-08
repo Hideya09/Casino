@@ -14,6 +14,10 @@ public class cCardView : MonoBehaviour {
 	private static int m_Back = 14;
 	private int m_Number;
 
+	void Awake(){
+		m_cModel.InitPosition (transform.localPosition);
+	}
+
 	// Use this for initialization
 	void Start () {
 		m_Renderer = GetComponent< Image > ();
@@ -65,11 +69,15 @@ public class cCardView : MonoBehaviour {
 			break;
 		case cCardModel.eOutLineMode.eOutLineMode_Yellow:
 			m_OutLine.enabled = true;
-			m_OutLine.effectColor = new Color (1.0f, 1.0f, 0.0f, 0.5f);
+			m_OutLine.effectColor = new Color (1.0f, 1.0f, 0.0f, 1.0f);
 			break;
 		case cCardModel.eOutLineMode.eOutLineMode_Blue:
 			m_OutLine.enabled = true;
-			m_OutLine.effectColor = new Color (0.0f, 0.0f, 1.0f, 0.5f);
+			m_OutLine.effectColor = new Color (0.0f, 0.0f, 1.0f, 1.0f);
+			break;
+		case cCardModel.eOutLineMode.eOutLineMode_Red:
+			m_OutLine.enabled = true;
+			m_OutLine.effectColor = new Color (1.0f, 0.0f, 0.0f, 1.0f);
 			break;
 		}
 	}

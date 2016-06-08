@@ -14,7 +14,8 @@ public class cCardModel : ScriptableObject {
 	public enum eOutLineMode{
 		eOutLineMode_None,
 		eOutLineMode_Yellow,
-		eOutLineMode_Blue
+		eOutLineMode_Blue,
+		eOutLineMode_Red,
 	}
 
 	public enum eSize{
@@ -28,6 +29,10 @@ public class cCardModel : ScriptableObject {
 	public eSize m_Size{ get; protected set; }
 
 	public int m_CardNumber{ set; get; }
+
+	public virtual void InitPosition( Vector2 position ){
+		m_Position = position;
+	}
 
 	public Vector2 GetPosition(){
 		return m_Position;

@@ -7,9 +7,14 @@ public class cCardControl : MonoBehaviour {
 
 	private bool m_HitFlag;
 
+	private bool m_TouchFlag;
+
 	// Use this for initialization
 	void Start () {
 		m_HitFlag = false;
+		m_TouchFlag = false;
+
+		m_cModel.InitPosition (transform.localPosition);
 	}
 	
 	// Update is called once per frame
@@ -18,19 +23,24 @@ public class cCardControl : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			if (m_HitFlag == true) {
 				m_cModel.SetPosition (Input.mousePosition);
+				m_TouchFlag = true;
 			} else {
-				m_cModel.UnTapCard ();
+				m_TouchFlag = false;
 			}
 		}
 
 		if (Input.GetMouseButtonUp (0)) {
 			if (m_HitFlag == true) {
 				m_cModel.ConfirmCard ();
+			} else {
+				m_cModel.UnTapCard ();
 			}
 		}
 
 		if (Input.GetMouseButton (0)) {
-			m_cModel.SelectCard (Input.mousePosition);
+			if (m_TouchFlag == true) {
+				m_cModel.SelectCard (Input.mousePosition);
+			}
 		}
 	}
 

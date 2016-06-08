@@ -10,12 +10,16 @@ public class cSelectCardModel : cCardModel {
 
 	private Vector2 m_BufPosition;
 
-	public Vector2 m_BasePosition;
+	private Vector2 m_BasePosition;
 
 	public static float m_Line = 0.0f;
 
 	void OnEnable(){
 		Init ();
+	}
+
+	public override void InitPosition( Vector2 position ){
+		m_BasePosition = position;
 	}
 
 	public void Init(){
@@ -45,6 +49,7 @@ public class cSelectCardModel : cCardModel {
 		} else if (m_MoveFlag == true) {
 			m_TapFlag = true;
 
+			m_DrawMode = eDrawMode.eDrawMode_Front;
 			m_Size = eSize.eSize_Large;
 		}
 	}

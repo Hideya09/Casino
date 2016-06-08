@@ -14,6 +14,7 @@ public class cDeckModel : ScriptableObject {
 	private int m_SelectNumber;
 
 	public bool m_LastBattle{ get; private set; }
+	public bool m_DoubleBattle{ get; private set; }
 
 	public void Init(){
 		m_bcModel.Init ();
@@ -28,6 +29,8 @@ public class cDeckModel : ScriptableObject {
 	}
 
 	public void RandomSet(){
+		m_bcModel.Init ();
+
 		int[] random = new int[m_selcModel.Length];
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
@@ -68,10 +71,21 @@ public class cDeckModel : ScriptableObject {
 			}
 		}
 
+		m_DoubleBattle = false;
+		int doubleCharengeFlag = 0;
+
 		for( int i = 0 ; i < m_selcModel.Length ; ++i ){
 			m_selcModel [i].m_CardNumber = random [i];
 			m_selcModel [i].Init ();
 			m_selcModel [i].m_MoveFlag = true;
+
+			if (random [i] == 1 || random [i] == 2 || random [i] == 3) {
+				++doubleCharengeFlag;
+			}
+		}
+
+		if (doubleCharengeFlag == 3) {
+			m_DoubleBattle = true;
 		}
 	}
 
@@ -112,6 +126,7 @@ public class cDeckModel : ScriptableObject {
 	public bool CardMove(){
 		if (m_selcModel [m_SelectNumber].MoveSelectCard (m_bcModel.GetPosition())) {
 			m_bcModel.m_CardNumber = m_selcModel [m_SelectNumber].m_CardNumber;
+			m_bcModel.SetCard ();
 			return true;
 		}
 		return false;
@@ -119,5 +134,9 @@ public class cDeckModel : ScriptableObject {
 
 	public void DuelEnd(){
 		m_Deck [m_bcModel.m_CardNumber] = true;
+	}
+
+	public int GetBattleCardNumber(){
+		return m_bcModel.m_CardNumber;
 	}
 }

@@ -3,9 +3,12 @@ using System.Collections;
 
 public class cBattleCardModel : cCardModel {
 	public void Init(){
-		m_Position = new Vector2 (140, 120);
+		m_DrawMode = eDrawMode.eDrawMode_None;
+		m_OutLineMode = eOutLineMode.eOutLineMode_None;
 	}
 
-	public void Move(){
+	public void SetCard(){
+		m_DrawMode = eDrawMode.eDrawMode_Front;
+		m_OutLineMode = eOutLineMode.eOutLineMode_Red;
 	}
 }
