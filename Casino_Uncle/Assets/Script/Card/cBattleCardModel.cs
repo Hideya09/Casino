@@ -9,6 +9,7 @@ public class cBattleCardModel : cCardModel {
 
 	public void SetCard(){
 		m_DrawMode = eDrawMode.eDrawMode_Front;
+		m_Size = eSize.eSize_Medium;
 		m_OutLineMode = eOutLineMode.eOutLineMode_Red;
 	}
 }

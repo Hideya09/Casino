@@ -80,7 +80,6 @@ public class cGameScene : cSceneBase {
 			Lose ();
 			break;
 		case eGameSceneList.eGameSceneList_End:
-			m_dModel.DuelEnd ();
 			End ();
 			break;
 		}
@@ -96,11 +95,12 @@ public class cGameScene : cSceneBase {
 	private void BattleInit(){
 		m_gData.InitLife ();
 		m_edModel.Init ();
+		m_dModel.RandomSet ();
 		++m_State;
 	}
 
 	private void Shuffle(){
-		m_dModel.RandomSet ();
+		m_dModel.EditCard ();
 		m_edModel.Hind ();
 		++m_State;
 	}
@@ -132,7 +132,7 @@ public class cGameScene : cSceneBase {
 	}
 
 	private void Calc(){
-		m_dModel.DuelEnd ();
+		m_dModel.CardEnd ();
 
 		int playerPower = m_dModel.GetBattleCardNumber ();
 		int enemyPower = m_edModel.GetBattleCardNumber ();
@@ -234,7 +234,6 @@ public class cGameScene : cSceneBase {
 	}
 
 	private void End(){
-		m_dModel.DuelEnd ();
 		if (m_dModel.m_LastBattle == true) {
 			m_State = eGameSceneList.eGameSceneList_FadeIn;
 		} else {

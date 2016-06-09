@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb854ab59d916a47bb15c9e3c9a1fb4, type: 3}
   m_Name: cGameData
   m_EditorClassIdentifier: 
-  LifeMax: 3
+  LifeMax: 30

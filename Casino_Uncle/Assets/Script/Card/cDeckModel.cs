@@ -37,17 +37,7 @@ public class cDeckModel : ScriptableObject {
 			random [i] = 14;
 		}
 
-		int deckCheck = 0;
-
-		for (int i = 0; i < DeckMax; ++i) {
-			if (m_Deck [i] == false) {
-				++deckCheck;
-			}
-		}
-
-		if (deckCheck == 3) {
-			m_LastBattle = true;
-		}
+		DeckCheck ();
 
 		int setNumber = 0;
 
@@ -86,6 +76,38 @@ public class cDeckModel : ScriptableObject {
 
 		if (doubleCharengeFlag == 3) {
 			m_DoubleBattle = true;
+		}
+	}
+
+	public void EditCard(){
+		m_bcModel.Init ();
+
+		DeckCheck ();
+
+		for (int i = 0; i < m_selcModel.Length; ++i) {
+			m_selcModel [i].Init ();
+			m_selcModel [i].m_MoveFlag = true;
+
+			if (m_selcModel [i].m_CardNumber == DeckMax) {
+				do {
+					int number = Random.Range (0, DeckMax);
+
+					if (m_Deck [number] == true) {
+						continue;
+					}
+
+					int j;
+
+					for (j = 0; j < m_selcModel.Length; ++j) {
+						if (m_selcModel [j].m_CardNumber == number) {
+							break;
+						}
+					}
+					if (j == m_selcModel.Length) {
+						m_selcModel [i].m_CardNumber = number;
+					}
+				} while(m_selcModel[i].m_CardNumber == DeckMax);
+			}
 		}
 	}
 
@@ -132,11 +154,26 @@ public class cDeckModel : ScriptableObject {
 		return false;
 	}
 
-	public void DuelEnd(){
+	public void CardEnd(){
 		m_Deck [m_bcModel.m_CardNumber] = true;
+		m_selcModel [m_SelectNumber].m_CardNumber = DeckMax;
 	}
 
 	public int GetBattleCardNumber(){
 		return m_bcModel.m_CardNumber;
+	}
+
+	private void DeckCheck(){
+		int deckCheck = 0;
+
+		for (int i = 0; i < DeckMax; ++i) {
+			if (m_Deck [i] == false) {
+				++deckCheck;
+			}
+		}
+
+		if (deckCheck == 3) {
+			m_LastBattle = true;
+		}
 	}
 }

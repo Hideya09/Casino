@@ -46,9 +46,12 @@ public class cCardView : MonoBehaviour {
 		}
 
 		if (m_cModel.m_DrawMode == cCardModel.eDrawMode.eDrawMode_Dark) {
-			m_Renderer.color = new Color (0.5f, 0.5f, 0.5f, 1.0f);
+			Color color = m_Renderer.color;
+			m_Renderer.color = new Color (0.5f, 0.5f, 0.5f , color.a);
+
 		} else {
-			m_Renderer.color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
+			Color color = m_Renderer.color;
+			m_Renderer.color = new Color (1.0f, 1.0f, 1.0f , color.a);
 		}
 
 		switch (m_cModel.m_Size) {
