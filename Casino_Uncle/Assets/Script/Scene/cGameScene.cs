@@ -6,6 +6,8 @@ public class cGameScene : cSceneBase {
 	public cDeckModel m_dModel;
 	public cEnemyDeckModel m_edModel;
 	public cGameData m_gData;
+	public cCommitTextModel m_ctModel;
+	public cCameraModel m_cameraModel;
 
 	private int m_Damage;
 
@@ -19,6 +21,7 @@ public class cGameScene : cSceneBase {
 		eGameSceneList_BattleEffect,
 		eGameSceneList_EnemyCardOpen,
 		eGameSceneList_Calc,
+		eGameSceneList_CommitEffect,
 		eGameSceneList_CommitEffectWin,
 		eGameSceneList_CommitEffectLose,
 		eGameSceneList_CommitEffectDraw,
@@ -63,6 +66,9 @@ public class cGameScene : cSceneBase {
 			break;
 		case eGameSceneList.eGameSceneList_Calc:
 			Calc ();
+			break;
+		case eGameSceneList.eGameSceneList_CommitEffect:
+			CommitEffect ();
 			break;
 		case eGameSceneList.eGameSceneList_CommitEffectWin:
 			CommitEffectWin ();
@@ -113,16 +119,21 @@ public class cGameScene : cSceneBase {
 
 	private void Move(){
 		m_dModel.CardMove ();
+		m_cameraModel.MoveSet (1.0f, 0.3f);
 		++m_State;
 	}
 
 	private void EnemyShuffle(){
-		m_edModel.Select ();
+		m_edModel.Select ( 0.3f );
 		++m_State;
 	}
 
 	private void BattleEffect(){
-		++m_State;		
+		if (m_cameraModel.Move () == true) {
+			if (m_edModel.Move () == true) {
+				++m_State;
+			}
+		}
 	}
 
 	private void EnemyCardOpen(){
@@ -134,13 +145,15 @@ public class cGameScene : cSceneBase {
 	private void Calc(){
 		m_dModel.CardEnd ();
 
+		m_ctModel.Init ();
+
 		int playerPower = m_dModel.GetBattleCardNumber ();
 		int enemyPower = m_edModel.GetBattleCardNumber ();
 
 		Debug.Log (playerPower.ToString() + "  " + enemyPower.ToString());
 
 		if (playerPower == enemyPower) {
-			m_State = eGameSceneList.eGameSceneList_CommitEffectDraw;
+			m_State = eGameSceneList.eGameSceneList_CommitEffect;
 			Debug.Log ("引き分け");
 
 			return;
@@ -148,7 +161,7 @@ public class cGameScene : cSceneBase {
 
 		if (playerPower == 0) {
 			m_gData.EnemyDamege (1);
-			m_State = eGameSceneList.eGameSceneList_CommitEffectWin;
+			m_State = eGameSceneList.eGameSceneList_CommitEffect;
 			Debug.Log ("勝利");
 
 			return;
@@ -156,7 +169,7 @@ public class cGameScene : cSceneBase {
 
 		if (enemyPower == 0) {
 			m_gData.PlayerDamege (1);
-			m_State = eGameSceneList.eGameSceneList_CommitEffectLose;
+			m_State = eGameSceneList.eGameSceneList_CommitEffect;
 			Debug.Log ("敗北");
 
 			return;
@@ -165,7 +178,7 @@ public class cGameScene : cSceneBase {
 		if (playerPower == 1) {
 			if (enemyPower > 10) {
 				m_gData.EnemyDamege (1);
-				m_State = eGameSceneList.eGameSceneList_CommitEffectWin;
+				m_State = eGameSceneList.eGameSceneList_CommitEffect;
 				Debug.Log ("勝利");
 
 				return;
@@ -175,7 +188,7 @@ public class cGameScene : cSceneBase {
 		if (enemyPower == 1) {
 			if (playerPower > 10) {
 				m_gData.PlayerDamege (1);
-				m_State = eGameSceneList.eGameSceneList_CommitEffectLose;
+				m_State = eGameSceneList.eGameSceneList_CommitEffect;
 				Debug.Log ("敗北");
 
 				return;
@@ -184,14 +197,29 @@ public class cGameScene : cSceneBase {
 
 		if (playerPower > enemyPower) {
 			m_gData.EnemyDamege (playerPower - enemyPower);
-			m_State = eGameSceneList.eGameSceneList_CommitEffectWin;
+			m_State = eGameSceneList.eGameSceneList_CommitEffect;
 			Debug.Log ("勝利");
 		} else {
 			m_gData.PlayerDamege (enemyPower - playerPower);
-			m_State = eGameSceneList.eGameSceneList_CommitEffectLose;
+			m_State = eGameSceneList.eGameSceneList_CommitEffect;
 			Debug.Log ("敗北");
 		}
 
+	}
+
+	private void CommitEffect(){
+		if (m_ctModel.Move () == true) {
+
+			cCommitTextModel.eCommitText commit = m_ctModel.GetText ();
+
+			if (commit == cCommitTextModel.eCommitText.eCommitText_Win) {
+				m_State = eGameSceneList.eGameSceneList_CommitEffectWin;
+			} else if (commit == cCommitTextModel.eCommitText.eCommitText_Lose) {
+				m_State = eGameSceneList.eGameSceneList_CommitEffectLose;
+			} else {
+				m_State = eGameSceneList.eGameSceneList_CommitEffectDraw;
+			}
+		}
 	}
 
 	private void CommitEffectWin(){

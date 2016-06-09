@@ -20,7 +20,7 @@ public class cEnemyDeckModel : ScriptableObject {
 		m_bcModel.Init ();
 	}
 
-	public void Select(){
+	public void Select( float setSecond ){
 		int number;
 		do {
 			number = Random.Range (0, 14);
@@ -30,9 +30,12 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		m_bcModel.m_CardNumber = number;
 		m_bcModel.SetCard ();
+
+		m_bcModel.MoveSet (setSecond);
 	}
 
-	public void Move(){
+	public bool Move(){
+		return m_bcModel.Move ();
 	}
 
 	public void Open(){

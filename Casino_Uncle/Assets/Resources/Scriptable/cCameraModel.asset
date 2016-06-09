@@ -8,8 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b038dbcad3b0546b5530121e24ef2b, type: 3}
-  m_Name: cEnemyBattleCardModel
+  m_Script: {fileID: 11500000, guid: f43a053f61cd2f849bd6c92cb8250b3e, type: 3}
+  m_Name: cCameraModel
   m_EditorClassIdentifier: 
-  m_StartPosition: {x: -620, y: 550}
-  m_MoveAdd: {x: 792.2673, y: -962.8185}
+  m_ReturnPosition: {x: 40, y: 40}
