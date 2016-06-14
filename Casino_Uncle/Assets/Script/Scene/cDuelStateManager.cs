@@ -152,23 +152,30 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Move(){
 		m_dModel.CardMove ();
-		m_cameraModel.MoveSet (1.0f, 0.3f);
+		m_cameraModel.MoveSet (1.0f, 0.15f);
 		++m_State;
 	}
 
 	private void EnemyShuffle(){
-		m_edModel.Select ( 0.3f );
+		m_edModel.Select ( 0.15f );
 		++m_State;
 	}
 
 	private void BattleEffect(){
-		if (m_cameraModel.Move () == true) {
-			if (m_edModel.Move () == true) {
+		bool moveEndFlag;
+
+		if (m_cameraModel.Move ( out moveEndFlag ) == true) {
+
+			m_dModel.ReturnAngle ();
+
+			if (m_edModel.Move () == true && moveEndFlag == true) {
+				m_dModel.SetAngle ();
+
 				m_effectModel.EffectStart ();
 				++m_State;
 			}
 		} else {
-			
+			m_dModel.MoveAngle ();
 		}
 	}
 

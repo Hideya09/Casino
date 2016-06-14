@@ -29,7 +29,17 @@ public class cBattleCardModel : cCardModel {
 		m_OutLineMode = eOutLineMode.eOutLineMode_Red;
 	}
 
+	public void MoveAngle(){
+		m_Rotation.z -= m_MaxAngle * Time.deltaTime;
+	}
 
+	public void ReturnAngle(){
+		m_Rotation.z += m_MaxAngle * Time.deltaTime * 2;
+	}
+
+	public void SetAngle(){
+		m_Rotation.z = m_MaxAngle;
+	}
 
 	public void SnapMove(){
 		m_Position.x += m_Speed * Time.deltaTime;

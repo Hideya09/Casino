@@ -11,3 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7315e96832dd26a49b08e88836412fc4, type: 3}
   m_Name: cBattleCardModel
   m_EditorClassIdentifier: 
+  m_MaxAngle: 45
+  m_Speed: 5000

@@ -28,12 +28,12 @@ public class cCameraModel : ScriptableObject {
 		m_Position = m_BasePosition;
 
 		m_MoveAcceleration = m_ReturnPosition - m_BasePosition;
-		m_MoveAcceleration *= (1 / reachingSecond) * 2;
+		m_MoveAcceleration *= (1 / reachingSecond) * (1 / reachingSecond);
 
 		m_MoveAdd = Vector2.zero;
 
 		m_ReturnAcceleration = m_BasePosition - m_ReturnPosition;
-		m_ReturnAcceleration *= (1 / returnSecond) * 2;
+		m_ReturnAcceleration *= (1 / returnSecond) * (1 / returnSecond);
 
 		m_ReturnAdd = Vector2.zero;
 
@@ -42,16 +42,21 @@ public class cCameraModel : ScriptableObject {
 		m_SecondReturnMax = m_SecondMoveMax + returnSecond;
 	}
 
-	public bool Move(){
+	public bool Move( out bool endFlag ){
+
 		m_Second += Time.deltaTime;
+
+		endFlag = false;
 
 		if (m_Second >= m_SecondMoveMax) {
 			m_Position += ((m_ReturnAdd += (m_ReturnAcceleration * Time.deltaTime)) * Time.deltaTime);
 
+
 			if (m_Second >= m_SecondReturnMax) {
+				endFlag = true;
+
 				m_Position = m_BasePosition;
 			}
-
 			return true;
 		} else {
 			m_Position += ((m_MoveAdd += (m_MoveAcceleration * Time.deltaTime)) * Time.deltaTime);

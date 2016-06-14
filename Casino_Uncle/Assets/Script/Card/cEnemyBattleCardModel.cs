@@ -42,7 +42,7 @@ public class cEnemyBattleCardModel : cCardModel {
 
 	public void MoveSet( float reachingSecond ){
 		m_MoveAcceleration = m_BasePosition - m_StartPosition;
-		m_MoveAcceleration *= (1 / reachingSecond) * 2;
+		m_MoveAcceleration *= (1 / reachingSecond) * (1 / reachingSecond);
 
 		m_MoveAdd = Vector2.zero;
 
@@ -53,12 +53,14 @@ public class cEnemyBattleCardModel : cCardModel {
 	public bool Move(){
 		m_Position += ((m_MoveAdd += (m_MoveAcceleration * Time.deltaTime)) * Time.deltaTime);
 
-		m_Rotation.z -= m_MaxAngle * Time.deltaTime;
+		m_Rotation.z += m_MaxAngle * Time.deltaTime;
 
 		m_Second += Time.deltaTime;
 
 		if (m_Second >= m_SecondMax) {
 			m_Position = m_BasePosition;
+
+			m_Rotation.z = m_MaxAngle % 360;
 
 			return true;
 		} else {
@@ -67,7 +69,7 @@ public class cEnemyBattleCardModel : cCardModel {
 	}
 
 	public void SnapMove(){
-		m_Rotation.z += m_MaxAngle * Time.deltaTime;
+		m_Rotation.z = -m_MaxAngle;
 		m_Position.x -= m_Speed * Time.deltaTime;
 	}
 }

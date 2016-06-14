@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Name: cEnemyBattleCardModel
   m_EditorClassIdentifier: 
   m_StartPosition: {x: -620, y: 550}
-  m_MoveAdd: {x: 1320.4454, y: -1604.6974}
+  m_MaxAngle: -45
+  m_Speed: 5000
