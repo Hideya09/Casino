@@ -28,7 +28,7 @@ public class cBlinkModel : ScriptableObject {
 				m_Alpha = 1.0f;
 				m_AddFlag = false;
 
-				if (m_Count <= m_MaxCount) {
+				if (m_Count >= m_MaxCount) {
 					return true;
 				}
 			}
