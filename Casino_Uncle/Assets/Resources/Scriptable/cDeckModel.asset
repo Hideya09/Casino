@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fda81c46f7c09042877df5802faedda, type: 3}
   m_Name: cDeckModel
   m_EditorClassIdentifier: 
+  HandOutSpeed: 400
+  DeckPosition: {x: -320, y: -161}
   DeckMax: 14
   m_selcModel:
   - {fileID: 11400000, guid: 7028e4c2fe596464382f7e0752ef9433, type: 2}

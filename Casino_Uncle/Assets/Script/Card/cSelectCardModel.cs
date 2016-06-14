@@ -12,28 +12,64 @@ public class cSelectCardModel : cCardModel {
 
 	private Vector2 m_BasePosition;
 
+	private Vector2 m_Movement;
+	private float m_Count;
+	private float m_MaxCount;
+
 	public static float m_Line = 0.0f;
 
 	void OnEnable(){
-		Init ();
-	}
-
-	public override void InitPosition( Vector2 position ){
-		m_BasePosition = position;
-	}
-
-	public void Init(){
 		CardInit ();
 
 		m_TapFlag = false;
 
 		m_SelectFlag = false;
 
-		m_MoveFlag = true;
+		m_MoveFlag = false;
+	}
 
-		m_Position = m_BasePosition;
+	public override void InitPosition( Vector2 position ){
+		m_BasePosition = position;
+
+		m_Rotation = 0;
+	}
+
+	public void Init( Vector2 setPosition , float speed ){
+		m_DrawMode = eDrawMode.eDrawMode_Back;
+		m_Size = eSize.eSize_Medium;
+
+		m_Position = setPosition;
 
 		m_BufPosition = m_Position;
+
+		m_MaxCount = Vector2.Distance (m_BasePosition, m_Position) / speed;
+
+		m_Movement = ( m_BasePosition - m_Position ) / m_MaxCount;
+
+		m_Count = 0;
+	}
+
+	public void SetSelect(){
+		CardInit ();
+
+		m_TapFlag = false;
+
+		m_SelectFlag = false;
+	}
+
+	public bool Move(){
+
+		m_Count += Time.deltaTime;
+
+		if (m_Count < m_MaxCount) {
+			m_Position += (Time.deltaTime * m_Movement);
+
+			return false;
+		} else {
+			m_Position = m_BasePosition;
+
+			return true;
+		}
 	}
 
 	public void ConfirmCard(){

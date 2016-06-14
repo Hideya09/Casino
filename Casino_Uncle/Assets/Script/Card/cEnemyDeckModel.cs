@@ -38,8 +38,13 @@ public class cEnemyDeckModel : ScriptableObject {
 		return m_bcModel.Move ();
 	}
 
-	public void Open(){
-		m_bcModel.OpenCard ();
+	public bool Open(){
+		m_bcModel.Open();
+		if (m_bcModel.GetOpen ()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public int GetBattleCardNumber(){

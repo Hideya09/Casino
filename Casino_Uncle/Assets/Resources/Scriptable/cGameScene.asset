@@ -11,8 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8a6fcc28a24ea4a825bef133fc7f6c, type: 3}
   m_Name: cGameScene
   m_EditorClassIdentifier: 
-  m_dModel: {fileID: 11400000, guid: 34d5ade43284197418d82362b2b74d50, type: 2}
-  m_edModel: {fileID: 11400000, guid: 68bfa3187d066dd4fa94cc4e1fb68b6c, type: 2}
-  m_gData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
-  m_ctModel: {fileID: 11400000, guid: ea8c89e8f00bad74f9aa82cfa5d47039, type: 2}
-  m_cameraModel: {fileID: 11400000, guid: d59d55d9fa46d664fac36d77f74a2ba1, type: 2}
+  m_DuelStateManager: {fileID: 11400000, guid: de02ede13231c7842bc132cb5bb47211, type: 2}
+  m_Dialog: {fileID: 11400000, guid: 2c8549f6c7fe2ce499796832e44606b3, type: 2}

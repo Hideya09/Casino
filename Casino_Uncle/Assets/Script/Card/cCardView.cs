@@ -30,6 +30,7 @@ public class cCardView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.localPosition = m_cModel.GetPosition ();
+		transform.rotation = Quaternion.AngleAxis (m_cModel.GetRotation (), Vector3.up);
 
 		if (m_cModel.m_DrawMode == cCardModel.eDrawMode.eDrawMode_Back) {
 			m_Number = m_Back;

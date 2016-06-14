@@ -14,6 +14,8 @@ public class cEnemyBattleCardModel : cCardModel {
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 		m_Position = m_StartPosition;
+
+		m_Rotation = 0;
 	}
 
 	public void Init(){
@@ -31,10 +33,6 @@ public class cEnemyBattleCardModel : cCardModel {
 		m_DrawMode = eDrawMode.eDrawMode_Back;
 		m_Size = eSize.eSize_Medium;
 		m_OutLineMode = eOutLineMode.eOutLineMode_Red;
-	}
-
-	public void OpenCard(){
-		m_DrawMode = eDrawMode.eDrawMode_Front;
 	}
 
 	public void MoveSet( float reachingSecond ){

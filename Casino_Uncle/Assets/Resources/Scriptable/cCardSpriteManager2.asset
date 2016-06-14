@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: cCardSpriteManager2
   m_EditorClassIdentifier: Assembly-CSharp::cCardSpritManager
   sprite:
-  - {fileID: 21300000, guid: 90bfbf8868b2ca34b895eecb8011044f, type: 3}
+  - {fileID: 21300000, guid: 45c6583b1423425488f3174ef4a35ebb, type: 3}
   - {fileID: 21300000, guid: ccd8393ff75b2864ea336fd5b6673818, type: 3}
   - {fileID: 21300000, guid: 07db48c487c733a4cba1d8f3c482ddec, type: 3}
   - {fileID: 21300000, guid: c68d0eb5527f4ad4ab0406f840f30d5d, type: 3}
@@ -26,4 +26,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5fbca8fb75022874994dcbbbac5dc2cb, type: 3}
   - {fileID: 21300000, guid: dccb5926ee625cb4abe9f813493eb52d, type: 3}
   - {fileID: 21300000, guid: 71e86da51bdb85a4d9ec78c6519ae834, type: 3}
-  - {fileID: 21300000, guid: 0f9e7ef2e140e224a813800176296034, type: 3}
+  - {fileID: 21300000, guid: 62b3c519c4389d041a6b16a5a207ecb0, type: 3}

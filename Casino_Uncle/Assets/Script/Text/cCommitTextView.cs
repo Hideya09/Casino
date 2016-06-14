@@ -26,10 +26,10 @@ public class cCommitTextView : MonoBehaviour {
 			m_Text.text = "アタック成功！";
 			break;
 		case cCommitTextModel.eCommitText.eCommitText_Lose:
-			m_Text.text = "アタック失敗！";
+			m_Text.text = "アタック失敗";
 			break;
 		case cCommitTextModel.eCommitText.eCommitText_Draw:
-			m_Text.text = "アタック拮抗";
+			m_Text.text = "拮抗";
 			break;
 		}
 

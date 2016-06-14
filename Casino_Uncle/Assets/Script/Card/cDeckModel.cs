@@ -3,6 +3,10 @@ using System.Collections;
 
 public class cDeckModel : ScriptableObject {
 
+	public float HandOutSpeed;
+
+	public Vector2 DeckPosition;
+
 	public int DeckMax;
 
 	public cSelectCardModel[] m_selcModel;
@@ -37,8 +41,6 @@ public class cDeckModel : ScriptableObject {
 			random [i] = 14;
 		}
 
-		DeckCheck ();
-
 		int setNumber = 0;
 
 		while (setNumber < m_selcModel.Length) {
@@ -66,8 +68,8 @@ public class cDeckModel : ScriptableObject {
 
 		for( int i = 0 ; i < m_selcModel.Length ; ++i ){
 			m_selcModel [i].m_CardNumber = random [i];
-			m_selcModel [i].Init ();
-			m_selcModel [i].m_MoveFlag = true;
+			m_selcModel [i].SetSelect ();
+			m_selcModel [i].Init ( DeckPosition , HandOutSpeed);
 
 			if (random [i] == 1 || random [i] == 2 || random [i] == 3) {
 				++doubleCharengeFlag;
@@ -82,39 +84,45 @@ public class cDeckModel : ScriptableObject {
 	public void EditCard(){
 		m_bcModel.Init ();
 
-		DeckCheck ();
+		if (DeckCheck () == true) {
+			for (int i = 0; i < m_selcModel.Length; ++i) {
 
-		for (int i = 0; i < m_selcModel.Length; ++i) {
-			m_selcModel [i].Init ();
-			m_selcModel [i].m_MoveFlag = true;
+				m_selcModel [i].SetSelect ();
 
-			if (m_selcModel [i].m_CardNumber == DeckMax) {
-				do {
-					int number = Random.Range (0, DeckMax);
+				if (m_selcModel [i].m_CardNumber == DeckMax) {
+					do {
+						int number = Random.Range (0, DeckMax);
 
-					if (m_Deck [number] == true) {
-						continue;
-					}
-
-					int j;
-
-					for (j = 0; j < m_selcModel.Length; ++j) {
-						if (m_selcModel [j].m_CardNumber == number) {
-							break;
+						if (m_Deck [number] == true) {
+							continue;
 						}
-					}
-					if (j == m_selcModel.Length) {
-						m_selcModel [i].m_CardNumber = number;
-					}
-				} while(m_selcModel[i].m_CardNumber == DeckMax);
+
+						int j;
+
+						for (j = 0; j < m_selcModel.Length; ++j) {
+							if (m_selcModel [j].m_CardNumber == number) {
+								break;
+							}
+						}
+						if (j == m_selcModel.Length) {
+							m_selcModel [i].m_CardNumber = number;
+						}
+					} while(m_selcModel [i].m_CardNumber == DeckMax);
+				}
 			}
 		}
+
+		m_selcModel [m_SelectNumber].Init (DeckPosition, HandOutSpeed);
 	}
 
 	public bool CardCheck(){
 		int number = -1;
 
 		bool selectFlag = false;
+
+		for (int i = 0; i < m_selcModel.Length; ++i) {
+			m_selcModel [i].m_MoveFlag = true;
+		}
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
 			selectFlag = m_selcModel [i].GetSelect ();
@@ -163,7 +171,7 @@ public class cDeckModel : ScriptableObject {
 		return m_bcModel.m_CardNumber;
 	}
 
-	private void DeckCheck(){
+	private bool DeckCheck(){
 		int deckCheck = 0;
 
 		for (int i = 0; i < DeckMax; ++i) {
@@ -172,8 +180,35 @@ public class cDeckModel : ScriptableObject {
 			}
 		}
 
-		if (deckCheck == 3) {
-			m_LastBattle = true;
+		if (deckCheck > 2) {
+			return true;
 		}
+
+		return false;
+	}
+
+	public bool HandOnCard(){
+		bool endFlag = true;
+
+		for (int i = 0; i < m_selcModel.Length; ++i) {
+			endFlag &= m_selcModel [i].Move ();
+		}
+
+		return endFlag;
+	}
+
+	public bool CardOpen(){
+		bool endFlag = true;
+
+		for (int i = m_selcModel.Length - 1; i >= 0; --i) {
+			if (m_selcModel [i].Open() == true) {
+				endFlag &= m_selcModel [i].GetOpen ();
+			} else {
+				endFlag = false;
+				break;
+			}
+		}
+
+		return endFlag;
 	}
 }
