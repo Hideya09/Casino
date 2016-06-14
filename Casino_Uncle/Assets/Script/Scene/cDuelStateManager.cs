@@ -8,6 +8,7 @@ public class cDuelStateManager : ScriptableObject {
 	public cGameData m_gData;
 	public cCommitTextModel m_ctModel;
 	public cCameraModel m_cameraModel;
+	public cEffectModel m_effectModel;
 
 	private int m_Damage;
 
@@ -102,6 +103,7 @@ public class cDuelStateManager : ScriptableObject {
 	public void Init(){
 		m_dModel.Init ();
 		m_gData.InitWin ();
+		m_effectModel.Init ();
 	}
 
 	private void BattleInit(){
@@ -156,14 +158,17 @@ public class cDuelStateManager : ScriptableObject {
 	private void BattleEffect(){
 		if (m_cameraModel.Move () == true) {
 			if (m_edModel.Move () == true) {
+				m_effectModel.EffectStart ();
 				++m_State;
 			}
 		}
 	}
 
 	private void EnemyCardOpen(){
-		if (m_edModel.Open () == true) {
-			++m_State;
+		if (m_effectModel.EffectExec () == true) {
+			if (m_edModel.Open () == true) {
+				++m_State;
+			}
 		}
 	}
 
@@ -241,6 +246,8 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void CommitEffect(){
 		if (m_ctModel.Move () == true) {
+
+			m_effectModel.EffectEnd ();
 
 			cCommitTextModel.eCommitText commit = m_ctModel.GetText ();
 

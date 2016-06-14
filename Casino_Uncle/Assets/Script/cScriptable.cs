@@ -4,9 +4,9 @@ using UnityEditor;
 public class cScriptable : MonoBehaviour {
 	void Start(){
 		//スクリプタブルオブジェクトの作成
-		cBlinkModel obj = ScriptableObject.CreateInstance<cBlinkModel> ();
+		cEffectModel obj = ScriptableObject.CreateInstance<cEffectModel> ();
 
-		string path = AssetDatabase.GenerateUniqueAssetPath ("Assets/Resources/Scriptable/" + typeof( cBlinkModel ) + ".asset");
+		string path = AssetDatabase.GenerateUniqueAssetPath ("Assets/Resources/Scriptable/" + typeof( cEffectModel ) + ".asset");
 
 		AssetDatabase.CreateAsset (obj, path);
 		AssetDatabase.SaveAssets ();

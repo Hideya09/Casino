@@ -31,7 +31,7 @@ public class cGameScene : cSceneBase {
 		case eGameSceneList.eGameSceneList_Init:
 			m_DuelStateManager.Init ();
 			m_Dialog.Init ();
-			m_State = eGameSceneList.eGameSceneList_Next;
+			m_State = eGameSceneList.eGameSceneList_Duel;
 			break;
 		case eGameSceneList.eGameSceneList_FadeIn:
 			m_Dialog.DialogExec ();

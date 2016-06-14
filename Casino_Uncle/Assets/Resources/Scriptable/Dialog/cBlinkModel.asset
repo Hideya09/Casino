@@ -8,8 +8,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b038dbcad3b0546b5530121e24ef2b, type: 3}
-  m_Name: cEnemyBattleCardModel
+  m_Script: {fileID: 11500000, guid: 9f188a32335f7144e91c7a7bcc11fa02, type: 3}
+  m_Name: cBlinkModel
   m_EditorClassIdentifier: 
-  m_StartPosition: {x: -620, y: 550}
-  m_MoveAdd: {x: 792.2673, y: -962.8185}
+  m_MaxCount: 1.5
+  m_Speed: 3
