@@ -31,7 +31,7 @@ public class cSelectCardModel : cCardModel {
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 
-		m_Rotation = 0;
+		m_Rotation = Vector3.zero;
 	}
 
 	public void Init( Vector2 setPosition , float speed ){

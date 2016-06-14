@@ -14,15 +14,7 @@ public class cGameData : ScriptableObject {
 
 	private int m_Card;//{ get; set; }
 
-	public int LifeMax;
-
-	private int m_playerLife;
-	private int m_enemyLife;
-
-	public void InitLife(){
-		m_playerLife = LifeMax;
-		m_enemyLife = LifeMax;
-	}
+	public int m_PlayerHitPoint{ get; set; }
 
 	public int GetPayBack( bool doubleFlag ){
 		if (m_WinningStreak == 0) {
@@ -49,28 +41,6 @@ public class cGameData : ScriptableObject {
 	}
 
 	public void Load(){
-		InitLife ();
-	}
-
-	public int PlayerDamege( int damege = 0 ){
-		m_playerLife -= damege;
-		if (m_playerLife < 0) {
-			m_playerLife = 0;
-		}
-
-		Debug.Log ("プレイヤー " + m_playerLife.ToString() + "  エネミー " + m_enemyLife.ToString());
-
-		return m_playerLife;
-	}
-	public int EnemyDamege( int damege = 0 ){
-		m_enemyLife -= damege;
-		if (m_enemyLife < 0) {
-			m_enemyLife = 0;
-		}
-
-		Debug.Log ("プレイヤー " + m_playerLife.ToString() + "  エネミー " + m_enemyLife.ToString());
-
-		return m_enemyLife;
 	}
 
 	public int GetCard(){

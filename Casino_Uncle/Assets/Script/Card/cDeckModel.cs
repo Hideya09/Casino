@@ -38,7 +38,7 @@ public class cDeckModel : ScriptableObject {
 		int[] random = new int[m_selcModel.Length];
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
-			random [i] = 14;
+			random [i] = cCardSpriteManager.Back;
 		}
 
 		int setNumber = 0;
@@ -210,5 +210,9 @@ public class cDeckModel : ScriptableObject {
 		}
 
 		return endFlag;
+	}
+
+	public void Snap(){
+		m_bcModel.SnapMove ();
 	}
 }

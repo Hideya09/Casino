@@ -6,7 +6,9 @@ public class cCameraModel : ScriptableObject {
 	private Vector2 m_Position;
 
 	private Vector2 m_MoveAdd;
+	private Vector2 m_MoveAcceleration;
 	private Vector2 m_ReturnAdd;
+	private Vector2 m_ReturnAcceleration;
 
 	private float m_Second;
 
@@ -25,11 +27,15 @@ public class cCameraModel : ScriptableObject {
 	public void MoveSet( float reachingSecond , float returnSecond ){
 		m_Position = m_BasePosition;
 
-		m_MoveAdd = m_ReturnPosition - m_BasePosition;
-		m_MoveAdd *= (1 / reachingSecond);
+		m_MoveAcceleration = m_ReturnPosition - m_BasePosition;
+		m_MoveAcceleration *= (1 / reachingSecond) * 2;
 
-		m_ReturnAdd = m_BasePosition - m_ReturnPosition;
-		m_ReturnAdd *= (1 / returnSecond);
+		m_MoveAdd = Vector2.zero;
+
+		m_ReturnAcceleration = m_BasePosition - m_ReturnPosition;
+		m_ReturnAcceleration *= (1 / returnSecond) * 2;
+
+		m_ReturnAdd = Vector2.zero;
 
 		m_Second = 0.0f;
 		m_SecondMoveMax = reachingSecond;
@@ -40,7 +46,7 @@ public class cCameraModel : ScriptableObject {
 		m_Second += Time.deltaTime;
 
 		if (m_Second >= m_SecondMoveMax) {
-			m_Position += (m_ReturnAdd * Time.deltaTime);
+			m_Position += ((m_ReturnAdd += (m_ReturnAcceleration * Time.deltaTime)) * Time.deltaTime);
 
 			if (m_Second >= m_SecondReturnMax) {
 				m_Position = m_BasePosition;
@@ -48,10 +54,18 @@ public class cCameraModel : ScriptableObject {
 
 			return true;
 		} else {
-			m_Position += (m_MoveAdd * Time.deltaTime);
+			m_Position += ((m_MoveAdd += (m_MoveAcceleration * Time.deltaTime)) * Time.deltaTime);
 
 			return false;
 		}
+	}
+
+	public void Vibration(){
+		m_Position.y = m_BasePosition.y + Random.Range (-0.1f, 0.1f);
+	}
+
+	public void StopVibration(){
+		m_Position = m_BasePosition;
 	}
 
 	public Vector2 GetPosition(){

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class cCardModel : ScriptableObject {
 	protected Vector2 m_Position;
-	protected float m_Rotation;
+	protected Vector3 m_Rotation;
 
 	private bool m_EndOpen;
 
@@ -35,14 +35,14 @@ public class cCardModel : ScriptableObject {
 
 	public virtual void InitPosition( Vector2 position ){
 		m_Position = position;
-		m_Rotation = 0;
+		m_Rotation = Vector3.zero;
 	}
 
 	public Vector2 GetPosition(){
 		return m_Position;
 	}
 
-	public float GetRotation(){
+	public Vector3 GetRotation(){
 		return m_Rotation;
 	}
 
@@ -58,17 +58,17 @@ public class cCardModel : ScriptableObject {
 		m_EndOpen = false;
 
 		if (m_DrawMode == eDrawMode.eDrawMode_Back) {
-			m_Rotation += 360 * Time.deltaTime;
+			m_Rotation.y += 360 * Time.deltaTime;
 
-			if (m_Rotation >= 90) {
-				m_Rotation = 270 + (m_Rotation - 90);
+			if (m_Rotation.y >= 90) {
+				m_Rotation.y = 270 + (m_Rotation.y - 90);
 				m_DrawMode = eDrawMode.eDrawMode_Front;
 			}
 		} else if (m_DrawMode == eDrawMode.eDrawMode_Front) {
-			m_Rotation += 360 * Time.deltaTime;
+			m_Rotation.y += 360 * Time.deltaTime;
 
-			if (m_Rotation >= 360 || m_Rotation < 45) {
-				m_Rotation = 0;
+			if (m_Rotation.y >= 360 || m_Rotation.y < 45) {
+				m_Rotation.y = 0;
 
 				m_EndOpen = true;
 			}
@@ -82,17 +82,17 @@ public class cCardModel : ScriptableObject {
 		m_EndOpen = true;
 
 		if (m_DrawMode == eDrawMode.eDrawMode_Front) {
-			m_Rotation += 360 * Time.deltaTime;
+			m_Rotation.y += 360 * Time.deltaTime;
 
-			if (m_Rotation >= 90) {
-				m_Rotation = 270 + (m_Rotation - 90);
+			if (m_Rotation.y >= 90) {
+				m_Rotation.y = 270 + (m_Rotation.y - 90);
 				m_DrawMode = eDrawMode.eDrawMode_Back;
 			}
 		} else if (m_DrawMode == eDrawMode.eDrawMode_Back) {
-			m_Rotation += 360 * Time.deltaTime;
+			m_Rotation.y += 360 * Time.deltaTime;
 
-			if (m_Rotation >= 360 || m_Rotation < 45) {
-				m_Rotation = 0;
+			if (m_Rotation.y >= 360 || m_Rotation.y < 45) {
+				m_Rotation.y = 0;
 
 				m_EndOpen = false;
 			}
