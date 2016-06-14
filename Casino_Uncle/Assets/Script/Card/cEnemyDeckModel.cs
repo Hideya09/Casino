@@ -50,4 +50,8 @@ public class cEnemyDeckModel : ScriptableObject {
 	public int GetBattleCardNumber(){
 		return m_bcModel.m_CardNumber;
 	}
+
+	public void Snap(){
+		m_bcModel.SnapMove ();
+	}
 }

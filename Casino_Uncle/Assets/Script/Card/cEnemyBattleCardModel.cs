@@ -6,16 +6,20 @@ public class cEnemyBattleCardModel : cCardModel {
 	private Vector2 m_BasePosition;
 	public Vector2 m_StartPosition;
 
-	public Vector2 m_MoveAdd;
+	private Vector2 m_MoveAdd;
+	private Vector2 m_MoveAcceleration;
 
 	private float m_Second;
 	private float m_SecondMax;
+
+	public float m_MaxAngle;
+	public float m_Speed;
 
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 		m_Position = m_StartPosition;
 
-		m_Rotation = 0;
+		m_Rotation = Vector3.zero;
 	}
 
 	public void Init(){
@@ -24,6 +28,7 @@ public class cEnemyBattleCardModel : cCardModel {
 		m_OutLineMode = eOutLineMode.eOutLineMode_None;
 
 		m_Position = m_StartPosition;
+		m_Rotation = Vector3.zero;
 
 		m_Second = 0.0f;
 		m_SecondMax = 0.0f;
@@ -36,15 +41,19 @@ public class cEnemyBattleCardModel : cCardModel {
 	}
 
 	public void MoveSet( float reachingSecond ){
-		m_MoveAdd = m_BasePosition - m_StartPosition;
-		m_MoveAdd *= (1 / reachingSecond);
+		m_MoveAcceleration = m_BasePosition - m_StartPosition;
+		m_MoveAcceleration *= (1 / reachingSecond) * 2;
+
+		m_MoveAdd = Vector2.zero;
 
 		m_Second = 0.0f;
 		m_SecondMax = reachingSecond;
 	}
 
 	public bool Move(){
-		m_Position += (m_MoveAdd * Time.deltaTime);
+		m_Position += ((m_MoveAdd += (m_MoveAcceleration * Time.deltaTime)) * Time.deltaTime);
+
+		m_Rotation.z -= m_MaxAngle * Time.deltaTime;
 
 		m_Second += Time.deltaTime;
 
@@ -55,5 +64,10 @@ public class cEnemyBattleCardModel : cCardModel {
 		} else {
 			return false;
 		}
+	}
+
+	public void SnapMove(){
+		m_Rotation.z += m_MaxAngle * Time.deltaTime;
+		m_Position.x -= m_Speed * Time.deltaTime;
 	}
 }

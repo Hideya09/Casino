@@ -11,6 +11,7 @@ public class cDuelStateManager : ScriptableObject {
 	public cEffectModel m_effectModel;
 	public cHitPointManager m_hpPManager;
 	public cHitPointManager m_hpEManager;
+	public cEnemyModel m_eModel;
 
 	private int m_Damage;
 
@@ -107,11 +108,13 @@ public class cDuelStateManager : ScriptableObject {
 		m_hpPManager.Init ();
 		m_gData.InitWin ();
 		m_effectModel.Init ();
+		m_eModel.Init ();
 	}
 
 	private void BattleInit(){
 		m_hpEManager.Init ();
 		m_edModel.Init ();
+		m_eModel.Init ();
 		++m_State;
 	}
 
@@ -164,6 +167,8 @@ public class cDuelStateManager : ScriptableObject {
 				m_effectModel.EffectStart ();
 				++m_State;
 			}
+		} else {
+			
 		}
 	}
 
@@ -265,7 +270,14 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffectWin(){
+		m_edModel.Snap ();
+
+		m_eModel.Vibration ();
+
 		if (m_hpEManager.CutBack () == true) {
+
+			m_eModel.StopVibration ();
+
 			if (m_hpEManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Win;
 			} else if (m_dModel.m_LastBattle == true) {
@@ -277,7 +289,14 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffectLose(){
+		m_dModel.Snap ();
+
+		m_cameraModel.Vibration ();
+
 		if (m_hpPManager.CutBack () == true) {
+
+			m_cameraModel.StopVibration ();
+
 			if (m_hpPManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Lose;
 			} else if (m_dModel.m_LastBattle == true) {
@@ -289,6 +308,9 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffectDraw(){
+		m_dModel.Snap ();
+		m_edModel.Snap ();
+
 		if (m_dModel.m_LastBattle == true) {
 			m_State = eDuelState.eDuelState_Lose;
 		} else {

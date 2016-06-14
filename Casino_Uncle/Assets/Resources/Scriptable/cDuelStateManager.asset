@@ -19,3 +19,4 @@ MonoBehaviour:
   m_effectModel: {fileID: 11400000, guid: 79534c2600f9e7043818d204a8b4295e, type: 2}
   m_hpPManager: {fileID: 11400000, guid: 8f08b99e5375b8443955dee53941d427, type: 2}
   m_hpEManager: {fileID: 11400000, guid: 980af96d4409b4c4292e22cfa79e5946, type: 2}
+  m_eModel: {fileID: 11400000, guid: 71e59e6230f54564e8430d6a34151bbb, type: 2}
