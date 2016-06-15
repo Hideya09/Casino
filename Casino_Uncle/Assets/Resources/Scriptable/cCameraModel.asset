@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: cCameraModel
   m_EditorClassIdentifier: 
   m_ReturnPosition: {x: 80, y: 80}
+  m_Runble: 96

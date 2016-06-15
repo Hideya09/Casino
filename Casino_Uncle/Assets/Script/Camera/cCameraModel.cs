@@ -18,10 +18,12 @@ public class cCameraModel : ScriptableObject {
 	private Vector2 m_BasePosition;
 	public Vector2 m_ReturnPosition;
 
-	public float m_RunbleCount;
-	public float m_RunbleMaxPower;
-	public float m_RunblePower;
-	public bool m_RunbleFlag;
+	public float m_Runble;
+
+	private float m_RunbleCount;
+	private float m_RunbleMaxPower;
+	private float m_RunblePower;
+	private bool m_RunbleFlag;
 
 	public void InitPosition( Vector2 setPosition ){
 		m_Position = setPosition;
@@ -71,46 +73,57 @@ public class cCameraModel : ScriptableObject {
 	}
 
 	public void RunbleInit(){
-		m_RunbleMaxPower = 48.0f;
-		m_RunblePower = Random.Range (m_RunbleMaxPower - 20.0f, m_RunbleMaxPower);
+		m_RunbleMaxPower = m_Runble * 0.25f;
+		m_RunblePower = m_Runble;
 		m_RunbleCount = 0.0f;
 		m_RunbleFlag = true;
 	}
 
 	public void Runble(){
-		m_RunbleCount += Time.deltaTime;
+		if (m_RunbleMaxPower > 0.0f) {
+			m_RunbleCount += Time.deltaTime;
 
-		if (m_RunbleCount >= 0.1f) {
-			m_RunbleMaxPower -= m_RunbleCount *  48.0f;
-
-			if (m_RunbleMaxPower < 0.0f) {
-				m_RunbleMaxPower = 0.0f;
-
-				m_RunblePower = m_BasePosition.y - m_RunblePower;
-
-				m_RunbleFlag = false;
+			if (m_RunbleCount >= 0.05f && m_RunbleMaxPower > 0.0f) {
+				if (m_RunbleFlag == true) {
+					m_Position.y -= m_RunblePower * Time.deltaTime;
+				} else {
+					m_Position.y += m_RunblePower * Time.deltaTime;
+				}
 			} else {
-				m_RunblePower = m_RunbleMaxPower;
+				if (m_RunbleFlag == true) {
+					m_Position.y += m_RunblePower * Time.deltaTime;
+				} else {
+					m_Position.y -= m_RunblePower * Time.deltaTime;
+				}
+			}
+
+			m_RunbleCount += Time.deltaTime;
+
+			if (m_RunbleCount >= 0.1f) {
+				m_RunbleMaxPower -= m_RunbleCount * 24.0f;
+
+				if (m_RunbleMaxPower < 0.0f) {
+					m_RunbleMaxPower = 0.0f;
+
+					m_RunblePower = m_BasePosition.y - m_Position.y;
+
+					m_RunbleFlag = false;
+				} else {
+					m_RunblePower = m_RunbleMaxPower;
+
+					m_RunbleFlag ^= true;
+				}
 
 				m_RunbleCount = 0.0f;
-
-				m_RunbleFlag ^= true;
-			}
-
-			m_RunbleCount = 0.0f;
-		}
-
-		if (m_RunbleCount >= 0.05f  && m_RunbleMaxPower > 0.0f) {
-			if (m_RunbleFlag == true) {
-				m_Position.y -= m_RunblePower * Time.deltaTime;
-			} else {
-				m_Position.y += m_RunblePower * Time.deltaTime;
 			}
 		} else {
-			if (m_RunbleFlag == true) {
-				m_Position.y += m_RunblePower * Time.deltaTime;
+
+			m_RunbleCount += Time.deltaTime;
+
+			if (m_RunbleCount <= 0.2f) {
+				m_Position.y += m_RunblePower * Time.deltaTime * 5;
 			} else {
-				m_Position.y -= m_RunblePower * Time.deltaTime;
+				m_Position.y = m_BasePosition.y;
 			}
 		}
 	}

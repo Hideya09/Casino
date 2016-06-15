@@ -13,6 +13,9 @@ public class cDuelStateManager : ScriptableObject {
 	public cHitPointManager m_hpEManager;
 	public cEnemyModel m_eModel;
 
+	public float cSwingTime;
+	public float cSwingDownTime;
+
 	private int m_Damage;
 
 	public enum eDuelState{
@@ -152,13 +155,13 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Move(){
 		m_dModel.CardMove ();
-		m_cameraModel.MoveSet (2.0f, 0.3f);
-		m_dModel.MoveAngleSet (2.0f, 0.3f);
+		m_cameraModel.MoveSet (cSwingTime, cSwingDownTime);
+		m_dModel.MoveAngleSet (cSwingTime, cSwingDownTime);
 		++m_State;
 	}
 
 	private void EnemyShuffle(){
-		m_edModel.Select ( 0.3f );
+		m_edModel.Select ( cSwingDownTime );
 		++m_State;
 	}
 

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: cEnemyModel
   m_EditorClassIdentifier: 
   m_Damage: {fileID: 11400000, guid: 6d5a857fa634f4141bea2fb6d44db072, type: 2}
+  m_Runble: 24
