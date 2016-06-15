@@ -12,6 +12,7 @@ public class cDuelStateManager : ScriptableObject {
 	public cHitPointManager m_hpPManager;
 	public cHitPointManager m_hpEManager;
 	public cEnemyModel m_eModel;
+	public cFadeHalfModel m_fadeHModel;
 
 	public float cSwingTime;
 	public float cSwingDownTime;
@@ -204,7 +205,6 @@ public class cDuelStateManager : ScriptableObject {
 		if (playerPower == enemyPower) {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Draw);
 			m_State = eDuelState.eDuelState_CommitEffect;
-			Debug.Log ("引き分け");
 
 			return;
 		}
@@ -213,7 +213,6 @@ public class cDuelStateManager : ScriptableObject {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Win);
 			m_hpEManager.m_Damage = 1;
 			m_State = eDuelState.eDuelState_CommitEffect;
-			Debug.Log ("勝利");
 
 			return;
 		}
@@ -222,7 +221,6 @@ public class cDuelStateManager : ScriptableObject {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Lose);
 			m_hpPManager.m_Damage = 1;
 			m_State = eDuelState.eDuelState_CommitEffect;
-			Debug.Log ("敗北");
 
 			return;
 		}
@@ -232,7 +230,6 @@ public class cDuelStateManager : ScriptableObject {
 				m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Win);
 				m_hpEManager.m_Damage = 1;
 				m_State = eDuelState.eDuelState_CommitEffect;
-				Debug.Log ("勝利");
 
 				return;
 			}
@@ -243,7 +240,6 @@ public class cDuelStateManager : ScriptableObject {
 				m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Lose);
 				m_hpPManager.m_Damage = 1;
 				m_State = eDuelState.eDuelState_CommitEffect;
-				Debug.Log ("敗北");
 
 				return;
 			}
@@ -253,12 +249,10 @@ public class cDuelStateManager : ScriptableObject {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Win);
 			m_hpEManager.m_Damage = playerPower - enemyPower;
 			m_State = eDuelState.eDuelState_CommitEffect;
-			Debug.Log ("勝利");
 		} else {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Lose);
 			m_hpPManager.m_Damage = enemyPower - playerPower;
 			m_State = eDuelState.eDuelState_CommitEffect;
-			Debug.Log ("敗北");
 		}
 
 	}
@@ -294,6 +288,7 @@ public class cDuelStateManager : ScriptableObject {
 			if (m_hpEManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Win;
 			} else if (m_dModel.m_LastBattle == true) {
+				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
 			} else {
 				m_State = eDuelState.eDuelState_CardEdit;
@@ -311,8 +306,10 @@ public class cDuelStateManager : ScriptableObject {
 			m_cameraModel.StopRunble ();
 
 			if (m_hpPManager.HitPointCheck () == true) {
+				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
 			} else if (m_dModel.m_LastBattle == true) {
+				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
 			} else {
 				m_State = eDuelState.eDuelState_CardEdit;
@@ -325,6 +322,7 @@ public class cDuelStateManager : ScriptableObject {
 		m_edModel.Snap ();
 
 		if (m_dModel.m_LastBattle == true) {
+			m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 			m_State = eDuelState.eDuelState_Lose;
 		} else {
 			m_State = eDuelState.eDuelState_CardEdit;
@@ -332,14 +330,15 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Win(){
-		Debug.Log ("ゲームに勝利" );
 		m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
 		m_State = eDuelState.eDuelState_End;
 		m_gData.AddWin ();
 	}
 
 	private void Lose(){
-		Debug.Log ("ゲームに敗北" );
-		m_State = eDuelState.eDuelState_End;
+		m_fadeHModel.FadeExec ();
+		if (m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutEnd) {
+			m_State = eDuelState.eDuelState_End;
+		}
 	}
 }

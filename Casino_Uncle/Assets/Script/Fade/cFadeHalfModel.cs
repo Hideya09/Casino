@@ -1,33 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cFadeInOutModel : ScriptableObject{
-
-	//フェードのステート
-	public enum eFadeState{
-		FadeIn,
-		FadeInEnd,
-		FadeInStop,
-		FadeOut,
-		FadeOutStop,
-		FadeOutEnd
-	}
-		
-
-	//現在のフェードステート
-	protected eFadeState m_State;
-
-	protected float m_Arpha;
-
+public class cFadeHalfModel : cFadeInOutModel{
 	// Use this for initialization
-	public virtual void OnEnable () {
-		m_State = eFadeState.FadeIn;
+	public override void OnEnable () {
+		m_State = eFadeState.FadeOut;
 
-		m_Arpha = 1.0f;
+		m_Arpha = 0.0f;
 	}
 	
 	// Update is called once per frame
-	public virtual void FadeExec () {
+	public override void FadeExec () {
 		switch (m_State) {
 		case eFadeState.FadeIn:
 			//徐々に白いテクスチャを薄くしていく
@@ -35,21 +18,21 @@ public class cFadeInOutModel : ScriptableObject{
 
 			if (m_Arpha <= 0.0f) {
 				m_State = eFadeState.FadeInStop;
+				m_Arpha = 0.0f;
 			}
 			break;
 		case eFadeState.FadeInStop:
-			m_State = eFadeState.FadeOut;
 			break;
 		case eFadeState.FadeOut:
 			//徐々に白いテクスチャを濃くしていく
 			m_Arpha += Time.deltaTime;
 
-			if (m_Arpha >= 1.0f) {
+			if (m_Arpha >= 0.5f) {
+				m_Arpha = 0.5f;
 				m_State = eFadeState.FadeOutStop;
 			}
 			break;
 		case eFadeState.FadeOutStop:
-			m_State = eFadeState.FadeIn;
 			break;
 		default:
 			//処理なし
@@ -57,11 +40,7 @@ public class cFadeInOutModel : ScriptableObject{
 		}
 	}
 
-	public float GetArpha(){
-		return m_Arpha;
-	}
-
-	public eFadeState GetState(){
-		return m_State;
+	public void SetState(eFadeState setState){
+		m_State = setState;
 	}
 }
