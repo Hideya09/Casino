@@ -4,6 +4,8 @@ using System.Collections;
 public class cGameScene : cSceneBase {
 	public cDuelStateManager m_DuelStateManager;
 
+	public cFadeInOutModel m_fadeModel;
+
 	public cDialogModel m_Dialog;
 
 	public enum eGameSceneList{
