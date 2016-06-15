@@ -212,6 +212,10 @@ public class cDeckModel : ScriptableObject {
 		return endFlag;
 	}
 
+	public void MoveAngleSet( float reachingSecond , float returnSecond ){
+		m_bcModel.SetMove (reachingSecond, returnSecond);
+	}
+
 	public void MoveAngle(){
 		m_bcModel.MoveAngle ();
 	}

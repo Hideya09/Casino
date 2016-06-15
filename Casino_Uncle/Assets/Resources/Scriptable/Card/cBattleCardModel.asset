@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Name: cBattleCardModel
   m_EditorClassIdentifier: 
   m_MaxAngle: 45
+  m_CookAngle: -135
   m_Speed: 5000
+  m_Stop: 380

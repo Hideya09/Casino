@@ -152,12 +152,13 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Move(){
 		m_dModel.CardMove ();
-		m_cameraModel.MoveSet (1.0f, 0.15f);
+		m_cameraModel.MoveSet (2.0f, 0.3f);
+		m_dModel.MoveAngleSet (2.0f, 0.3f);
 		++m_State;
 	}
 
 	private void EnemyShuffle(){
-		m_edModel.Select ( 0.15f );
+		m_edModel.Select ( 0.3f );
 		++m_State;
 	}
 
@@ -267,8 +268,10 @@ public class cDuelStateManager : ScriptableObject {
 			cCommitTextModel.eCommitText commit = m_ctModel.GetText ();
 
 			if (commit == cCommitTextModel.eCommitText.eCommitText_Win) {
+				m_eModel.RunbleInit ();
 				m_State = eDuelState.eDuelState_CommitEffectWin;
 			} else if (commit == cCommitTextModel.eCommitText.eCommitText_Lose) {
+				m_cameraModel.RunbleInit ();
 				m_State = eDuelState.eDuelState_CommitEffectLose;
 			} else {
 				m_State = eDuelState.eDuelState_CommitEffectDraw;
@@ -279,11 +282,11 @@ public class cDuelStateManager : ScriptableObject {
 	private void CommitEffectWin(){
 		m_edModel.Snap ();
 
-		m_eModel.Vibration ();
+		m_eModel.Runble ();
 
 		if (m_hpEManager.CutBack () == true) {
 
-			m_eModel.StopVibration ();
+			m_eModel.StopRunble ();
 
 			if (m_hpEManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Win;
@@ -298,11 +301,11 @@ public class cDuelStateManager : ScriptableObject {
 	private void CommitEffectLose(){
 		m_dModel.Snap ();
 
-		m_cameraModel.Vibration ();
+		m_cameraModel.Runble ();
 
 		if (m_hpPManager.CutBack () == true) {
 
-			m_cameraModel.StopVibration ();
+			m_cameraModel.StopRunble ();
 
 			if (m_hpPManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Lose;

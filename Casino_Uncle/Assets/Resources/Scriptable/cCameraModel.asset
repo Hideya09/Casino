@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f43a053f61cd2f849bd6c92cb8250b3e, type: 3}
   m_Name: cCameraModel
   m_EditorClassIdentifier: 
-  m_ReturnPosition: {x: 40, y: 40}
+  m_ReturnPosition: {x: 80, y: 80}

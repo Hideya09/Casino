@@ -14,6 +14,7 @@ public class cEnemyBattleCardModel : cCardModel {
 
 	public float m_MaxAngle;
 	public float m_Speed;
+	public float m_Stop;
 
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
@@ -70,6 +71,11 @@ public class cEnemyBattleCardModel : cCardModel {
 
 	public void SnapMove(){
 		m_Rotation.z = -m_MaxAngle;
+
 		m_Position.x -= m_Speed * Time.deltaTime;
+
+		if (m_Stop >= m_Position.x) {
+			m_Position.x = m_Stop;
+		}
 	}
 }

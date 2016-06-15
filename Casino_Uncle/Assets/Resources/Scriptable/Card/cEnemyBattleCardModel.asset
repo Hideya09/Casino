@@ -14,3 +14,4 @@ MonoBehaviour:
   m_StartPosition: {x: -620, y: 550}
   m_MaxAngle: -45
   m_Speed: 5000
+  m_Stop: -380
