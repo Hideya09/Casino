@@ -54,6 +54,8 @@ public class cSelectCardModel : cCardModel {
 	public void SetSelect(){
 		CardInit ();
 
+		m_DrawMode = eDrawMode.eDrawMode_Front;
+
 		m_TapFlag = false;
 
 		m_SelectFlag = false;

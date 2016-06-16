@@ -21,5 +21,8 @@ MonoBehaviour:
   m_hpEManager: {fileID: 11400000, guid: 980af96d4409b4c4292e22cfa79e5946, type: 2}
   m_eModel: {fileID: 11400000, guid: 71e59e6230f54564e8430d6a34151bbb, type: 2}
   m_fadeHModel: {fileID: 11400000, guid: 017a0f365dfdd2d4b9734bcda9fcf8d8, type: 2}
+  m_winModel: {fileID: 11400000, guid: 1f44cd9d7f5a56e4fbe52292fc5636bd, type: 2}
+  m_loseModel: {fileID: 11400000, guid: 5515d7b25a208fa48ad41141167ca7ee, type: 2}
+  m_startModel: {fileID: 11400000, guid: 9bb51425caf1ccb4facae7fc76dc439a, type: 2}
   cSwingTime: 1.5
   cSwingDownTime: 0.3

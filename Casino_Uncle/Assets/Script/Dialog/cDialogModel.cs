@@ -16,14 +16,14 @@ public abstract class cDialogModel : ScriptableObject {
 	public abstract void Init (bool upPosition = true);
 
 	protected void InitPositionUp(){
-		m_Position = new Vector3 (0.0f, 600.0f , -2.0f);
+		m_Position = new Vector3 (0.0f, 600.0f , -705.0f);
 		m_Rotation = -15;
 
 		m_Count = 0.0f;
 	}
 
 	protected void InitPositionDpwn(){
-		m_Position = new Vector3 (0.0f, -600.0f , -2.0f);
+		m_Position = new Vector3 (0.0f, -600.0f , -705.0f);
 		m_Rotation = -15;
 
 		m_Count = 0.0f;
