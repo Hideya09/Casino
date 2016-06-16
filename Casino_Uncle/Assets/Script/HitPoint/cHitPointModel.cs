@@ -69,6 +69,7 @@ public class cHitPointModel : ScriptableObject {
 				m_AddFlag = true;
 
 				if (m_Count >= m_MaxCount) {
+					m_AliveFlag = false;
 					return true;
 				}
 			}

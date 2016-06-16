@@ -3229,6 +3229,7 @@ GameObject:
   - 4: {fileID: 1281448128}
   - 212: {fileID: 1281448127}
   - 114: {fileID: 1281448126}
+  - 114: {fileID: 1281448129}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -3292,6 +3293,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &1281448129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1281448125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304dcf9316355be459016e069296b505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_effectWinModel: {fileID: 11400000, guid: 1f44cd9d7f5a56e4fbe52292fc5636bd, type: 2}
 --- !u!1001 &1293834858
 Prefab:
   m_ObjectHideFlags: 0
@@ -3542,6 +3555,7 @@ GameObject:
   - 4: {fileID: 1514496396}
   - 212: {fileID: 1514496395}
   - 114: {fileID: 1514496394}
+  - 114: {fileID: 1514496397}
   m_Layer: 0
   m_Name: Lose
   m_TagString: Untagged
@@ -3603,6 +3617,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!114 &1514496397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1514496393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6715bdbc871d9d344b3c1a3499a7ef05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_effectLoseModel: {fileID: 11400000, guid: 5515d7b25a208fa48ad41141167ca7ee, type: 2}
 --- !u!1 &1655220134
 GameObject:
   m_ObjectHideFlags: 0
