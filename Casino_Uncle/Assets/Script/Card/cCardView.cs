@@ -47,12 +47,12 @@ public class cCardView : MonoBehaviour {
 		}
 
 		if (m_cModel.m_DrawMode == cCardModel.eDrawMode.eDrawMode_Dark) {
-			Color color = m_Renderer.color;
-			m_Renderer.color = new Color (0.5f, 0.5f, 0.5f , color.a);
+			//Color color = m_Renderer.color;
+			m_Renderer.color = new Color (0.5f, 0.5f, 0.5f, m_cModel.GetFade ());
 
 		} else {
-			Color color = m_Renderer.color;
-			m_Renderer.color = new Color (1.0f, 1.0f, 1.0f , color.a);
+			//Color color = m_Renderer.color;
+			m_Renderer.color = new Color (1.0f, 1.0f, 1.0f, m_cModel.GetFade ());
 		}
 
 		switch (m_cModel.m_Size) {

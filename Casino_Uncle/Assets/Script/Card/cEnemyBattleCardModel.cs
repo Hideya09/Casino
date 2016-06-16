@@ -39,6 +39,8 @@ public class cEnemyBattleCardModel : cCardModel {
 		m_DrawMode = eDrawMode.eDrawMode_Back;
 		m_Size = eSize.eSize_Medium;
 		m_OutLineMode = eOutLineMode.eOutLineMode_Red;
+
+		m_Fade = 1.0f;
 	}
 
 	public void MoveSet( float reachingSecond ){

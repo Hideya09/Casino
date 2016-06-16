@@ -34,6 +34,8 @@ public class cBattleCardModel : cCardModel {
 		m_DrawMode = eDrawMode.eDrawMode_Front;
 		m_Size = eSize.eSize_Medium;
 		m_OutLineMode = eOutLineMode.eOutLineMode_Red;
+
+		m_Fade = 1.0f;
 	}
 
 	public void SetMove( float reachingSecond , float returnSecond ){

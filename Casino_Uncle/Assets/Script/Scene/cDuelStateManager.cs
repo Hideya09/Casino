@@ -21,6 +21,8 @@ public class cDuelStateManager : ScriptableObject {
 
 	public enum eDuelState{
 		eDuelState_BattleInit,
+		eDuelState_Start,
+		eDuelState_Start2,
 		eDuelState_Shuffle,
 		eDuelState_HandOut,
 		eDuelState_CardOpen,
@@ -51,6 +53,12 @@ public class cDuelStateManager : ScriptableObject {
 		switch (m_State) {
 		case eDuelState.eDuelState_BattleInit:
 			BattleInit ();
+			break;
+		case eDuelState.eDuelState_Start:
+			Start ();
+			break;
+		case eDuelState.eDuelState_Start2:
+			Start2 ();
 			break;
 		case eDuelState.eDuelState_Shuffle:
 			Shuffle ();
@@ -101,8 +109,12 @@ public class cDuelStateManager : ScriptableObject {
 			Lose ();
 			break;
 		case eDuelState.eDuelState_End:
-			m_State = eDuelState.eDuelState_BattleInit;
-			return true;
+			if (End () == true) {
+				m_State = eDuelState.eDuelState_BattleInit;
+
+				return true;
+			}
+			break;
 		}
 		return false;
 	}
@@ -119,7 +131,40 @@ public class cDuelStateManager : ScriptableObject {
 		m_hpEManager.Init ();
 		m_edModel.Init ();
 		m_eModel.Init ();
+
+		m_dModel.MoveSet ();
+		m_hpPManager.MoveSet ();
+		m_hpEManager.FadeInit ();
+
 		++m_State;
+	}
+
+	private void Start(){
+		bool endFlag = true;
+
+		endFlag &= m_dModel.Move ();
+		endFlag &= m_hpPManager.Move ();
+
+		if (endFlag == true) {
+			m_dModel.ReturnSet ();
+			m_hpPManager.ReturnSet ();
+
+			++m_State;
+		}
+	}
+
+	private void Start2(){
+		bool endFlag = true;
+
+		endFlag &= m_dModel.Return ();
+		endFlag &= m_hpPManager.Return ();
+		if (endFlag == true) {
+			endFlag &= m_eModel.Start ();
+			endFlag &= m_hpEManager.Fade ();
+			if (endFlag == true) {
+				++m_State;
+			}
+		}
 	}
 
 	private void Shuffle(){
@@ -199,8 +244,6 @@ public class cDuelStateManager : ScriptableObject {
 
 		int playerPower = m_dModel.GetBattleCardNumber ();
 		int enemyPower = m_edModel.GetBattleCardNumber ();
-
-		Debug.Log (playerPower.ToString() + "  " + enemyPower.ToString());
 
 		if (playerPower == enemyPower) {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Draw);
@@ -330,15 +373,35 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Win(){
-		m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
-		m_State = eDuelState.eDuelState_End;
-		m_gData.AddWin ();
+		if (m_eModel.End () == true) {
+			m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
+			m_dModel.BackSet ();
+			m_hpPManager.BackSet ();
+			m_hpEManager.BackSet ();
+			m_State = eDuelState.eDuelState_End;
+			m_gData.AddWin ();
+		}
 	}
 
 	private void Lose(){
 		m_fadeHModel.FadeExec ();
-		if (m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutEnd) {
+		if (m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
+			m_dModel.BackSet ();
+         	m_hpPManager.BackSet ();
+         	m_hpEManager.BackSet ();
 			m_State = eDuelState.eDuelState_End;
 		}
+	}
+
+	private bool End(){
+		bool endFlag = true;
+
+		endFlag &= m_dModel.MoveBack ();
+		endFlag &= m_edModel.Back ();
+		endFlag &= m_hpPManager.Back ();
+		//endFlag &= m_eModel,Ba ();
+		endFlag &= m_hpEManager.Back ();
+
+		return endFlag;
 	}
 }

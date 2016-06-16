@@ -38,6 +38,8 @@ public class cSelectCardModel : cCardModel {
 		m_DrawMode = eDrawMode.eDrawMode_Back;
 		m_Size = eSize.eSize_Medium;
 
+		m_Fade = 0.0f;
+
 		m_Position = setPosition;
 
 		m_BufPosition = m_Position;
@@ -58,6 +60,8 @@ public class cSelectCardModel : cCardModel {
 	}
 
 	public bool Move(){
+
+		m_Fade = 1.0f;
 
 		m_Count += Time.deltaTime;
 

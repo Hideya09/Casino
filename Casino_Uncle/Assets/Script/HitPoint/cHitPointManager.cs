@@ -43,7 +43,67 @@ public class cHitPointManager : ScriptableObject {
 		return m_HitPointMax - m_CutBackTotalNumber;
 	}
 
+	public void FadeInit(){
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			m_hpModel [i].FadeInit ();
+		}
+	}
+
+	public bool Fade(){
+		bool endFlag = true;
+
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			endFlag &= m_hpModel [i].Fade ();
+		}
+
+		return endFlag;
+	}
+
+	public void MoveSet(){
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			m_hpModel [i].MoveSet ();
+		}
+	}
+
 	public bool Move(){
-		return false;
+		bool ret = true;
+
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			ret &= m_hpModel [i].Move ();
+		}
+
+		return ret;
+	}
+
+	public void ReturnSet(){
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			m_hpModel [i].ReturnSet ();
+		}
+	}
+
+	public bool Return(){
+		bool ret = true;
+
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			ret &= m_hpModel [i].Return ();
+		}
+
+		return ret;
+	}
+
+	public void BackSet(){
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			m_hpModel [i].BackSet ();
+		}
+	}
+
+	public bool Back(){
+		bool ret = true;
+
+		for (int i = 0; i < m_hpModel.Length; ++i) {
+			ret &= m_hpModel [i].Back ();
+		}
+
+		return ret;
 	}
 }

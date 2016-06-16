@@ -10,6 +10,9 @@ public class cEnemyModel : ScriptableObject {
 
 	public float m_Runble;
 
+	public float m_Fade;
+	public float m_Black;
+
 	private float m_RunbleCount;
 	private float m_RunbleMaxPower;
 	private float m_RunblePower;
@@ -24,6 +27,9 @@ public class cEnemyModel : ScriptableObject {
 		m_Position = m_BasePosition;
 
 		m_Damage.EffectEnd ();
+
+		m_Fade = 0.0f;
+		m_Black = 0.5f;
 	}
 
 	public void RunbleInit(){
@@ -94,11 +100,38 @@ public class cEnemyModel : ScriptableObject {
 		return m_Position;
 	}
 
-	public void Start(){
-		
+	public float GetFade(){
+		return m_Fade;
+	}
+	public float GetBlack(){
+		return m_Black;
 	}
 
-	public void End(){
-		
+	public bool Start(){
+		m_Fade += Time.deltaTime;
+		if (m_Fade >= 1.0f) {
+			m_Fade = 1.0f;
+			m_Black += Time.deltaTime;
+			if (m_Black >= 1.0f) {
+				m_Black = 1.0f;
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public bool End(){
+		m_Black -= Time.deltaTime;
+		if (m_Black <= 0.5f) {
+			m_Black = 0.5f;
+			m_Fade -= Time.deltaTime;
+			if (m_Fade <= 0.0f) {
+				m_Fade = 0.0f;
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

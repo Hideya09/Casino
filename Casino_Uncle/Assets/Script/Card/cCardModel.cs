@@ -7,6 +7,8 @@ public class cCardModel : ScriptableObject {
 
 	private bool m_EndOpen;
 
+	protected float m_Fade;
+
 	public enum eDrawMode{
 		eDrawMode_None,
 		eDrawMode_Front,
@@ -50,6 +52,8 @@ public class cCardModel : ScriptableObject {
 		m_DrawMode = eDrawMode.eDrawMode_Front;
 		m_OutLineMode = eOutLineMode.eOutLineMode_None;
 		m_Size = eSize.eSize_Medium;
+
+		m_Fade = 1.0f;
 
 		m_EndOpen = false;
 	}
@@ -100,6 +104,20 @@ public class cCardModel : ScriptableObject {
 		}
 
 		return false;
+	}
+
+	public bool Back(){
+		m_Fade -= Time.deltaTime;
+		m_Position.y -= Time.deltaTime * 10;
+		if (m_Fade <= 0.0f) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public float GetFade(){
+		return m_Fade;
 	}
 
 	public bool GetOpen(){
