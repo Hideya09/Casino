@@ -13,6 +13,9 @@ public class cDuelStateManager : ScriptableObject {
 	public cHitPointManager m_hpEManager;
 	public cEnemyModel m_eModel;
 	public cFadeHalfModel m_fadeHModel;
+	public cEffectWinModel m_winModel;
+	public cEffectLoseModel m_loseModel;
+	public cEffectStartModel m_startModel;
 
 	public float cSwingTime;
 	public float cSwingDownTime;
@@ -111,7 +114,7 @@ public class cDuelStateManager : ScriptableObject {
 		case eDuelState.eDuelState_End:
 			if (End () == true) {
 				m_State = eDuelState.eDuelState_BattleInit;
-
+				DeleteText ();
 				return true;
 			}
 			break;
@@ -127,10 +130,17 @@ public class cDuelStateManager : ScriptableObject {
 		m_eModel.Init ();
 	}
 
+	public void DeleteText(){
+		m_winModel.Init ();
+		m_loseModel.Init ();
+	}
+
 	private void BattleInit(){
 		m_hpEManager.Init ();
 		m_edModel.Init ();
 		m_eModel.Init ();
+
+		m_startModel.Init ();
 
 		m_dModel.MoveSet ();
 		m_hpPManager.MoveSet ();
@@ -162,7 +172,9 @@ public class cDuelStateManager : ScriptableObject {
 			endFlag &= m_eModel.Start ();
 			endFlag &= m_hpEManager.Fade ();
 			if (endFlag == true) {
-				++m_State;
+				if (m_startModel.Exec () == true) {
+					++m_State;
+				}
 			}
 		}
 	}
@@ -374,18 +386,20 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Win(){
 		if (m_eModel.End () == true) {
-			m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
-			m_dModel.BackSet ();
-			m_hpPManager.BackSet ();
-			m_hpEManager.BackSet ();
-			m_State = eDuelState.eDuelState_End;
-			m_gData.AddWin ();
+			if (m_winModel.EffectOn () == true) {
+				m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
+				m_dModel.BackSet ();
+				m_hpPManager.BackSet ();
+				m_hpEManager.BackSet ();
+				m_State = eDuelState.eDuelState_End;
+				m_gData.AddWin ();
+			}
 		}
 	}
 
 	private void Lose(){
 		m_fadeHModel.FadeExec ();
-		if (m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
+		if ( m_loseModel.EffectOn() == true && m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 			m_dModel.BackSet ();
          	m_hpPManager.BackSet ();
          	m_hpEManager.BackSet ();

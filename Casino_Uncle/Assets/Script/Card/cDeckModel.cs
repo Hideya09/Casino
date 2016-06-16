@@ -45,6 +45,10 @@ public class cDeckModel : ScriptableObject {
 			m_Deck[i] = false;
 		}
 
+		for( int i = 0 ; i < m_selcModel.Length ; ++i ){
+			m_selcModel [i].CardInit ();
+		}
+
 		m_LastBattle = false;
 
 		m_Fade = 1.0f;
@@ -268,6 +272,9 @@ public class cDeckModel : ScriptableObject {
 		m_Movement = m_ReturnPosition - m_Position;
 
 		m_Movement /= m_MaxReturnCount;
+
+		m_Position = m_StartPosition;
+		m_Fade = 1.0f;
 
 		m_ReturnCount = 0.0f;
 	}

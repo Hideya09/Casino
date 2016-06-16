@@ -23,6 +23,7 @@ public class cHitPointModel : ScriptableObject {
 	public float m_Fade{ get; private set; }
 	public float m_Black{ get; private set; }
 
+	private bool m_AliveFlag;
 	private bool m_AddFlag;
 
 	public void SetPosition( Vector3 setPosition ){
@@ -37,6 +38,8 @@ public class cHitPointModel : ScriptableObject {
 		m_Black = 1.0f;
 
 		m_Position = m_StartPosition;
+
+		m_AliveFlag = true;
 
 		m_AddFlag = false;
 	}
@@ -78,6 +81,14 @@ public class cHitPointModel : ScriptableObject {
 		m_Movement = m_ReturnPosition - m_StartPosition;
 
 		m_Movement /= m_MaxReturnCount;
+
+		m_Position = m_StartPosition;
+
+		m_Fade = 1.0f;
+
+		if (m_AliveFlag == true) {
+			m_Color = 1.0f;
+		}
 
 		m_ReturnCount = 0.0f;
 	}

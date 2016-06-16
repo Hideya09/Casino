@@ -35,6 +35,12 @@ public class cCardModel : ScriptableObject {
 
 	public int m_CardNumber{ set; get; }
 
+	void OnEnable(){
+		m_DrawMode = eDrawMode.eDrawMode_None;
+		m_OutLineMode = eOutLineMode.eOutLineMode_None;
+		m_Size = eSize.eSize_Medium;
+	}
+
 	public virtual void InitPosition( Vector2 position ){
 		m_Position = position;
 		m_Rotation = Vector3.zero;
@@ -49,7 +55,7 @@ public class cCardModel : ScriptableObject {
 	}
 
 	public void CardInit(){
-		m_DrawMode = eDrawMode.eDrawMode_Front;
+		m_DrawMode = eDrawMode.eDrawMode_None;
 		m_OutLineMode = eOutLineMode.eOutLineMode_None;
 		m_Size = eSize.eSize_Medium;
 
