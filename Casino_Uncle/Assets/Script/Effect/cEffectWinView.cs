@@ -19,6 +19,7 @@ public class cEffectWinView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.localScale = m_effectWinModel.GetLightScale ();
+		transform.rotation = Quaternion.AngleAxis (m_effectWinModel.GetAngle (), Vector3.forward);
 		m_TextTransform.localScale = m_effectWinModel.GetTextScale ();
 
 		m_Sprite.enabled = m_effectWinModel.GetDraw ();

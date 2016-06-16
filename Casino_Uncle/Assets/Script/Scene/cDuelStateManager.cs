@@ -126,6 +126,7 @@ public class cDuelStateManager : ScriptableObject {
 		m_dModel.Init ();
 		m_hpPManager.Init ();
 		m_gData.InitWin ();
+		m_gData.InitCard ();
 		m_effectModel.Init ();
 		m_eModel.Init ();
 	}
@@ -182,7 +183,7 @@ public class cDuelStateManager : ScriptableObject {
 	private void Shuffle(){
 		m_dModel.RandomSet ();
 		m_edModel.Hind ();
-		m_gData.InitCard ();
+		m_gData.CardMinus ();
 		++m_State;
 	}
 
@@ -386,7 +387,7 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Win(){
 		if (m_eModel.End () == true) {
-			if (m_winModel.EffectOn () == true) {
+			if (m_winModel.GetTapFlag () == true) {
 				m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
 				m_dModel.BackSet ();
 				m_hpPManager.BackSet ();
@@ -394,17 +395,21 @@ public class cDuelStateManager : ScriptableObject {
 				m_State = eDuelState.eDuelState_End;
 				m_gData.AddWin ();
 			}
+
+			m_winModel.EffectOn ();
 		}
 	}
 
 	private void Lose(){
 		m_fadeHModel.FadeExec ();
-		if ( m_loseModel.EffectOn() == true && m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
+		if (m_loseModel.GetTapFlag () == true && m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 			m_dModel.BackSet ();
-         	m_hpPManager.BackSet ();
-         	m_hpEManager.BackSet ();
+			m_hpPManager.BackSet ();
+			m_hpEManager.BackSet ();
 			m_State = eDuelState.eDuelState_End;
 		}
+
+		m_loseModel.EffectOn ();
 	}
 
 	private bool End(){

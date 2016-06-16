@@ -18,20 +18,18 @@ public class cGameData : ScriptableObject {
 
 	public int GetPayBack( bool doubleFlag ){
 		if (m_WinningStreak == 0) {
-			return m_bet;
+			return 0;
 		}
 
 		if (doubleFlag == true) {
-			return m_bet * (int)m_PayBack [m_WinningStreak - 1] * 2;
+			return (int)(m_bet * m_PayBack [m_WinningStreak - 1] * 2);
 		} else {
-			return m_bet * (int)m_PayBack [m_WinningStreak - 1];
+			return (int)(m_bet * m_PayBack [m_WinningStreak - 1]);
 		}
 	}
 
 	public void AddWin(){
 		++m_WinningStreak;
-
-		Debug.Log (m_WinningStreak.ToString() + "連勝");
 	}
 	public int GetWin(){
 		return m_WinningStreak;

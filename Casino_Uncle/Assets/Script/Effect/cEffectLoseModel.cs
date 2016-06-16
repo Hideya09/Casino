@@ -6,6 +6,9 @@ public class cEffectLoseModel : ScriptableObject {
 
 	private bool m_DrawFlag;
 
+	private bool m_TapFlag;
+	private bool m_EffectEndFlag;
+
 	public float m_Speed;
 
 	void OnEnable(){
@@ -14,6 +17,9 @@ public class cEffectLoseModel : ScriptableObject {
 
 	public void Init(){
 		m_DrawFlag = false;
+
+		m_TapFlag = false;
+		m_EffectEndFlag = false;
 
 		m_Fade = 0.0f;
 	}
@@ -37,9 +43,21 @@ public class cEffectLoseModel : ScriptableObject {
 		if (m_Fade >= 1.0f) {
 			m_Fade = 1.0f;
 
+			m_EffectEndFlag = true;
+
+			m_TapFlag = false;
+
 			return true;
 		}
 
 		return false;
+	}
+
+	public void Tap(){
+		m_TapFlag = true;
+	}
+
+	public bool GetTapFlag(){
+		return m_TapFlag & m_EffectEndFlag;
 	}
 }
