@@ -118,7 +118,7 @@ RectTransform:
   m_RootOrder: 10
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 420.4, y: -177}
+  m_AnchoredPosition: {x: 420, y: -177}
   m_SizeDelta: {x: 54, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &55463464
@@ -406,7 +406,7 @@ RectTransform:
   m_RootOrder: 9
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 358, y: -177}
+  m_AnchoredPosition: {x: 360, y: -177}
   m_SizeDelta: {x: 54, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &285134199
@@ -1522,6 +1522,7 @@ GameObject:
   - 224: {fileID: 1061464325}
   - 222: {fileID: 1061464327}
   - 114: {fileID: 1061464326}
+  - 114: {fileID: 1061464328}
   m_Layer: 5
   m_Name: Deck
   m_TagString: Untagged
@@ -1543,7 +1544,7 @@ RectTransform:
   m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 160, y: 109}
+  m_AnchoredPosition: {x: 160, y: 110}
   m_SizeDelta: {x: 112, y: 165}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061464326
@@ -1579,6 +1580,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1061464324}
+--- !u!114 &1061464328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1061464324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88601ad6b91f0f947a21e40c9693a67f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_dModel: {fileID: 11400000, guid: 34d5ade43284197418d82362b2b74d50, type: 2}
 --- !u!1 &1248356254
 GameObject:
   m_ObjectHideFlags: 0
@@ -8487,7 +8500,7 @@ RectTransform:
   m_RootOrder: 8
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 295.69974, y: -177}
+  m_AnchoredPosition: {x: 300, y: -177}
   m_SizeDelta: {x: 54, y: 54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057736685

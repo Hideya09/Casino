@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Name: cDeckModel
   m_EditorClassIdentifier: 
   HandOutSpeed: 400
-  DeckPosition: {x: -320, y: -161}
+  m_StartPosition: {x: -600, y: -160, z: 0}
+  m_ReturnPosition: {x: -300, y: -160, z: 0}
+  m_MaxReturnCount: 2
   DeckMax: 14
   m_selcModel:
   - {fileID: 11400000, guid: 7028e4c2fe596464382f7e0752ef9433, type: 2}
