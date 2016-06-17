@@ -33,8 +33,25 @@ public class cBetDialogModel : cDialogModel {
 			}
 			break;
 		case eBetState.eBetState_Bet:
-			if (m_betMoneyModel.GetNumber () != 0) {
+			if (m_betMoneyModel.GetNumber () >= 100 && m_betMoneyModel.GetNumber () <= m_NumberData [0]) {
 				m_State = eBetState.eBetState_Lock;
+			}
+			for (int i = 0; i < m_buttonModel.Length; ++i) {
+				int number = m_buttonModel [i].GetSelect ();
+				if (number == 1) {
+					m_buttonModel [i].Init ();
+					m_buttonModel [i].Start ();
+				}
+				else if (number == 2) {
+					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Show;
+
+					m_State = eBetState.eBetState_End;
+					break;
+				} else if (number == 3) {
+					m_buttonModel [i].Init ();
+					m_buttonModel [i].Start ();
+					break;
+				}
 			}
 			break;
 		case eBetState.eBetState_Lock:
@@ -51,6 +68,8 @@ public class cBetDialogModel : cDialogModel {
 					break;
 				} else if (number == 3) {
 					m_State = eBetState.eBetState_Main; 
+
+					m_betMoneyModel.SetInput (false);
 
 					break;
 				}
@@ -93,6 +112,7 @@ public class cBetDialogModel : cDialogModel {
 
 			if (m_Select == false) {
 				m_State = eBetState.eBetState_Lock;
+				m_betMoneyModel.SetInput (true);
 			}
 			break;
 		case eBetState.eBetState_Money:
@@ -121,6 +141,8 @@ public class cBetDialogModel : cDialogModel {
 		m_RetScene = cGameScene.eGameSceneList.eGameSceneList_BetDialog;
 
 		m_State = eBetState.eBetState_Start;
+
+		m_betMoneyModel.Init ();
 
 		InitPositionUp ();
 
