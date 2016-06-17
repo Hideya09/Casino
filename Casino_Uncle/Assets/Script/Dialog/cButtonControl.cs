@@ -26,6 +26,12 @@ public class cButtonControl : MonoBehaviour {
 		} else {
 			m_buttonModel.UnTapButton ();
 		}
+
+		if (Input.GetMouseButton (0)) {
+			m_buttonModel.Touch ();
+		} else {
+			m_buttonModel.UnTouch ();
+		}
 	}
 
 	void OnMouseOver(){

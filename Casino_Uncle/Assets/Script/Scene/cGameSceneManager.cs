@@ -34,19 +34,20 @@ public class cGameSceneManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		m_Scene [1].SceneInit ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//返り値が現在のシーン番号と違う場合はシーンを切り替える
 
-		eGameScene nextScene = eGameScene.GameScene_Title;
+		//eGameScene nextScene = eGameScene.GameScene_Title;
 
 		m_Scene [1].SceneExec ();
 
-		if (nextScene != m_GameScene) {
-			UnityEngine.SceneManagement.SceneManager.LoadScene ((int)nextScene);
-			m_GameScene = nextScene;
-		}
+		//if (nextScene != m_GameScene) {
+		//	UnityEngine.SceneManagement.SceneManager.LoadScene ((int)nextScene);
+		//	m_GameScene = nextScene;
+		//}
 	}
 }
