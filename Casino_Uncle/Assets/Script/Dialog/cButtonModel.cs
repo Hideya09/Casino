@@ -6,7 +6,9 @@ public class cButtonModel : ScriptableObject {
 
 	private bool m_TapFlag;
 
-	private bool m_Selct;
+	private bool m_Select;
+
+	private bool m_Touch;
 
 	public int m_ButtonNumber;
 
@@ -15,7 +17,9 @@ public class cButtonModel : ScriptableObject {
 
 		m_TapFlag = false;
 
-		m_Selct = false;
+		m_Select = false;
+
+		m_Touch = false;
 	}
 
 	public void Start(){
@@ -40,8 +44,19 @@ public class cButtonModel : ScriptableObject {
 
 	public void SelectButton(){
 		if (m_Start == true) {
-			m_Selct = true;
+			m_Select ^= true;
 		}
+	}
+
+	public bool GetTouch(){
+		return m_Touch;
+	}
+
+	public void Touch(){
+		m_Touch = true;
+	}
+	public void UnTouch(){
+		m_Touch = false;
 	}
 
 	public bool GetTap(){
@@ -49,7 +64,7 @@ public class cButtonModel : ScriptableObject {
 	}
 
 	public int GetSelect(){
-		if (m_Selct == true) {
+		if (m_Select == true) {
 			return m_ButtonNumber;
 		}
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class cFadeHalfModel : cFadeInOutModel{
 	// Use this for initialization
 	public override void OnEnable () {
-		m_State = eFadeState.FadeOut;
+		m_State = eFadeState.FadeInStop;
 
 		m_Arpha = 0.0f;
 	}

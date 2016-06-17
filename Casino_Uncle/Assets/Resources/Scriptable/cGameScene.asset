@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Name: cGameScene
   m_EditorClassIdentifier: 
   m_DuelStateManager: {fileID: 11400000, guid: de02ede13231c7842bc132cb5bb47211, type: 2}
-  m_Dialog: {fileID: 11400000, guid: 2c8549f6c7fe2ce499796832e44606b3, type: 2}
+  m_gData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
+  m_fadeModel: {fileID: 0}
+  m_BetDialog: {fileID: 11400000, guid: 24a07692ff013994482be083ccd6b389, type: 2}
+  m_NextDialog: {fileID: 11400000, guid: 2c8549f6c7fe2ce499796832e44606b3, type: 2}
+  m_PayBackDialog: {fileID: 11400000, guid: a6f23e65e37924643b650a817a5c6c6e, type: 2}

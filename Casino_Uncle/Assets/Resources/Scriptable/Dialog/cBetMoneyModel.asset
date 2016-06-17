@@ -8,13 +8,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb854ab59d916a47bb15c9e3c9a1fb4, type: 3}
-  m_Name: cGameData
+  m_Script: {fileID: 11500000, guid: fd44f2b287d4182438cc05f2fd44279e, type: 3}
+  m_Name: cBetMoneyModel
   m_EditorClassIdentifier: 
-  m_PayBack:
-  - 1.1
-  - 1.2
-  - 1.5
-  - 1.7
-  - 3
-  m_Money: 49

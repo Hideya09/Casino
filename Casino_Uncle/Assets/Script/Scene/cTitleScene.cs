@@ -7,4 +7,7 @@ public class cTitleScene : cSceneBase {
 	{
 		return cGameSceneManager.eGameScene.GameScene_Title;
 	}
+
+	public override void SceneInit(){
+	}
 }

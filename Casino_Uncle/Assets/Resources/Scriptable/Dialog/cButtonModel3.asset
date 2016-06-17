@@ -11,4 +11,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2af421f84b56e47876ed5f3ca9b74b, type: 3}
   m_Name: cButtonModel3
   m_EditorClassIdentifier: 
-  m_ButtonNumber: 0
+  m_ButtonNumber: 3

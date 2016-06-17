@@ -112,12 +112,8 @@ public class cDuelStateManager : ScriptableObject {
 			Lose ();
 			break;
 		case eDuelState.eDuelState_End:
-			if (End () == true) {
-				m_State = eDuelState.eDuelState_BattleInit;
-				DeleteText ();
-				return true;
-			}
-			break;
+			m_State = eDuelState.eDuelState_BattleInit;
+			return true;
 		}
 		return false;
 	}
@@ -134,6 +130,11 @@ public class cDuelStateManager : ScriptableObject {
 	public void DeleteText(){
 		m_winModel.Init ();
 		m_loseModel.Init ();
+		m_eModel.Init ();
+	}
+
+	public void FadeInHalf(){
+		m_fadeHModel.FadeExec ();
 	}
 
 	private void BattleInit(){
@@ -403,16 +404,20 @@ public class cDuelStateManager : ScriptableObject {
 	private void Lose(){
 		m_fadeHModel.FadeExec ();
 		if (m_loseModel.GetTapFlag () == true && m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
+			m_gData.InitWin ();
 			m_dModel.BackSet ();
 			m_hpPManager.BackSet ();
 			m_hpEManager.BackSet ();
+
+			m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeIn);
+
 			m_State = eDuelState.eDuelState_End;
 		}
 
 		m_loseModel.EffectOn ();
 	}
 
-	private bool End(){
+	public bool End(){
 		bool endFlag = true;
 
 		endFlag &= m_dModel.MoveBack ();
