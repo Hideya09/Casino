@@ -86,6 +86,16 @@ public class cGameScene : cSceneBase {
 				if (m_State == eGameSceneList.eGameSceneList_Duel) {
 					m_DuelStateManager.Init ();
 				} else {
+					m_BufState = eGameSceneList.eGameSceneList_BetDialog;
+
+					Destroy (m_Dialog);
+					m_Dialog = null;
+
+					m_ShowDialog.Init ();
+
+					GameObject obj = (GameObject)Resources.Load ("Prefab/ShowDialog");
+					m_Dialog = (GameObject)Instantiate (obj);
+					m_Dialog.transform.SetParent (m_DialogParent.transform, false);
 				}
 			}
 			break;
