@@ -17,4 +17,5 @@ MonoBehaviour:
   - 1.5
   - 1.7
   - 3
-  m_Money: 49
+  m_Money: 9900
+  m_StartMoney: 10000

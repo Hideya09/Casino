@@ -42,8 +42,8 @@ public class cPayBackDialogModel : cDialogModel {
 				m_State = ePayBackState.ePayBackState_Main;
 			}
 
-			m_NumberData [1] = Mathf.RoundToInt(m_GameData.m_Money);
-			m_NumberData [2] = Mathf.RoundToInt(m_GameData.m_Prise);
+			m_NumberData [1] = m_GameData.m_Money;
+			m_NumberData [2] = m_GameData.m_Prise;
 
 			break;
 		case ePayBackState.ePayBackState_Main:
@@ -87,8 +87,8 @@ public class cPayBackDialogModel : cDialogModel {
 
 		m_NumberData = new int[3];
 		m_NumberData [0] = m_GameData.GetWin ();
-		m_NumberData [1] = Mathf.RoundToInt(m_GameData.m_Money);
-		m_NumberData [2] = Mathf.RoundToInt(m_GameData.m_Prise);
+		m_NumberData [1] = m_GameData.m_Money;
+		m_NumberData [2] = m_GameData.m_Prise;
 
 	}
 }

@@ -8,13 +8,14 @@ public class cGameData : ScriptableObject {
 
 	private int m_MaxMoney;
 
-	public float m_Money;//{ get; set; }
+	public int m_Money;//{ get; set; }
+	public int m_StartMoney;
 
-	private float m_Bet;
+	private int m_Bet;
 
-	private float m_BufBet;
+	private int m_BufBet;
 
-	public float m_Prise{ get; private set; }
+	public int m_Prise{ get; private set; }
 
 	private int m_Card;//{ get; set; }
 
@@ -33,18 +34,18 @@ public class cGameData : ScriptableObject {
 		}
 
 		if (m_DoubleFlag == true) {
-			return (int)(m_Bet * m_PayBack [m_WinningStreak - 1] * 2);
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		} else {
-			return (int)(m_Bet * m_PayBack [m_WinningStreak - 1]);
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		}
 	}
 
 	public void AddWin(){
 		++m_WinningStreak;
 		if (m_DoubleFlag == true) {
-			m_Prise = (m_Bet * m_PayBack [m_WinningStreak - 1] * 2);
+			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		} else {
-			m_Prise = (m_Bet * m_PayBack [m_WinningStreak - 1]);
+			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1]));
 		}
 	}
 	public int GetWin(){
@@ -53,11 +54,28 @@ public class cGameData : ScriptableObject {
 	public void InitWin(){
 		m_WinningStreak = 0;
 
-		m_Prise = 0.0f;
+		m_Prise = 0;
+
+		m_DoubleFlag = false;
 	}
 
 	public void Load(){
 		m_DoubleFlag = false;
+	}
+
+	public void Save(){
+	}
+
+	public bool GetDouble(){
+		return m_DoubleFlag;
+	}
+
+	public void SetDouble(){
+		m_DoubleFlag = true;
+	}
+
+	public int GetProfit(){
+		return m_Money - m_StartMoney;
 	}
 
 	public int GetCard(){
@@ -73,19 +91,18 @@ public class cGameData : ScriptableObject {
 	}
 
 	public bool PriseReturn(){
-		float secound = Time.deltaTime * 1000;
+		int secound = Mathf.RoundToInt (Time.deltaTime * 1000);
 		if (m_Prise - secound <= 0) {
 			secound = m_Prise;
 
-			m_Prise = 0.0f;
+			m_Prise = 0;
 		} else {
 			m_Prise -= secound;
 		}
 
 		m_Money += secound;
 
-		if (m_Prise <= 0.0f) {
-			m_Money = Mathf.Round (m_Money);
+		if (m_Prise <= 0) {
 			return true;
 		}
 
@@ -95,25 +112,23 @@ public class cGameData : ScriptableObject {
 	public void PriseReturnSoon(){
 		m_Money += m_Prise;
 
-		m_Prise = 0.0f;
+		m_Prise = 0;
 
-		m_Money = Mathf.Round (m_Money);
 	}
 
 	public bool Bet(){
-		float secound = Time.deltaTime * 1000;
+		int secound = Mathf.RoundToInt (Time.deltaTime * 1000);
 		if (m_BufBet - secound <= 0) {
 			secound = m_BufBet;
 
-			m_BufBet = 0.0f;
+			m_BufBet = 0;
 		} else {
 			m_BufBet -= secound;
 		}
 
 		m_Money -= secound;
 
-		if (m_BufBet <= 0.0f) {
-			m_Money = Mathf.Round (m_Money);
+		if (m_BufBet <= 0) {
 			return true;
 		}
 
@@ -123,8 +138,7 @@ public class cGameData : ScriptableObject {
 	public void BetSoon(){
 		m_Money -= m_BufBet;
 
-		m_BufBet = 0.0f;
+		m_BufBet = 0;
 
-		m_Money = Mathf.Round (m_Money);
 	}
 }

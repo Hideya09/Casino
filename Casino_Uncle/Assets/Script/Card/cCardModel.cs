@@ -9,6 +9,7 @@ public class cCardModel : ScriptableObject {
 
 	protected float m_Fade;
 
+	//カードの描画モード
 	public enum eDrawMode{
 		eDrawMode_None,
 		eDrawMode_Front,
@@ -16,6 +17,7 @@ public class cCardModel : ScriptableObject {
 		eDrawMode_Back
 	}
 
+	//カードのアウトラインの描画モード
 	public enum eOutLineMode{
 		eOutLineMode_None,
 		eOutLineMode_Yellow,
@@ -23,16 +25,18 @@ public class cCardModel : ScriptableObject {
 		eOutLineMode_Red,
 	}
 
+	//カードの描画サイズ
 	public enum eSize{
 		eSize_Small,
 		eSize_Medium,
 		eSize_Large
 	}
-
+		
 	public eDrawMode m_DrawMode{ get; protected set; }
 	public eOutLineMode m_OutLineMode{ get; protected set; }
 	public eSize m_Size{ get; protected set; }
 
+	//カードのナンバー
 	public int m_CardNumber{ set; get; }
 
 	void OnEnable(){
@@ -64,6 +68,7 @@ public class cCardModel : ScriptableObject {
 		m_EndOpen = false;
 	}
 
+	//カードを裏から表に回転させる
 	public bool Open(){
 		m_EndOpen = false;
 
@@ -88,6 +93,7 @@ public class cCardModel : ScriptableObject {
 		return false;
 	}
 
+	//カードを表から裏に回転させる
 	public bool Close(){
 		m_EndOpen = true;
 
@@ -112,6 +118,7 @@ public class cCardModel : ScriptableObject {
 		return false;
 	}
 
+	//退去処理
 	public bool Back(){
 		m_Fade -= Time.deltaTime;
 		m_Position.y -= Time.deltaTime * 10;

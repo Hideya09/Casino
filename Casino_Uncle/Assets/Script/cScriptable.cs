@@ -4,9 +4,9 @@ using UnityEditor;
 public class cScriptable : MonoBehaviour {
 	void Start(){
 		//スクリプタブルオブジェクトの作成
-		cBetDialogModel obj = ScriptableObject.CreateInstance<cBetDialogModel> ();
+		cShowDialogModel obj = ScriptableObject.CreateInstance<cShowDialogModel> ();
 
-		string path = AssetDatabase.GenerateUniqueAssetPath ("Assets/Resources/Scriptable/" + typeof( cBetDialogModel ) + ".asset");
+		string path = AssetDatabase.GenerateUniqueAssetPath ("Assets/Resources/Scriptable/" + typeof( cShowDialogModel ) + ".asset");
 
 		AssetDatabase.CreateAsset (obj, path);
 		AssetDatabase.SaveAssets ();

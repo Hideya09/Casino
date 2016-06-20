@@ -320,6 +320,7 @@ MonoBehaviour:
   - {fileID: 11494126}
   - {fileID: 11408672}
   - {fileID: 11492724}
+  m_MoneyFlag: 0000000101
 --- !u!114 &11420356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,7 +367,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 58e8bfa0bd012ac4bbbe485ac1216265, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5ecb84b243bc05f47925ee14f7b697fa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -809,7 +810,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -158, y: -150}
-  m_SizeDelta: {x: 164, y: 68}
+  m_SizeDelta: {x: 192, y: 101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22403960
 RectTransform:
@@ -860,7 +861,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 22, y: 189}
-  m_SizeDelta: {x: 540, y: 43}
+  m_SizeDelta: {x: 555, y: 51}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!224 &22428862
 RectTransform:
@@ -911,7 +912,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 158, y: -150}
-  m_SizeDelta: {x: 164, y: 68}
+  m_SizeDelta: {x: 192, y: 101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22451586
 RectTransform:
