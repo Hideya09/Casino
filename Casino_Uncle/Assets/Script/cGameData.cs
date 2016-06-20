@@ -36,7 +36,7 @@ public class cGameData : ScriptableObject {
 		if (m_DoubleFlag == true) {
 			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		} else {
-			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1]));
 		}
 	}
 
