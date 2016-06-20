@@ -15,12 +15,14 @@ public class cBattleCardModel : cCardModel {
 	private float m_ReturnAngleSpeed;
 	private float m_ReturnAngleAcceleration;
 
+	//ポジションのセット
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 
 		m_Rotation = Vector3.zero;
 	}
 
+	//初期化処理
 	public void Init(){
 		m_Position = m_BasePosition;
 
@@ -30,6 +32,7 @@ public class cBattleCardModel : cCardModel {
 		m_OutLineMode = eOutLineMode.eOutLineMode_None;
 	}
 
+	//カードのセット
 	public void SetCard(){
 		m_DrawMode = eDrawMode.eDrawMode_Front;
 		m_Size = eSize.eSize_Medium;
@@ -38,6 +41,7 @@ public class cBattleCardModel : cCardModel {
 		m_Fade = 1.0f;
 	}
 
+	//カードセット後回転角セット
 	public void SetMove( float reachingSecond , float returnSecond ){
 		m_AngleAcceleration = (m_CookAngle / reachingSecond / reachingSecond);
 
@@ -50,18 +54,22 @@ public class cBattleCardModel : cCardModel {
 		m_ReturnAngleSpeed = 0.0f;
 	}
 
+	//振り上げ回転
 	public void MoveAngle(){
 		m_Rotation.z +=( m_AngleSpeed += ( m_AngleAcceleration * Time.deltaTime )) * Time.deltaTime;
 	}
 
+	//振り下ろし回転
 	public void ReturnAngle(){
 		m_Rotation.z += ( m_ReturnAngleSpeed += ( m_ReturnAngleAcceleration * Time.deltaTime )) * Time.deltaTime;
 	}
 
+	//角度を正常に戻す
 	public void SetAngle(){
 		m_Rotation.z = m_MaxAngle;
 	}
 
+	//負けた時の回転と移動
 	public void SnapMove(){
 		m_Rotation.z = -m_MaxAngle;
 

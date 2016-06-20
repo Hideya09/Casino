@@ -54,6 +54,8 @@ public class cDeckModel : ScriptableObject {
 		m_Fade = 1.0f;
 
 		m_Position = m_StartPosition;
+
+		m_DoubleBattle = false;
 	}
 
 	public void RandomSet(){
@@ -86,8 +88,7 @@ public class cDeckModel : ScriptableObject {
 				++setNumber;
 			}
 		}
-
-		m_DoubleBattle = false;
+			
 		int doubleCharengeFlag = 0;
 
 		for( int i = 0 ; i < m_selcModel.Length ; ++i ){

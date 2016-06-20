@@ -82,7 +82,7 @@ public class cNextDialogModel : cDialogModel {
 		m_NumberData [0] = m_GameData.GetWin ();
 		m_NumberData [1] = m_GameData.GetCard ();
 		m_NumberData [2] = m_GameData.m_PlayerHitPoint;
-		m_NumberData [3] = (int)m_GameData.m_Money;
+		m_NumberData [3] = m_GameData.m_Money;
 		m_NumberData [4] = m_GameData.GetPayBack();
 
 	}

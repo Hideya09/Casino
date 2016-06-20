@@ -16,6 +16,7 @@ public class cDuelStateManager : ScriptableObject {
 	public cEffectWinModel m_winModel;
 	public cEffectLoseModel m_loseModel;
 	public cEffectStartModel m_startModel;
+	public cButtonModel m_buttonModel;
 
 	public float cSwingTime;
 	public float cSwingDownTime;
@@ -125,6 +126,7 @@ public class cDuelStateManager : ScriptableObject {
 		m_gData.InitCard ();
 		m_effectModel.Init ();
 		m_eModel.Init ();
+		m_buttonModel.Init ();
 	}
 
 	public void DeleteText(){
@@ -185,6 +187,10 @@ public class cDuelStateManager : ScriptableObject {
 		m_dModel.RandomSet ();
 		m_edModel.Hind ();
 		m_gData.CardMinus ();
+
+		if (m_dModel.m_DoubleBattle) {
+			m_gData.SetDouble ();
+		}
 		++m_State;
 	}
 
@@ -204,11 +210,19 @@ public class cDuelStateManager : ScriptableObject {
 		m_dModel.EditCard ();
 		m_edModel.Hind ();
 		m_gData.CardMinus ();
+
+		if (m_dModel.m_DoubleBattle) {
+			m_gData.SetDouble ();
+		}
+
 		m_State = eDuelState.eDuelState_HandOut;
 	}
 
 	private void Select(){
+		m_buttonModel.Start ();
+
 		if (m_dModel.CardCheck ()) {
+			m_buttonModel.End ();
 			++m_State;
 		}
 	}
@@ -427,5 +441,14 @@ public class cDuelStateManager : ScriptableObject {
 		endFlag &= m_hpEManager.Back ();
 
 		return endFlag;
+	}
+
+	public bool GetButton(){
+		if (m_buttonModel.GetSelect () == 1) {
+			m_buttonModel.Init ();
+			return true;
+		}
+
+		return false;
 	}
 }

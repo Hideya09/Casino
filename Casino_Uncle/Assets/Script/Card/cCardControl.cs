@@ -20,6 +20,7 @@ public class cCardControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//入力処理
 		if (Input.GetMouseButtonDown (0)) {
 			if (m_HitFlag == true) {
 				m_cModel.SetPosition (Input.mousePosition);
@@ -44,6 +45,7 @@ public class cCardControl : MonoBehaviour {
 		}
 	}
 
+	//マウスがオブジェクトに当たっているかを取得
 	void OnMouseOver(){
 		m_HitFlag = true;
 	}

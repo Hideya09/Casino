@@ -24,5 +24,6 @@ MonoBehaviour:
   m_winModel: {fileID: 11400000, guid: 1f44cd9d7f5a56e4fbe52292fc5636bd, type: 2}
   m_loseModel: {fileID: 11400000, guid: 5515d7b25a208fa48ad41141167ca7ee, type: 2}
   m_startModel: {fileID: 11400000, guid: 9bb51425caf1ccb4facae7fc76dc439a, type: 2}
+  m_buttonModel: {fileID: 11400000, guid: 899d391ae83ab4146aff29f1489594cc, type: 2}
   cSwingTime: 1.5
   cSwingDownTime: 0.3

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class cFadeInOutView : MonoBehaviour {
 
 	public cFadeInOutModel m_fadeModel;
-	public SpriteRenderer m_Sprite;
+	public Image m_Sprite;
+
+	public bool m_MainFade;
 
 	// Use this for initialization
 	void Start () {
@@ -17,5 +20,15 @@ public class cFadeInOutView : MonoBehaviour {
 		Color color = new Color (0.0f, 0.0f, 0.0f, m_fadeModel.GetArpha ());
 
 		m_Sprite.color = color;
+
+		if (m_MainFade == true) {
+			if (m_fadeModel.GetArpha() > 0) {
+				transform.SetAsLastSibling ();
+
+				m_Sprite.enabled = true;
+			} else {
+				m_Sprite.enabled = false;
+			}
+		}
 	}
 }
