@@ -1635,7 +1635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f3e521944066764fbf5aca42d246069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dModel: {fileID: 11400000, guid: 34d5ade43284197418d82362b2b74d50, type: 2}
+  m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
   m_Sprite:
   - {fileID: 21300000, guid: 43fe426502276b546be7e4f763b6edfa, type: 3}
   - {fileID: 21300000, guid: 7d5b63488f0d9034aa93ca4e2c13ecdb, type: 3}

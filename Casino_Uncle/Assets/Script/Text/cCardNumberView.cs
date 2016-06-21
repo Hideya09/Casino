@@ -4,7 +4,7 @@ using System.Collections;
 
 public class cCardNumberView : MonoBehaviour {
 
-	public cDeckModel m_dModel;
+	public cGameData m_GameData;
 
 	private Image m_Image;
 
@@ -18,7 +18,7 @@ public class cCardNumberView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		int number = m_dModel.DeckMax - 3;
+		int number = m_GameData.GetCard() - 3;
 
 		if (number < 0) {
 			number = 0;
