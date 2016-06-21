@@ -8,6 +8,7 @@ public abstract class cDialogModel : ScriptableObject {
 	private float m_Count;
 
 	protected int[] m_NumberData;
+	protected float[] m_NumberData2;
 
 	public cButtonModel[] m_buttonModel;
 
@@ -127,5 +128,9 @@ public abstract class cDialogModel : ScriptableObject {
 
 	public int[] GetNumberData(){
 		return m_NumberData;
+	}
+
+	public float[] GetNumberData2(){
+		return m_NumberData2;
 	}
 }

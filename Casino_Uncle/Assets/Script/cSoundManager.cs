@@ -47,6 +47,8 @@ public class cSoundManager : MonoBehaviour {
 
 		m_BGMPlayFlag = false;
 		m_BGMDown = false;
+
+		m_BGM.Stop ();
 	}
 	
 	// Update is called once per frame

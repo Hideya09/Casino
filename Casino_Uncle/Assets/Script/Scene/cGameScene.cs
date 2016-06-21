@@ -70,6 +70,8 @@ public class cGameScene : cSceneBase {
 				m_State = eGameSceneList.eGameSceneList_BetDialog;
 				
 				m_BufState = eGameSceneList.eGameSceneList_FadeIn;
+
+				cSoundManager.BGMPlay ();
 			}
 			break;
 		case eGameSceneList.eGameSceneList_BetDialog:
@@ -303,6 +305,9 @@ public class cGameScene : cSceneBase {
 			m_State = m_ShowDialog.DialogExec ();
 			break;
 		case eGameSceneList.eGameSceneList_FadeOut:
+
+			cSoundManager.BGMDown ();
+
 			m_fadeModel.FadeExec ();
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 				m_gData.Save ();

@@ -167,5 +167,10 @@ public class cBetDialogModel : cDialogModel {
 		m_NumberData = new int[1];
 		m_NumberData [0] = Mathf.RoundToInt(m_GameData.m_Money);
 
+		m_NumberData2 = new float[5];
+		for (int i = 0; i < m_NumberData2.Length; ++i) {
+			m_NumberData2 [i] = m_GameData.m_PayBack [i];
+		}
+
 	}
 }

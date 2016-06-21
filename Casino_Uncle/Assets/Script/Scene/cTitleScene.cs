@@ -51,6 +51,8 @@ public class cTitleScene : cSceneBase {
 					m_buttonModel [i].Init ();
 					m_buttonModel [i].Start ();
 				}
+
+				cSoundManager.BGMPlay ();
 			}
 			break;
 		case eTitleSceneList.eTitleSceneList_FadeIn:
@@ -62,6 +64,8 @@ public class cTitleScene : cSceneBase {
 					m_buttonModel [i].Init ();
 					m_buttonModel [i].Start ();
 				}
+
+				cSoundManager.BGMPlay ();
 			}
 			break;
 		case eTitleSceneList.eTitleSceneList_Main:
@@ -72,6 +76,8 @@ public class cTitleScene : cSceneBase {
 				if (button == 1) {
 					m_State = eTitleSceneList.eTitleSceneList_FadeOut;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Start);
+
 					for (int j = 0; j < m_buttonModel.Length; ++j) {
 						m_buttonModel [j].End ();
 					}
@@ -79,6 +85,9 @@ public class cTitleScene : cSceneBase {
 					m_fadeHalfModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 
 					m_State = eTitleSceneList.eTitleSceneList_Dialog;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					m_dialogModel.Init ();
 
 					for (int j = 0; j < m_buttonModel.Length; ++j) {
@@ -103,6 +112,9 @@ public class cTitleScene : cSceneBase {
 			break;
 		case eTitleSceneList.eTitleSceneList_FadeOut:
 			m_fadeModel.FadeExec ();
+
+			cSoundManager.BGMDown ();
+
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 				m_State = eTitleSceneList.eTitleSceneList_FadeIn;
 				return cGameSceneManager.eGameScene.GameScene_Game;
@@ -110,6 +122,9 @@ public class cTitleScene : cSceneBase {
 			break;
 		case eTitleSceneList.eTitleSceneList_End:
 			m_fadeModel.FadeExec ();
+
+			cSoundManager.BGMDown ();
+
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 				m_State = eTitleSceneList.eTitleSceneList_FadeIn;
 				Application.Quit ();
