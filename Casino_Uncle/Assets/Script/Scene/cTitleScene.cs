@@ -3,11 +3,123 @@ using System.Collections;
 
 public class cTitleScene : cSceneBase {
 
+	public enum eTitleSceneList{
+		eTitleSceneList_Init,
+		eTitleSceneList_Start,
+		eTitleSceneList_FadeIn,
+		eTitleSceneList_Main,
+		eTitleSceneList_Dialog,
+		eTitleSceneList_FadeOut,
+		eTitleSceneList_End
+	}
+
+	private eTitleSceneList m_State;
+
+	public cButtonModel[] m_buttonModel;
+
+	public cFadeInOutModel m_fadeModel;
+	public cFadeHalfModel m_fadeHalfModel;
+
+	public cEndDialogModel m_dialogModel;
+
+	public cStartEffectModel m_startModel;
+
+	public cGameData m_GameData;
+
+	void OnEnable(){
+		m_State = eTitleSceneList.eTitleSceneList_Init;
+	}
+
 	public override cGameSceneManager.eGameScene SceneExec ()
 	{
+		switch (m_State) {
+		case eTitleSceneList.eTitleSceneList_Init:
+			m_GameData.Load ();
+
+			m_fadeHalfModel.SetState (cFadeInOutModel.eFadeState.FadeIn);
+
+			m_fadeModel.Init ();
+
+			m_dialogModel.Init ();
+
+			m_State = eTitleSceneList.eTitleSceneList_Start;
+			break;
+		case eTitleSceneList.eTitleSceneList_Start:
+			if (m_startModel.StartExec () == true) {
+				m_State = eTitleSceneList.eTitleSceneList_Main;
+				for (int i = 0; i < m_buttonModel.Length; ++i) {
+					m_buttonModel [i].Init ();
+					m_buttonModel [i].Start ();
+				}
+			}
+			break;
+		case eTitleSceneList.eTitleSceneList_FadeIn:
+			m_fadeModel.FadeExec ();
+			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeInStop) {
+				m_State = eTitleSceneList.eTitleSceneList_Main;
+
+				for (int i = 0; i < m_buttonModel.Length; ++i) {
+					m_buttonModel [i].Init ();
+					m_buttonModel [i].Start ();
+				}
+			}
+			break;
+		case eTitleSceneList.eTitleSceneList_Main:
+			m_fadeHalfModel.FadeExec ();
+
+			for (int i = 0; i < m_buttonModel.Length; ++i) {
+				int button = m_buttonModel [i].GetSelect ();
+				if (button == 1) {
+					m_State = eTitleSceneList.eTitleSceneList_FadeOut;
+
+					for (int j = 0; j < m_buttonModel.Length; ++j) {
+						m_buttonModel [j].End ();
+					}
+				} else if (button == 2) {
+					m_fadeHalfModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
+
+					m_State = eTitleSceneList.eTitleSceneList_Dialog;
+					m_dialogModel.Init ();
+
+					for (int j = 0; j < m_buttonModel.Length; ++j) {
+						m_buttonModel [j].End ();
+					}
+				}
+			}
+			break;
+		case eTitleSceneList.eTitleSceneList_Dialog:
+			m_fadeHalfModel.FadeExec ();
+
+			m_State = m_dialogModel.TitleDialogExec ();
+
+			if (m_State == eTitleSceneList.eTitleSceneList_Main) {
+				m_fadeHalfModel.SetState (cFadeInOutModel.eFadeState.FadeIn);
+
+				for (int i = 0; i < m_buttonModel.Length; ++i) {
+					m_buttonModel [i].Init ();
+					m_buttonModel [i].Start ();
+				}
+			}
+			break;
+		case eTitleSceneList.eTitleSceneList_FadeOut:
+			m_fadeModel.FadeExec ();
+			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
+				m_State = eTitleSceneList.eTitleSceneList_FadeIn;
+				return cGameSceneManager.eGameScene.GameScene_Game;
+			}
+			break;
+		case eTitleSceneList.eTitleSceneList_End:
+			m_fadeModel.FadeExec ();
+			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
+				m_State = eTitleSceneList.eTitleSceneList_FadeIn;
+				Application.Quit ();
+			}
+			break;
+		}
 		return cGameSceneManager.eGameScene.GameScene_Title;
 	}
 
 	public override void SceneInit(){
+		//m_State = eTitleSceneList.eTitleSceneList_Init;
 	}
 }

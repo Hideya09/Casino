@@ -22,7 +22,6 @@ public class cGameScene : cSceneBase {
 	public cShowDialogModel m_ShowDialog;
 
 	public enum eGameSceneList{
-		eGameSceneList_Title,
 		eGameSceneList_Init,
 		eGameSceneList_FadeIn,
 		eGameSceneList_BetDialog,
@@ -54,6 +53,8 @@ public class cGameScene : cSceneBase {
 
 			m_BetDialog.Init ();
 
+			m_gData.StartMoneySet ();
+
 			m_State = eGameSceneList.eGameSceneList_FadeIn;
 
 			m_BufState = eGameSceneList.eGameSceneList_Init;
@@ -65,8 +66,6 @@ public class cGameScene : cSceneBase {
 				GameObject obj = (GameObject)Resources.Load ("Prefab/BetDialog");
 				m_Dialog = (GameObject)Instantiate (obj);
 				m_Dialog.transform.SetParent (m_DialogParent.transform, false);
-
-
 
 				m_State = eGameSceneList.eGameSceneList_BetDialog;
 				
@@ -302,17 +301,21 @@ public class cGameScene : cSceneBase {
 			break;
 		case eGameSceneList.eGameSceneList_Show:
 			m_State = m_ShowDialog.DialogExec ();
-
-			if (m_State != eGameSceneList.eGameSceneList_Show) {
-			}
 			break;
 		case eGameSceneList.eGameSceneList_FadeOut:
 			m_fadeModel.FadeExec ();
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
-				//Destroy (m_Dialog);
-				//m_Dialog = null;
+				m_gData.Save ();
 
-				//return cGameSceneManager.eGameScene.GameScene_Title;
+				if (m_BufState == eGameSceneList.eGameSceneList_MoveEnd) {
+					Application.Quit ();
+				} else {
+					Destroy (m_Dialog);
+					m_Dialog = null;
+					m_State = eGameSceneList.eGameSceneList_Init;
+				}
+
+				return cGameSceneManager.eGameScene.GameScene_Title;
 			}
 			break;
 		}
