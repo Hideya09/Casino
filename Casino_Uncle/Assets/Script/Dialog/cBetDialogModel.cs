@@ -21,7 +21,7 @@ public class cBetDialogModel : cDialogModel {
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
-		m_NumberData [0] = Mathf.RoundToInt(m_GameData.m_Money);
+		m_NumberData [0] = m_GameData.m_Money;
 
 		switch (m_State) {
 		case eBetState.eBetState_Start:
@@ -165,7 +165,7 @@ public class cBetDialogModel : cDialogModel {
 		}
 
 		m_NumberData = new int[1];
-		m_NumberData [0] = Mathf.RoundToInt(m_GameData.m_Money);
+		m_NumberData [0] = m_GameData.m_Money;
 
 		m_NumberData2 = new float[5];
 		for (int i = 0; i < m_NumberData2.Length; ++i) {
