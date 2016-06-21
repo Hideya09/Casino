@@ -34,6 +34,10 @@ public abstract class cDialogModel : ScriptableObject {
 
 		m_Rotation += 15.0f * Time.deltaTime;
 
+		if (m_Count == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
+		}
+
 		m_Count += Time.deltaTime;
 		if (m_Count >= 1.0f) {
 			m_Position.y = 0.0f;
@@ -51,6 +55,10 @@ public abstract class cDialogModel : ScriptableObject {
 		m_Position.y += 600.0f * Time.deltaTime;
 
 		m_Rotation += 15.0f * Time.deltaTime;
+
+		if (m_Count == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
+		}
 
 		m_Count += Time.deltaTime;
 		if (m_Count >= 1.0f) {
@@ -70,6 +78,10 @@ public abstract class cDialogModel : ScriptableObject {
 
 		m_Rotation -= 15.0f * Time.deltaTime;
 
+		if (m_Count == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
+		}
+
 		m_Count += Time.deltaTime;
 		if (m_Count >= 1.0f) {
 			m_Position.y = -600.0f;
@@ -87,6 +99,10 @@ public abstract class cDialogModel : ScriptableObject {
 		m_Position.y += 600.0f * Time.deltaTime;
 
 		m_Rotation -= 15.0f * Time.deltaTime;
+
+		if (m_Count == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
+		}
 
 		m_Count += Time.deltaTime;
 		if (m_Count >= 1.0f) {

@@ -41,17 +41,23 @@ public class cMenuDialogModel : cDialogModel {
 
 					m_State = eMenuState.eMenuState_End;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					break;
 				} else if (number == 2) {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_MoveEnd;
 
 					m_State = eMenuState.eMenuState_End;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					break;
 				} else if (number == 3) {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Duel;
 
 					m_State = eMenuState.eMenuState_UpEnd;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
 
 					break;
 				}

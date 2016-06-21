@@ -41,11 +41,15 @@ public class cNextDialogModel : cDialogModel {
 
 					m_State = eNextState.eNextState_End;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					break;
 				} else if (number == 2) {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Pay;
 
 					m_State = eNextState.eNextState_End;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
 
 					break;
 				}

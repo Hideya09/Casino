@@ -53,6 +53,8 @@ public class cEffectStartModel : ScriptableObject {
 			if (m_TextPosition.x >= 0) {
 				m_TextPosition.x = 0.0f;
 				++m_State;
+
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_DuelStart);
 			}
 			break;
 		case eEffectStartState.eEffectStartState_TextStop:

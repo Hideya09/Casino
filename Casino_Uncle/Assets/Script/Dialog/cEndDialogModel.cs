@@ -31,9 +31,13 @@ public class cEndDialogModel : cDialogModel {
 				if (number == 1) {
 					m_State = eEndState.eEndState_End;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					break;
 				} else if (number == 2) {
 					m_State = eEndState.eEndState_UpEnd;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
 
 					break;
 				}

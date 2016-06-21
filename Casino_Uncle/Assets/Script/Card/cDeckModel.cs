@@ -282,6 +282,10 @@ public class cDeckModel : ScriptableObject {
 
 	public bool Move(){
 
+		if (m_ReturnCount == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_In);
+		}
+
 		m_ReturnCount += Time.deltaTime;
 
 		m_Position += m_Movement * Time.deltaTime;

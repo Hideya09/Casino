@@ -41,11 +41,15 @@ public class cTitleDialogModel : cDialogModel {
 
 					m_State = eTitleState.eTitleState_End;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					break;
 				} else if (number == 2) {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Back;
 
 					m_State = eTitleState.eTitleState_UpEnd;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
 
 					break;
 				}

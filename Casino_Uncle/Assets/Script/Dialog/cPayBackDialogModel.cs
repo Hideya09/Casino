@@ -26,6 +26,10 @@ public class cPayBackDialogModel : cDialogModel {
 				m_State = ePayBackState.ePayBackState_Blink;
 				for (int i = 0; i < m_buttonModel.Length; ++i) {
 					m_buttonModel [i].Start ();
+
+					if (m_GameData.GetWin () == 5) {
+						cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_FiveWin);
+					}
 				}
 			}
 			break;
@@ -35,6 +39,8 @@ public class cPayBackDialogModel : cDialogModel {
 			}
 			break;
 		case ePayBackState.ePayBackState_Money:
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Count);
+
 			if (m_GameData.PriseReturn () == true) {
 				m_State = ePayBackState.ePayBackState_Main;
 			} else if (m_buttonModel [0].GetTouch ()) {
@@ -53,6 +59,8 @@ public class cPayBackDialogModel : cDialogModel {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_BetDialog;
 
 					m_State = ePayBackState.ePayBackState_End;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
 
 					break;
 				}

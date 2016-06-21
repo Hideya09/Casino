@@ -33,6 +33,8 @@ public class cShowDialogModel : cDialogModel {
 
 					m_State = eShowState.eShowState_End;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					break;
 				}
 			}

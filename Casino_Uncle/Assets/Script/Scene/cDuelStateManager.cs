@@ -231,11 +231,15 @@ public class cDuelStateManager : ScriptableObject {
 		m_dModel.CardMove ();
 		m_cameraModel.MoveSet (cSwingTime, cSwingDownTime);
 		m_dModel.MoveAngleSet (cSwingTime, cSwingDownTime);
+
+		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Confirm);
+
 		++m_State;
 	}
 
 	private void EnemyShuffle(){
 		m_edModel.Select ( cSwingDownTime );
+		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cock);
 		++m_State;
 	}
 
@@ -250,6 +254,7 @@ public class cDuelStateManager : ScriptableObject {
 				m_dModel.SetAngle ();
 
 				m_effectModel.EffectStart ();
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cross);
 				++m_State;
 			}
 		} else {
@@ -338,11 +343,14 @@ public class cDuelStateManager : ScriptableObject {
 			if (commit == cCommitTextModel.eCommitText.eCommitText_Win) {
 				m_eModel.RunbleInit ();
 				m_State = eDuelState.eDuelState_CommitEffectWin;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slash);
 			} else if (commit == cCommitTextModel.eCommitText.eCommitText_Lose) {
 				m_cameraModel.RunbleInit ();
 				m_State = eDuelState.eDuelState_CommitEffectLose;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slash);
 			} else {
 				m_State = eDuelState.eDuelState_CommitEffectDraw;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Repelled);
 			}
 		}
 	}
@@ -358,9 +366,11 @@ public class cDuelStateManager : ScriptableObject {
 
 			if (m_hpEManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Win;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Win);
 			} else if (m_dModel.m_LastBattle == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else {
 				m_State = eDuelState.eDuelState_CardEdit;
 			}
@@ -379,9 +389,11 @@ public class cDuelStateManager : ScriptableObject {
 			if (m_hpPManager.HitPointCheck () == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else if (m_dModel.m_LastBattle == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else {
 				m_State = eDuelState.eDuelState_CardEdit;
 			}
@@ -437,7 +449,6 @@ public class cDuelStateManager : ScriptableObject {
 		endFlag &= m_dModel.MoveBack ();
 		endFlag &= m_edModel.Back ();
 		endFlag &= m_hpPManager.Back ();
-		//endFlag &= m_eModel,Ba ();
 		endFlag &= m_hpEManager.Back ();
 
 		return endFlag;

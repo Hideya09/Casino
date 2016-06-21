@@ -65,6 +65,10 @@ public class cSelectCardModel : cCardModel {
 
 		m_Fade = 1.0f;
 
+		if (m_Count == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
+		}
+
 		m_Count += Time.deltaTime;
 
 		if (m_Count < m_MaxCount) {
@@ -98,6 +102,8 @@ public class cSelectCardModel : cCardModel {
 
 	public void SetPosition( Vector2 position ){
 		m_BufPosition = position;
+
+		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_In);
 	}
 
 	public void UnTapCard(){

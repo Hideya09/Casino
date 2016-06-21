@@ -108,6 +108,10 @@ public class cEnemyModel : ScriptableObject {
 	}
 
 	public bool Start(){
+		if (m_Fade == 0.0f) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_In);
+		}
+
 		m_Fade += Time.deltaTime;
 		if (m_Fade >= 1.0f) {
 			m_Fade = 1.0f;
