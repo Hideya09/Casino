@@ -31,6 +31,7 @@ GameObject:
   - 222: {fileID: 22256880}
   - 114: {fileID: 11492002}
   - 114: {fileID: 11495480}
+  - 114: {fileID: 11442044}
   m_Layer: 5
   m_Name: Win
   m_TagString: Untagged
@@ -265,6 +266,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
+--- !u!114 &11442044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 125992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249715d134e9d50479ed660391008e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_blinkModel: {fileID: 11400000, guid: 68957498a12b96347bd4a61c0cda1332, type: 2}
 --- !u!114 &11451282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,6 +294,7 @@ MonoBehaviour:
   - {fileID: 11493528}
   - {fileID: 11473846}
   m_MoneyFlag: 0101
+  m_text2: []
 --- !u!114 &11464762
 MonoBehaviour:
   m_ObjectHideFlags: 1

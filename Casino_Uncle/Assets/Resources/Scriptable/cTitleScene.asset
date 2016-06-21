@@ -18,4 +18,5 @@ MonoBehaviour:
   m_fadeHalfModel: {fileID: 11400000, guid: 017a0f365dfdd2d4b9734bcda9fcf8d8, type: 2}
   m_dialogModel: {fileID: 11400000, guid: e9561ca62fbcb73438fec5dceec5f273, type: 2}
   m_startModel: {fileID: 11400000, guid: 9ed31b8b637a3234a9297510067d136d, type: 2}
+  m_blinkModel: {fileID: 11400000, guid: 68957498a12b96347bd4a61c0cda1332, type: 2}
   m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}

@@ -24,6 +24,8 @@ public class cTitleScene : cSceneBase {
 
 	public cStartEffectModel m_startModel;
 
+	public cBlinkModel m_blinkModel;
+
 	public cGameData m_GameData;
 
 	void OnEnable(){
@@ -37,6 +39,8 @@ public class cTitleScene : cSceneBase {
 			m_GameData.Load ();
 
 			m_fadeHalfModel.SetState (cFadeInOutModel.eFadeState.FadeIn);
+
+			m_blinkModel.Init ();
 
 			m_fadeModel.Init ();
 
@@ -78,6 +82,8 @@ public class cTitleScene : cSceneBase {
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Start);
 
+					m_blinkModel.Init ();
+
 					for (int j = 0; j < m_buttonModel.Length; ++j) {
 						m_buttonModel [j].End ();
 					}
@@ -111,6 +117,8 @@ public class cTitleScene : cSceneBase {
 			}
 			break;
 		case eTitleSceneList.eTitleSceneList_FadeOut:
+			m_blinkModel.Blink ();
+
 			m_fadeModel.FadeExec ();
 
 			cSoundManager.BGMDown ();
