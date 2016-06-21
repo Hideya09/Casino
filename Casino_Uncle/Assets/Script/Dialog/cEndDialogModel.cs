@@ -15,6 +15,48 @@ public class cEndDialogModel : cDialogModel {
 
 	private cGameScene.eGameSceneList m_RetScene;
 
+	public cTitleScene.eTitleSceneList TitleDialogExec(){
+		switch (m_State) {
+		case eEndState.eEndState_Start:
+			if (StartDown () == true) {
+				m_State = eEndState.eEndState_Main;
+				for (int i = 0; i < m_buttonModel.Length; ++i) {
+					m_buttonModel [i].Start ();
+				}
+			}
+			break;
+		case eEndState.eEndState_Main:
+			for (int i = 0; i < m_buttonModel.Length; ++i) {
+				int number = m_buttonModel [i].GetSelect ();
+				if (number == 1) {
+					m_State = eEndState.eEndState_End;
+
+					break;
+				} else if (number == 2) {
+					m_State = eEndState.eEndState_UpEnd;
+
+					break;
+				}
+			}
+			break;
+		case eEndState.eEndState_End:
+			for (int i = 0; i < m_buttonModel.Length; ++i) {
+				m_buttonModel [i].End ();
+			}
+			return cTitleScene.eTitleSceneList.eTitleSceneList_End;
+		case eEndState.eEndState_UpEnd:
+			for (int i = 0; i < m_buttonModel.Length; ++i) {
+				m_buttonModel [i].End ();
+			}
+			if (EndUp () == true) {
+				return cTitleScene.eTitleSceneList.eTitleSceneList_Main;
+			}
+			break;
+		}
+
+		return cTitleScene.eTitleSceneList.eTitleSceneList_Dialog;
+	}
+
 	public override cGameScene.eGameSceneList DialogExec(){
 		switch (m_State) {
 		case eEndState.eEndState_Start:

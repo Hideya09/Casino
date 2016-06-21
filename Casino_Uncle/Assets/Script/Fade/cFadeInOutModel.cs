@@ -64,4 +64,9 @@ public class cFadeInOutModel : ScriptableObject{
 	public eFadeState GetState(){
 		return m_State;
 	}
+
+	public void Init(){
+		m_Arpha = 0.0f;
+		m_State = eFadeState.FadeOut;
+	}
 }

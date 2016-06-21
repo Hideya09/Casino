@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
+using System.Collections.Generic;
 
 public class cGameData : ScriptableObject {
 	private int m_WinningStreak;
 
 	public float[] m_PayBack = new float[5];
 
-	private int m_MaxMoney;
+	public int m_MaxMoney{ get; private set; }
 
-	public int m_Money;//{ get; set; }
-	public int m_StartMoney;
+	public int m_Money{ get; private set; }
+	private int m_StartMoney;
 
 	private int m_Bet;
 
@@ -22,6 +24,10 @@ public class cGameData : ScriptableObject {
 	public int m_PlayerHitPoint{ get; set; }
 
 	private bool m_DoubleFlag;
+
+	public void StartMoneySet(){
+		m_StartMoney = m_Money;
+	}
 
 	public void MoneyBet( int money ){
 		m_Bet = money;
@@ -61,9 +67,30 @@ public class cGameData : ScriptableObject {
 
 	public void Load(){
 		m_DoubleFlag = false;
+
+		TextAsset file = (TextAsset)Resources.Load ("SaveFile/save");
+
+		StringReader reader = new StringReader (file.text);
+
+		string data = reader.ReadLine ();
+
+		string[] moneyData = data.Split (',');
+
+		m_MaxMoney = int.Parse (moneyData[0]);
+		m_Money = int.Parse (moneyData[1]);
 	}
 
 	public void Save(){
+		FileInfo file = new FileInfo( Application.dataPath + "/Resources/SaveFile/save.csv");
+
+		StreamWriter write = file.CreateText ();
+
+		string str = m_MaxMoney.ToString () + ',' + m_Money.ToString ();
+
+		write.WriteLine(str);
+
+		write.Flush ();
+		write.Close ();
 	}
 
 	public bool GetDouble(){
@@ -102,7 +129,14 @@ public class cGameData : ScriptableObject {
 
 		m_Money += secound;
 
+		if (m_Money > 999999999) {
+			m_Money = 999999999;
+		}
+
 		if (m_Prise <= 0) {
+			if (m_Money > m_MaxMoney) {
+				m_MaxMoney = m_Money;
+			}
 			return true;
 		}
 
@@ -111,6 +145,14 @@ public class cGameData : ScriptableObject {
 
 	public void PriseReturnSoon(){
 		m_Money += m_Prise;
+
+		if (m_Money > 999999999) {
+			m_Money = 999999999;
+		}
+
+		if (m_Money > m_MaxMoney) {
+			m_MaxMoney = m_Money;
+		}
 
 		m_Prise = 0;
 

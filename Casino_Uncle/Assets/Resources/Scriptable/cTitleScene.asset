@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d6538cd45373b748afa2cf8f0fbdbbd, type: 3}
+  m_Name: cTitleScene
+  m_EditorClassIdentifier: 
+  m_buttonModel:
+  - {fileID: 11400000, guid: c95345dda63fb3d4d9ef46ff66ec7b23, type: 2}
+  - {fileID: 11400000, guid: 3e974851ce8fb1d41abf236870f30be6, type: 2}
+  m_fadeModel: {fileID: 11400000, guid: 4fbb280701b48b64f9d96c4f6a918224, type: 2}
+  m_fadeHalfModel: {fileID: 11400000, guid: 017a0f365dfdd2d4b9734bcda9fcf8d8, type: 2}
+  m_dialogModel: {fileID: 11400000, guid: e9561ca62fbcb73438fec5dceec5f273, type: 2}
+  m_startModel: {fileID: 11400000, guid: 9ed31b8b637a3234a9297510067d136d, type: 2}
+  m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
