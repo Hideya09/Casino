@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
+  m_dModel: {fileID: 0}
   m_Sprite:
   - {fileID: 21300000, guid: e10f39651ca323b44b89f08be3709e06, type: 3}
   - {fileID: 21300000, guid: a30f0c265343f9d4a8f00d004ba12db6, type: 3}

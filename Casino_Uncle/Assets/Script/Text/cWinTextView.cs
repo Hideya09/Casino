@@ -24,8 +24,9 @@ public class cWinTextView : MonoBehaviour {
 
 			m_Image.sprite = m_Sprite [m_GameData.GetWin () - 1];
 
-			m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);
-
+			if (m_dModel != null) {
+				m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);
+			}
 		} else {
 			m_Image.enabled = false;
 		}

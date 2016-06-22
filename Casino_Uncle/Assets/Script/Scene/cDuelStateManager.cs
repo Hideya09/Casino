@@ -381,7 +381,6 @@ public class cDuelStateManager : ScriptableObject {
 
 			if (m_hpEManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Win;
-				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Win);
 			} else if (m_dModel.m_LastBattle == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;

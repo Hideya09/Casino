@@ -63,6 +63,9 @@ public class cEffectWinModel : ScriptableObject {
 		m_Angle %= 360;
 
 		if (m_TextOnScale <= m_LightScale.x) {
+			if (m_TextScale == Vector3.zero) {
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Win);
+			}
 			m_TextScale += new Vector3 (m_TextSpeed * secound, m_TextSpeed * secound, 1.0f);
 		}
 
