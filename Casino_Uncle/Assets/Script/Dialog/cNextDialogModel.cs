@@ -19,6 +19,12 @@ public class cNextDialogModel : cDialogModel {
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
+		m_NumberData [0] = m_GameData.GetWin ();
+		m_NumberData [1] = m_GameData.GetCard ();
+		m_NumberData [2] = m_GameData.m_PlayerHitPoint;
+		m_NumberData [3] = m_GameData.m_Money;
+		m_NumberData [4] = m_GameData.GetPayBack();
+
 		switch (m_State) {
 		case eNextState.eNextState_Start:
 			if (StartDown () == true) {
@@ -74,7 +80,7 @@ public class cNextDialogModel : cDialogModel {
 
 		m_State = eNextState.eNextState_Start;
 
-		m_blinkModel.Init ();
+		m_blinkModel.Init2 ();
 
 		InitPositionUp ();
 
