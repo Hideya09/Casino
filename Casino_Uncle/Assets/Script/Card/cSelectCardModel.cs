@@ -103,7 +103,9 @@ public class cSelectCardModel : cCardModel {
 	public void SetPosition( Vector2 position ){
 		m_BufPosition = position;
 
-		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+		if (m_MoveFlag == true) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+		}
 	}
 
 	public void UnTapCard(){

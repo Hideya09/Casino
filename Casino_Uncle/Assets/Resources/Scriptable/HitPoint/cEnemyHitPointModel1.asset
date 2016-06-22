@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f996e50bf7b1c47b2b4fe39676ebb7, type: 3}
   m_Name: cEnemyHitPointModel1
   m_EditorClassIdentifier: 
-  m_StartPosition: {x: -60, y: 0, z: 0}
+  m_StartPosition: {x: -60, y: 400, z: 0}
   m_ReturnPosition: {x: -60, y: 255, z: 0}
   m_MaxReturnCount: 1

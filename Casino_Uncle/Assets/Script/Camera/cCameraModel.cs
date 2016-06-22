@@ -5,6 +5,7 @@ public class cCameraModel : ScriptableObject {
 
 	private Vector2 m_Position;
 
+	//カメラの移動用
 	private Vector2 m_MoveAdd;
 	private Vector2 m_MoveAcceleration;
 	private Vector2 m_ReturnAdd;
@@ -15,9 +16,11 @@ public class cCameraModel : ScriptableObject {
 	private float m_SecondMoveMax;
 	private float m_SecondReturnMax;
 
+	//カメラの基本位置と折り返し地点
 	private Vector2 m_BasePosition;
 	public Vector2 m_ReturnPosition;
 
+	//揺れ関連ステータス
 	public float m_Runble;
 
 	private float m_RunbleCount;
@@ -31,6 +34,7 @@ public class cCameraModel : ScriptableObject {
 		m_BasePosition = setPosition;
 	}
 
+	//移動量等を計算
 	public void MoveSet( float reachingSecond , float returnSecond ){
 		m_Position = m_BasePosition;
 
@@ -49,6 +53,7 @@ public class cCameraModel : ScriptableObject {
 		m_SecondReturnMax = m_SecondMoveMax + returnSecond;
 	}
 
+	//移動処理
 	public bool Move( out bool endFlag ){
 
 		m_Second += Time.deltaTime;
@@ -72,6 +77,7 @@ public class cCameraModel : ScriptableObject {
 		}
 	}
 
+	//揺れ関連初期化
 	public void RunbleInit(){
 		m_RunbleMaxPower = m_Runble * 0.25f;
 		m_RunblePower = m_Runble;
@@ -79,6 +85,7 @@ public class cCameraModel : ScriptableObject {
 		m_RunbleFlag = true;
 	}
 
+	//揺らす処理
 	public void Runble(){
 		if (m_RunbleMaxPower > 0.0f) {
 			m_RunbleCount += Time.deltaTime;
@@ -128,6 +135,7 @@ public class cCameraModel : ScriptableObject {
 		}
 	}
 
+	//揺れを止める
 	public void StopRunble(){
 		m_Position = m_BasePosition;
 	}

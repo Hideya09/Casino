@@ -205,7 +205,7 @@ public class cDeckModel : ScriptableObject {
 			}
 		}
 
-		if (deckCheck > 2) {
+		if (deckCheck > 0) {
 			return true;
 		}
 
@@ -343,5 +343,11 @@ public class cDeckModel : ScriptableObject {
 
 	public Vector3 GetPosition(){
 		return m_Position;
+	}
+
+	public void SelectStop(){
+		for (int i = 0; i < m_selcModel.Length; ++i) {
+			m_selcModel [i].m_MoveFlag = false;
+		}
 	}
 }

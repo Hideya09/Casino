@@ -6,7 +6,12 @@ public class cDeckView : MonoBehaviour {
 
 	public cDeckModel m_dModel;
 
+	public cGameData m_GameData;
+
 	private Image m_Image;
+
+	public Sprite m_ThereSprite;
+	public Sprite m_NoneSprite;
 
 	// Use this for initialization
 	void Start () {
@@ -20,5 +25,11 @@ public class cDeckView : MonoBehaviour {
 		transform.localPosition = m_dModel.GetPosition ();
 
 		m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);
+
+		if (m_GameData.GetCard () - 2 > 0) {
+			m_Image.sprite = m_ThereSprite;
+		} else {
+			m_Image.sprite = m_NoneSprite;
+		}
 	}
 }

@@ -4,6 +4,8 @@ using System.Collections;
 
 public class cCardNumberView : MonoBehaviour {
 
+	public cDeckModel m_dModel;
+
 	public cGameData m_GameData;
 
 	private Image m_Image;
@@ -17,6 +19,8 @@ public class cCardNumberView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);
 
 		int number = m_GameData.GetCard() - 2;
 
