@@ -106,7 +106,7 @@ public class cGameScene : cSceneBase {
 
 				m_DeleteEnd = false;
 
-				if (m_gData.GetWin () == 5 || m_gData.GetWin () == 0) {
+				if (m_gData.GetWin () == 5 || m_DuelStateManager.GetWinNow() == false) {
 					m_PayBackDialog.Init ();
 
 					GameObject obj = (GameObject)Resources.Load ("Prefab/PayBackDialog");

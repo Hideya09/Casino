@@ -146,6 +146,10 @@ public class cDuelStateManager : ScriptableObject {
 		m_eModel.Init ();
 	}
 
+	public bool GetWinNow(){
+		return m_Win;
+	}
+
 	public void FadeInHalf(){
 		m_fadeHModel.FadeExec ();
 	}
