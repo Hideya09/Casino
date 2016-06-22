@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 644a99be9c040c14a8104afe2baf1437, type: 3}
   m_Name: cEffectStartModel
   m_EditorClassIdentifier: 
-  m_StartPosition: {x: -3, y: 0, z: 0.5}
+  m_StartPosition: {x: -3, y: 0, z: -0.5}
   m_Speed: 3
   m_StopCount: 1

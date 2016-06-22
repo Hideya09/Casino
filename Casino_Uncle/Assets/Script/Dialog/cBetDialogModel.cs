@@ -73,7 +73,7 @@ public class cBetDialogModel : cDialogModel {
 					m_buttonModel [i].Start ();
 				}
 				else if (number == 2) {
-					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Show;
+					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_MoveTitle;
 
 					m_State = eBetState.eBetState_End;
 
@@ -113,7 +113,7 @@ public class cBetDialogModel : cDialogModel {
 
 					break;
 				} else if (number == 2) {
-					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Show;
+					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_MoveTitle;
 
 					m_State = eBetState.eBetState_End;
 
