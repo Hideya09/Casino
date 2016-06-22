@@ -61,6 +61,7 @@ public class cTitleScene : cSceneBase {
 			break;
 		case eTitleSceneList.eTitleSceneList_FadeIn:
 			m_fadeModel.FadeExec ();
+			m_blinkModel.Init ();
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeInStop) {
 				m_State = eTitleSceneList.eTitleSceneList_Main;
 

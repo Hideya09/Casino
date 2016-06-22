@@ -122,11 +122,14 @@ public class cDuelStateManager : ScriptableObject {
 	public void Init(){
 		m_dModel.Init ();
 		m_hpPManager.Init ();
+		m_hpEManager.Init ();
 		m_gData.InitWin ();
 		m_gData.InitCard ();
 		m_effectModel.Init ();
 		m_eModel.Init ();
 		m_buttonModel.Init ();
+
+		m_State = eDuelState.eDuelState_BattleInit;
 	}
 
 	public void DeleteText(){
@@ -137,6 +140,10 @@ public class cDuelStateManager : ScriptableObject {
 
 	public void FadeInHalf(){
 		m_fadeHModel.FadeExec ();
+	}
+
+	public void SelectStop(){
+		m_dModel.SelectStop ();
 	}
 
 	private void BattleInit(){

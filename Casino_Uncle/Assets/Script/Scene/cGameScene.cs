@@ -92,9 +92,9 @@ public class cGameScene : cSceneBase {
 					Destroy (m_Dialog);
 					m_Dialog = null;
 
-					m_ShowDialog.Init ();
+					m_TitleDialog.Init ();
 
-					GameObject obj = (GameObject)Resources.Load ("Prefab/ShowDialog");
+					GameObject obj = (GameObject)Resources.Load ("Prefab/TitleDialog");
 					m_Dialog = (GameObject)Instantiate (obj);
 					m_Dialog.transform.SetParent (m_DialogParent.transform, false);
 				}
@@ -135,6 +135,8 @@ public class cGameScene : cSceneBase {
 				m_Dialog.transform.SetParent (m_DialogParent.transform, false);
 
 				m_State = eGameSceneList.eGameSceneList_Menu;
+
+				m_DuelStateManager.SelectStop ();
 			}
 			break;
 		case eGameSceneList.eGameSceneList_Menu:
@@ -190,8 +192,6 @@ public class cGameScene : cSceneBase {
 			}
 
 			if (m_State == eGameSceneList.eGameSceneList_Back) {
-				m_BufState = eGameSceneList.eGameSceneList_MoveEnd;
-
 				Destroy (m_Dialog);
 				m_Dialog = null;
 
@@ -239,7 +239,7 @@ public class cGameScene : cSceneBase {
 
 					m_State = eGameSceneList.eGameSceneList_Menu;
 				} else {
-					m_BetDialog.Init ();
+					m_BetDialog.Init (false);
 
 					GameObject obj = (GameObject)Resources.Load ("Prefab/BetDialog");
 					m_Dialog = (GameObject)Instantiate (obj);
