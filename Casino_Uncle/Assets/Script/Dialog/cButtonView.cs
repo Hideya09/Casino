@@ -10,6 +10,8 @@ public class cButtonView : MonoBehaviour {
 
 	private Color m_BaseColor;
 
+	public Color m_SelectColor;
+
 	// Use this for initialization
 	void Start () {
 		m_Sprite = GetComponent< Image > ();
@@ -19,10 +21,14 @@ public class cButtonView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Color setColor = m_BaseColor;
+
+		setColor.a = m_SelectColor.a;
+
 		if (m_ButtonModel.GetTap () == true) {
-			m_Sprite.color = new Color (1.0f, 1.0f, 1.0f, 1.0f);
+			m_Sprite.color = m_SelectColor;
 		} else {
-			m_Sprite.color = m_BaseColor;
+			m_Sprite.color = setColor;
 		}
 	}
 }

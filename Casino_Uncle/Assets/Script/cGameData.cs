@@ -81,6 +81,10 @@ public class cGameData : ScriptableObject {
 	}
 
 	public void Save(){
+		if (m_Money < 100) {
+			m_Money = 100;
+		}
+
 		FileInfo file = new FileInfo( Application.dataPath + "/Resources/SaveFile/save.csv");
 
 		StreamWriter write = file.CreateText ();

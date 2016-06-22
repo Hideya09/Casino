@@ -407,6 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
+  m_SelectColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11442774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -691,6 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: a7280761fa1144b4b88e74567ce92208, type: 2}
+  m_SelectColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11499756
 MonoBehaviour:
   m_ObjectHideFlags: 1

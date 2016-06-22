@@ -20,6 +20,14 @@ public class cBlinkModel : ScriptableObject {
 		m_AddFlag = false;
 	}
 
+	public void Init2(){
+		m_Count = 0.0f;
+
+		m_Alpha = 0.0f;
+
+		m_AddFlag = true;
+	}
+
 	public bool Blink(){
 		m_Count += Time.deltaTime;
 		if (m_AddFlag == true) {

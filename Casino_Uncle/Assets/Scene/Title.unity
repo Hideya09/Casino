@@ -221,7 +221,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7756130d9d49eac49afac5931721c977, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5441177, g: 0.5441177, b: 0.5441177, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: 3e974851ce8fb1d41abf236870f30be6, type: 2}
+  m_SelectColor: {r: 0.47794116, g: 0.47794116, b: 0.47794116, a: 1}
 --- !u!114 &270893981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +825,7 @@ GameObject:
   - 114: {fileID: 482187327}
   - 114: {fileID: 482187326}
   - 61: {fileID: 482187328}
+  - 114: {fileID: 482187329}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -860,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5441177, g: 0.5441177, b: 0.5441177, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -905,6 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: c95345dda63fb3d4d9ef46ff66ec7b23, type: 2}
+  m_SelectColor: {r: 0.47794116, g: 0.47794116, b: 0.47794116, a: 1}
 --- !u!61 &482187328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -919,6 +922,18 @@ BoxCollider2D:
   m_Offset: {x: 2.309967, y: -0.5774498}
   serializedVersion: 2
   m_Size: {x: 286.9742, y: 112.21276}
+--- !u!114 &482187329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 482187322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 249715d134e9d50479ed660391008e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_blinkModel: {fileID: 11400000, guid: 68957498a12b96347bd4a61c0cda1332, type: 2}
 --- !u!1 &491197865
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,7 +1631,7 @@ GameObject:
   - 114: {fileID: 819078113}
   - 114: {fileID: 819078112}
   m_Layer: 5
-  m_Name: Start
+  m_Name: StartEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: 24844db6695a17248a8486089827bb59, type: 2}
+  m_SelectColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11412432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: a7280761fa1144b4b88e74567ce92208, type: 2}
+  m_SelectColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11441006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ButtonModel: {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
+  m_SelectColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11496910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,6 +349,7 @@ MonoBehaviour:
   m_dialogModel: {fileID: 11400000, guid: 5f566f0946ffbca47910db8a8fd1484d, type: 2}
   m_text: []
   m_MoneyFlag: 
+  m_text2: []
 --- !u!114 &11497370
 MonoBehaviour:
   m_ObjectHideFlags: 1

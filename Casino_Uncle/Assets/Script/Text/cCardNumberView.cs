@@ -18,12 +18,16 @@ public class cCardNumberView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		int number = m_GameData.GetCard() - 3;
+		int number = m_GameData.GetCard() - 2;
 
 		if (number < 0) {
 			number = 0;
 		}
-
-		m_Image.sprite = m_Sprite [number];
+		if (number < 12) {
+			m_Image.enabled = true;
+			m_Image.sprite = m_Sprite [number];
+		} else {
+			m_Image.enabled = false;
+		}
 	}
 }

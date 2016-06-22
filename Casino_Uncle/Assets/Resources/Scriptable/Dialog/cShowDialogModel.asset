@@ -14,3 +14,4 @@ MonoBehaviour:
   m_buttonModel:
   - {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
   m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
+  m_blinkModel: {fileID: 11400000, guid: 68957498a12b96347bd4a61c0cda1332, type: 2}

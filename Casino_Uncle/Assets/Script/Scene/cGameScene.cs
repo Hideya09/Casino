@@ -294,11 +294,21 @@ public class cGameScene : cSceneBase {
 				Destroy (m_Dialog);
 				m_Dialog = null;
 
-				m_BetDialog.Init ();
+				if (m_gData.m_Money < 100) {
+					m_ShowDialog.Init ();
 
-				GameObject obj = (GameObject)Resources.Load ("Prefab/BetDialog");
-				m_Dialog = (GameObject)Instantiate (obj);
-				m_Dialog.transform.SetParent (m_DialogParent.transform, false);
+					m_State = eGameSceneList.eGameSceneList_Show;
+
+					GameObject obj = (GameObject)Resources.Load ("Prefab/ShowDialog");
+					m_Dialog = (GameObject)Instantiate (obj);
+					m_Dialog.transform.SetParent (m_DialogParent.transform, false);
+				} else {
+					m_BetDialog.Init ();
+
+					GameObject obj = (GameObject)Resources.Load ("Prefab/BetDialog");
+					m_Dialog = (GameObject)Instantiate (obj);
+					m_Dialog.transform.SetParent (m_DialogParent.transform, false);
+				}
 			}
 			break;
 		case eGameSceneList.eGameSceneList_Show:
