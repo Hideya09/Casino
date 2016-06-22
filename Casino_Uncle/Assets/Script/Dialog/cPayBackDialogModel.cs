@@ -85,7 +85,7 @@ public class cPayBackDialogModel : cDialogModel {
 
 		m_State = ePayBackState.ePayBackState_Start;
 
-		m_blinkModel.Init ();
+		m_blinkModel.Init2 ();
 
 		InitPositionUp ();
 

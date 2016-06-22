@@ -23,6 +23,8 @@ public class cDuelStateManager : ScriptableObject {
 
 	private int m_Damage;
 
+	private bool m_Win;
+
 	public enum eDuelState{
 		eDuelState_BattleInit,
 		eDuelState_Start,
@@ -129,10 +131,16 @@ public class cDuelStateManager : ScriptableObject {
 		m_eModel.Init ();
 		m_buttonModel.Init ();
 
+		m_Win = false;
+
 		m_State = eDuelState.eDuelState_BattleInit;
 	}
 
 	public void DeleteText(){
+		if ( m_Win == true ) {
+			m_gData.AddWin ();
+		}
+
 		m_winModel.Init ();
 		m_loseModel.Init ();
 		m_eModel.Init ();
@@ -427,7 +435,8 @@ public class cDuelStateManager : ScriptableObject {
 				m_hpPManager.BackSet ();
 				m_hpEManager.BackSet ();
 				m_State = eDuelState.eDuelState_End;
-				m_gData.AddWin ();
+
+				m_Win = true;
 			}
 
 			m_winModel.EffectOn ();
@@ -445,6 +454,8 @@ public class cDuelStateManager : ScriptableObject {
 			m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeIn);
 
 			m_State = eDuelState.eDuelState_End;
+
+			m_Win = false;
 		}
 
 		m_loseModel.EffectOn ();

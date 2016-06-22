@@ -62,12 +62,15 @@ public class cCardView : MonoBehaviour {
 		switch (m_cModel.m_Size) {
 		case cCardModel.eSize.eSize_Small:
 			transform.localScale = new Vector3 (0.8f, 0.8f, 0.8f);
+			transform.SetAsFirstSibling ();
 			break;
 		case cCardModel.eSize.eSize_Medium:
 			transform.localScale = new Vector3 (1.0f, 1.0f, 1.0f);
+			transform.SetAsFirstSibling ();
 			break;
 		case cCardModel.eSize.eSize_Large:
 			transform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
+			transform.SetAsLastSibling ();
 			break;
 		}
 
