@@ -6,7 +6,10 @@ public class cEffectWinModel : ScriptableObject {
 	private Vector3 m_LightScale;
 	private Vector3 m_TextScale;
 
+	public float m_MaxScale;
+
 	private float m_Angle;
+	public float m_AngleAdd;
 
 	private bool m_DrawFlag;
 
@@ -58,7 +61,7 @@ public class cEffectWinModel : ScriptableObject {
 
 		m_LightScale += new Vector3 (m_LightSpeed * secound, m_LightSpeed * secound, 1.0f);
 
-		m_Angle += 60 * Time.deltaTime;
+		m_Angle += m_AngleAdd * Time.deltaTime;
 
 		m_Angle %= 360;
 
@@ -69,11 +72,11 @@ public class cEffectWinModel : ScriptableObject {
 			m_TextScale += new Vector3 (m_TextSpeed * secound, m_TextSpeed * secound, 1.0f);
 		}
 
-		if (m_LightScale.x >= 1.0f) {
-			m_LightScale = new Vector3 (1.0f, 1.0f, 1.0f);
+		if (m_LightScale.x >= m_MaxScale) {
+			m_LightScale = new Vector3 (m_MaxScale, m_MaxScale, 1.0f);
 
-			if (m_TextScale.x >= 1.0f) {
-				m_TextScale = new Vector3 (1.0f, 1.0f, 1.0f);
+			if (m_TextScale.x >= m_MaxScale) {
+				m_TextScale = new Vector3 (m_MaxScale, m_MaxScale, 1.0f);
 
 				m_TapFlag = false;
 				m_EffectEndFlag = true;

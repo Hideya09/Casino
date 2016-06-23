@@ -3,9 +3,15 @@ using System.Collections;
 
 public abstract class cDialogModel : ScriptableObject {
 	private Vector3 m_Position;
+
+	public float m_RotationStart;
+
 	private float m_Rotation;
 
 	private float m_Count;
+
+	public float m_StartCountMax;
+	public float m_EndCountMax;
 
 	protected int[] m_NumberData;
 	protected float[] m_NumberData2;
@@ -31,16 +37,16 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool StartDown(){
-		m_Position.y -= 600.0f * Time.deltaTime;
+		m_Position.y -= 600.0f * (Time.deltaTime / m_StartCountMax);
 
-		m_Rotation += 15.0f * Time.deltaTime;
+		m_Rotation += m_RotationStart * (Time.deltaTime / m_StartCountMax);
 
 		if (m_Count == 0.0f) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
 		}
 
 		m_Count += Time.deltaTime;
-		if (m_Count >= 1.0f) {
+		if (m_Count >= m_StartCountMax) {
 			m_Position.y = 0.0f;
 			m_Rotation = 0.0f;
 
@@ -53,16 +59,16 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool StartUp(){
-		m_Position.y += 600.0f * Time.deltaTime;
+		m_Position.y += 600.0f * (Time.deltaTime / m_StartCountMax);
 
-		m_Rotation += 15.0f * Time.deltaTime;
+		m_Rotation += m_RotationStart * (Time.deltaTime / m_StartCountMax);
 
 		if (m_Count == 0.0f) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
 		}
 
 		m_Count += Time.deltaTime;
-		if (m_Count >= 1.0f) {
+		if (m_Count >= m_StartCountMax) {
 			m_Position.y = 0.0f;
 			m_Rotation = 0.0f;
 
@@ -75,18 +81,18 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool EndDown(){
-		m_Position.y -= 600.0f * Time.deltaTime;
+		m_Position.y -= 600.0f * (Time.deltaTime / m_EndCountMax);
 
-		m_Rotation -= 15.0f * Time.deltaTime;
+		m_Rotation -= m_RotationStart * (Time.deltaTime / m_EndCountMax);
 
 		if (m_Count == 0.0f) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
 		}
 
 		m_Count += Time.deltaTime;
-		if (m_Count >= 1.0f) {
+		if (m_Count >= m_EndCountMax) {
 			m_Position.y = -600.0f;
-			m_Rotation = -15.0f;
+			m_Rotation = -m_RotationStart;
 
 			m_Count = 0.0f;
 
@@ -97,18 +103,18 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool EndUp (){
-		m_Position.y += 600.0f * Time.deltaTime;
+		m_Position.y += 600.0f * (Time.deltaTime / m_EndCountMax);
 
-		m_Rotation -= 15.0f * Time.deltaTime;
+		m_Rotation -= m_RotationStart * (Time.deltaTime / m_EndCountMax);
 
 		if (m_Count == 0.0f) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Slide);
 		}
 
 		m_Count += Time.deltaTime;
-		if (m_Count >= 1.0f) {
+		if (m_Count >= m_EndCountMax) {
 			m_Position.y = 600.0f;
-			m_Rotation = -15.0f;
+			m_Rotation = -m_RotationStart;
 
 			m_Count = 0.0f;
 

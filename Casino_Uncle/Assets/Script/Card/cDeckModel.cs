@@ -15,7 +15,7 @@ public class cDeckModel : ScriptableObject {
 
 	private float m_ReturnCount;
 	public float m_MaxReturnCount;
-	private const float m_EndCount = 1.0f;
+	public float m_EndCount;
 
 	public float m_Fade{ get; private set; }
 

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_StartPosition: {x: 800, y: -177, z: 0}
   m_ReturnPosition: {x: 400, y: -177, z: 0}
   m_MaxReturnCount: 0.75
+  m_EndCount: 1

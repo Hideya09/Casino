@@ -10,8 +10,8 @@ public class cEnemyModel : ScriptableObject {
 
 	public float m_Runble;
 
-	public float m_Fade;
-	public float m_Black;
+	private float m_Fade;
+	private float m_Black;
 
 	private float m_RunbleCount;
 	private float m_RunbleMaxPower;

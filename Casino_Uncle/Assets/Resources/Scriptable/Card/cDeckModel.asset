@@ -15,6 +15,7 @@ MonoBehaviour:
   m_StartPosition: {x: -600, y: -160, z: 0}
   m_ReturnPosition: {x: -300, y: -160, z: 0}
   m_MaxReturnCount: 1
+  m_EndCount: 1
   DeckMax: 14
   m_selcModel:
   - {fileID: 11400000, guid: 7028e4c2fe596464382f7e0752ef9433, type: 2}

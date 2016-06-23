@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d628cc66baa781241b9efdce1c278f62, type: 3}
   m_Name: cEffectWinModel
   m_EditorClassIdentifier: 
+  m_MaxScale: 1
+  m_AngleAdd: 60
   m_LightSpeed: 1
   m_TextSpeed: 1.5
   m_TextOnScale: 0.5

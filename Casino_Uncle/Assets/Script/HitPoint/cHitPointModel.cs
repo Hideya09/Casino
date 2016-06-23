@@ -12,7 +12,7 @@ public class cHitPointModel : ScriptableObject {
 
 	private float m_ReturnCount;
 	public float m_MaxReturnCount;
-	private const float m_EndCount = 1.0f;
+	public float m_EndCount;
 
 	private float m_Count;
 	private const float m_MaxCount = 1.5f;

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class cEffectStartModel : ScriptableObject {
 	private float m_Size;
+	public float m_SizeMax;
+
+	public float m_SizeCount;
 
 	public Vector3 m_StartPosition;
 
@@ -41,9 +44,9 @@ public class cEffectStartModel : ScriptableObject {
 	public bool Exec(){
 		switch (m_State) {
 		case eEffectStartState.eEffectStartState_Start:
-			m_Size += Time.deltaTime;
-			if (m_Size >= 1.0f) {
-				m_Size = 1.0f;
+			m_Size += Time.deltaTime / m_SizeCount;
+			if (m_Size >= m_SizeMax) {
+				m_Size = m_SizeMax;
 				++m_State;
 			}
 			break;
@@ -72,7 +75,7 @@ public class cEffectStartModel : ScriptableObject {
 			}
 			break;
 		case eEffectStartState.eEffectStartState_End:
-			m_Size -= Time.deltaTime;
+			m_Size -= Time.deltaTime / m_SizeCount;
 			if (m_Size <= 0.0f) {
 				m_Size = 0.0f;
 				m_State = eEffectStartState.eEffectStartState_Start;

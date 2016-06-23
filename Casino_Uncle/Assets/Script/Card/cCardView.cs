@@ -60,18 +60,15 @@ public class cCardView : MonoBehaviour {
 			break;
 		case cCardModel.eOutLineMode.eOutLineMode_Yellow:
 			m_OutLine.enabled = true;
-			m_OutLine.effectColor = new Color (1.0f, 1.0f, 1.0f - fade, fade);
-			m_Renderer.color = new Color (1.0f - ((1.0f - fade)), 1.0f - ((1.0f - fade)), 1.0f, fade);
+			m_OutLine.effectColor = new Color (1.0f - (( 1.0f - fade ) * 4 ), 1.0f - (( 1.0f - fade ) * 4 ), 0.0f, 1.0f - (( 1.0f - fade ) * 4 ));
 			break;
 		case cCardModel.eOutLineMode.eOutLineMode_Blue:
 			m_OutLine.enabled = true;
-			m_OutLine.effectColor = new Color (1.0f - fade, 1.0f - fade, 1.0f, m_cModel.GetFade ());
-			m_Renderer.color = new Color (1.0f, 1.0f, 1.0f - ((1.0f - fade)), fade);
+			m_OutLine.effectColor = new Color (0.0f, 0.0f, 1.0f - (( 1.0f - fade ) * 4 ), 1.0f - (( 1.0f - fade ) * 4 ));
 			break;
 		case cCardModel.eOutLineMode.eOutLineMode_Red:
 			m_OutLine.enabled = true;
-			m_OutLine.effectColor = new Color (1.0f, 1.0f - fade, 1.0f - fade, m_cModel.GetFade ());
-			m_Renderer.color = new Color (1.0f - ((1.0f - fade)), 1.0f, 1.0f, fade);
+			m_OutLine.effectColor = new Color (1.0f - (( 1.0f - fade ) * 4 ), 0.0f, 0.0f, 1.0f - (( 1.0f - fade ) * 4 ));
 			break;
 		}
 
@@ -92,11 +89,11 @@ public class cCardView : MonoBehaviour {
 
 		if (m_cModel.m_DrawMode == cCardModel.eDrawMode.eDrawMode_Dark) {
 			//Color color = m_Renderer.color;
-			m_Renderer.color *= new Color (0.5f, 0.5f, 0.5f, 1.0f);
+			m_Renderer.color = new Color (0.5f, 0.5f, 0.5f, fade);
 
 		} else {
 			//Color color = m_Renderer.color;
-			m_Renderer.color *= new Color (1.0f, 1.0f, 1.0f, 1.0f);
+			m_Renderer.color = new Color (1.0f, 1.0f, 1.0f, fade);
 		}
 	}
 }

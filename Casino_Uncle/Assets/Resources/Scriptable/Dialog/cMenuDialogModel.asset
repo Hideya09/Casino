@@ -11,6 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b084e16889e5b124ca20126e8dc7e948, type: 3}
   m_Name: cMenuDialogModel
   m_EditorClassIdentifier: 
+  m_RotationStart: 15
+  m_StartCountMax: 1
+  m_EndCountMax: 1
   m_buttonModel:
   - {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
   - {fileID: 11400000, guid: a7280761fa1144b4b88e74567ce92208, type: 2}
