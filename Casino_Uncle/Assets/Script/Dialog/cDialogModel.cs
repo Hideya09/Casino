@@ -4,6 +4,8 @@ using System.Collections;
 public abstract class cDialogModel : ScriptableObject {
 	private Vector3 m_Position;
 
+	public float m_StartPosition = 600.0f;
+
 	public float m_RotationStart;
 
 	private float m_Rotation;
@@ -23,21 +25,21 @@ public abstract class cDialogModel : ScriptableObject {
 	public abstract void Init (bool upPosition = true);
 
 	protected void InitPositionUp(){
-		m_Position = new Vector3 (0.0f, 600.0f , -705.0f);
-		m_Rotation = -15;
+		m_Position = new Vector3 (0.0f, m_StartPosition , -705.0f);
+		m_Rotation = -m_RotationStart;
 
 		m_Count = 0.0f;
 	}
 
 	protected void InitPositionDpwn(){
-		m_Position = new Vector3 (0.0f, -600.0f , -705.0f);
-		m_Rotation = -15;
+		m_Position = new Vector3 (0.0f, -m_StartPosition , -705.0f);
+		m_Rotation = -m_RotationStart;
 
 		m_Count = 0.0f;
 	}
 
 	protected bool StartDown(){
-		m_Position.y -= 600.0f * (Time.deltaTime / m_StartCountMax);
+		m_Position.y -= m_StartPosition * (Time.deltaTime / m_StartCountMax);
 
 		m_Rotation += m_RotationStart * (Time.deltaTime / m_StartCountMax);
 
@@ -59,7 +61,7 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool StartUp(){
-		m_Position.y += 600.0f * (Time.deltaTime / m_StartCountMax);
+		m_Position.y += m_StartPosition * (Time.deltaTime / m_StartCountMax);
 
 		m_Rotation += m_RotationStart * (Time.deltaTime / m_StartCountMax);
 
@@ -81,7 +83,7 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool EndDown(){
-		m_Position.y -= 600.0f * (Time.deltaTime / m_EndCountMax);
+		m_Position.y -= m_StartPosition * (Time.deltaTime / m_EndCountMax);
 
 		m_Rotation -= m_RotationStart * (Time.deltaTime / m_EndCountMax);
 
@@ -91,7 +93,7 @@ public abstract class cDialogModel : ScriptableObject {
 
 		m_Count += Time.deltaTime;
 		if (m_Count >= m_EndCountMax) {
-			m_Position.y = -600.0f;
+			m_Position.y = -m_StartPosition;
 			m_Rotation = -m_RotationStart;
 
 			m_Count = 0.0f;
@@ -103,7 +105,7 @@ public abstract class cDialogModel : ScriptableObject {
 	}
 
 	protected bool EndUp (){
-		m_Position.y += 600.0f * (Time.deltaTime / m_EndCountMax);
+		m_Position.y += m_StartPosition * (Time.deltaTime / m_EndCountMax);
 
 		m_Rotation -= m_RotationStart * (Time.deltaTime / m_EndCountMax);
 
@@ -113,7 +115,7 @@ public abstract class cDialogModel : ScriptableObject {
 
 		m_Count += Time.deltaTime;
 		if (m_Count >= m_EndCountMax) {
-			m_Position.y = 600.0f;
+			m_Position.y = m_StartPosition;
 			m_Rotation = -m_RotationStart;
 
 			m_Count = 0.0f;

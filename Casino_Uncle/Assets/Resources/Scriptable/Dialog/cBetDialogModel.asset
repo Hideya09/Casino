@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949f5cbbee09be54eb59a41505615247, type: 3}
   m_Name: cBetDialogModel
   m_EditorClassIdentifier: 
+  m_StartPosition: 600
   m_RotationStart: 15
   m_StartCountMax: 1
   m_EndCountMax: 1
