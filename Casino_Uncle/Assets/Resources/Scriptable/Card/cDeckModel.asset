@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fda81c46f7c09042877df5802faedda, type: 3}
   m_Name: cDeckModel
   m_EditorClassIdentifier: 
-  HandOutSpeed: 2200
+  HandOutSpeed: 800
   m_StartPosition: {x: -600, y: -160, z: 0}
   m_ReturnPosition: {x: -300, y: -160, z: 0}
   m_MaxReturnCount: 1
