@@ -45,6 +45,7 @@ public class cDuelStateManager : ScriptableObject {
 		eDuelState_CommitEffectDraw,
 		eDuelState_Win,
 		eDuelState_Lose,
+		eDuelState_NextButtle,
 		eDuelState_End
 	}
 
@@ -114,6 +115,9 @@ public class cDuelStateManager : ScriptableObject {
 		case eDuelState.eDuelState_Lose:
 			Lose ();
 			break;
+		case eDuelState.eDuelState_NextButtle:
+			NextButtle ();
+			break;
 		case eDuelState.eDuelState_End:
 			m_State = eDuelState.eDuelState_BattleInit;
 			return true;
@@ -137,9 +141,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public void DeleteText(){
-		if (m_Win == true) {
-			m_gData.AddWin ();
-		}
+		m_gData.AddStartWin ();
 
 		m_Win = false;
 
@@ -404,7 +406,7 @@ public class cDuelStateManager : ScriptableObject {
 				m_State = eDuelState.eDuelState_Lose;
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else {
-				m_State = eDuelState.eDuelState_CardEdit;
+				m_State = eDuelState.eDuelState_NextButtle;
 			}
 		}
 	}
@@ -427,7 +429,7 @@ public class cDuelStateManager : ScriptableObject {
 				m_State = eDuelState.eDuelState_Lose;
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else {
-				m_State = eDuelState.eDuelState_CardEdit;
+				m_State = eDuelState.eDuelState_NextButtle;
 			}
 		}
 	}
@@ -440,7 +442,7 @@ public class cDuelStateManager : ScriptableObject {
 			m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 			m_State = eDuelState.eDuelState_Lose;
 		} else {
-			m_State = eDuelState.eDuelState_CardEdit;
+			m_State = eDuelState.eDuelState_NextButtle;
 		}
 	}
 
@@ -453,6 +455,7 @@ public class cDuelStateManager : ScriptableObject {
 				m_hpEManager.BackSet ();
 				m_State = eDuelState.eDuelState_End;
 
+				m_gData.AddWin ();
 				m_Win = true;
 			}
 
@@ -476,6 +479,17 @@ public class cDuelStateManager : ScriptableObject {
 		}
 
 		m_loseModel.EffectOn ();
+	}
+
+	private void NextButtle(){
+		bool endFlag = true;
+
+		endFlag = m_dModel.ButtleCardBack ();
+		endFlag = m_edModel.Back ();
+
+		if (endFlag == true) {
+			m_State = eDuelState.eDuelState_CardEdit;
+		}
 	}
 
 	public bool End(){

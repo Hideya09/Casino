@@ -14,6 +14,9 @@ public class cBlinkSpriteView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_blinkModel.m_Alpha);
+
+		Color color = m_Image.color;
+		color.a = m_blinkModel.m_Alpha;
+		m_Image.color = color;
 	}
 }

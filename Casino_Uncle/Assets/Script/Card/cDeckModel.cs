@@ -196,6 +196,9 @@ public class cDeckModel : ScriptableObject {
 		if (selectFlag == true) {
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].m_MoveFlag = false;
+				if (number != i) {
+					m_selcModel [i].SetSelect ();
+				}
 			}
 			m_SelectNumber = number;
 			return true;
@@ -313,6 +316,10 @@ public class cDeckModel : ScriptableObject {
 		}
 
 		return endFlag;
+	}
+
+	public bool ButtleCardBack(){
+		return m_bcModel.Back ();
 	}
 
 	public void MoveSet(){

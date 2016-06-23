@@ -19,10 +19,10 @@ public class cWinTextView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (m_GameData.GetWin () > 0) {
+		if (m_GameData.GetStartWin () > 0) {
 			m_Image.enabled = true;
 
-			m_Image.sprite = m_Sprite [m_GameData.GetWin () - 1];
+			m_Image.sprite = m_Sprite [m_GameData.GetStartWin () - 1];
 
 			if (m_dModel != null) {
 				m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);

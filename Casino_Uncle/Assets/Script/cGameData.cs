@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class cGameData : ScriptableObject {
 	private int m_WinningStreak;
+	private int m_DuelStartWinningStreak;
 
 	public float[] m_PayBack = new float[5];
 
@@ -69,8 +70,17 @@ public class cGameData : ScriptableObject {
 	public int GetWin(){
 		return m_WinningStreak;
 	}
+
+	public void AddStartWin(){
+		m_DuelStartWinningStreak = m_WinningStreak;
+	}
+	public int GetStartWin(){
+		return m_DuelStartWinningStreak;
+	}
+
 	public void InitWin(){
 		m_WinningStreak = 0;
+		m_DuelStartWinningStreak = m_WinningStreak;
 
 		m_Prise = 0;
 
