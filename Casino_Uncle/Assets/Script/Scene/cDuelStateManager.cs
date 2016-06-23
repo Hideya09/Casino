@@ -137,9 +137,11 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public void DeleteText(){
-		if ( m_Win == true ) {
+		if (m_Win == true) {
 			m_gData.AddWin ();
 		}
+
+		m_Win = false;
 
 		m_winModel.Init ();
 		m_loseModel.Init ();
@@ -172,6 +174,8 @@ public class cDuelStateManager : ScriptableObject {
 		m_dModel.MoveSet ();
 		m_hpPManager.MoveSet ();
 		m_hpEManager.FadeInit ();
+
+		m_Win = false;
 
 		++m_State;
 	}

@@ -284,10 +284,6 @@ public class cGameScene : cSceneBase {
 				if (m_DuelStateManager.End () == true) {
 					m_DuelStateManager.DeleteText ();
 
-					if (m_DuelStateManager.GetWinNow () == true) {
-						m_gData.AddWin ();
-					}
-
 					m_DeleteEnd = true;
 				}
 			}

@@ -22,6 +22,8 @@ public class cPayBackDialogModel : cDialogModel {
 	public override cGameScene.eGameSceneList DialogExec(){
 		switch (m_State) {
 		case ePayBackState.ePayBackState_Start:
+			m_NumberData [0] = m_GameData.m_Money;
+			m_NumberData [1] = m_GameData.GetPayBackNext ();
 			if (StartDown () == true) {
 				m_State = ePayBackState.ePayBackState_Blink;
 				for (int i = 0; i < m_buttonModel.Length; ++i) {
@@ -34,6 +36,8 @@ public class cPayBackDialogModel : cDialogModel {
 			}
 			break;
 		case ePayBackState.ePayBackState_Blink:
+			m_NumberData [0] = m_GameData.m_Money;
+			m_NumberData [1] = m_GameData.m_Prise;
 			if (m_blinkModel.Blink () == true) {
 				m_State = ePayBackState.ePayBackState_Money;
 			}
