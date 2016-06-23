@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f996e50bf7b1c47b2b4fe39676ebb7, type: 3}
   m_Name: cHitPointModel1
   m_EditorClassIdentifier: 
-  m_StartPosition: {x: 540, y: -177, z: 0}
+  m_StartPosition: {x: 720, y: -177, z: 0}
   m_ReturnPosition: {x: 280, y: -177, z: 0}
-  m_MaxReturnCount: 1
+  m_MaxReturnCount: 0.25
