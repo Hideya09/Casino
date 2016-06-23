@@ -226,7 +226,9 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CardEdit(){
-		m_dModel.EditCard ();
+
+
+		bool edit = m_dModel.EditCard () == true;
 		m_edModel.Hind ();
 		m_gData.CardMinus ();
 
@@ -234,7 +236,11 @@ public class cDuelStateManager : ScriptableObject {
 			m_gData.SetDouble ();
 		}
 
-		m_State = eDuelState.eDuelState_HandOut;
+		if (edit == true) {
+			m_State = eDuelState.eDuelState_HandOut;
+		} else {
+			m_State = eDuelState.eDuelState_Select;
+		}
 	}
 
 	private void Select(){

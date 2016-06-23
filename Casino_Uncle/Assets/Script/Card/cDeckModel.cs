@@ -69,44 +69,57 @@ public class cDeckModel : ScriptableObject {
 
 		int setNumber = 0;
 
-		while (setNumber < m_selcModel.Length) {
-			int number = Random.Range (0, DeckMax);
+		if (DeckCheck () == true) {
+			m_SelectNumber = -1;
 
-			if (m_Deck [number] == true) {
-				continue;
+			while (setNumber < m_selcModel.Length) {
+				int number = Random.Range (0, DeckMax);
+
+				if (m_Deck [number] == true) {
+					continue;
+				}
+
+				int i;
+				for (i = 0; i < setNumber; ++i) {
+					if (random [i] == number) {
+						break;
+					}
+				}
+
+				if (i == setNumber) {
+					random [setNumber] = number;
+					++setNumber;
+				}
 			}
+			int doubleCharengeFlag = 0;
+			for (int i = 0; i < m_selcModel.Length; ++i) {
+				m_selcModel [i].m_CardNumber = random [i];
+				m_selcModel [i].SetSelect ();
+				m_selcModel [i].Init (m_Position, HandOutSpeed);
 
-			int i;
-			for (i = 0; i < setNumber; ++i) {
-				if (random [i] == number) {
-					break;
+				if (random [i] == 2 || random [i] == 3 || random [i] == 4) {
+					++doubleCharengeFlag;
 				}
 			}
 
-			if (i == setNumber) {
-				random [setNumber] = number;
-				++setNumber;
+			if (doubleCharengeFlag == 3) {
+				m_DoubleBattle = true;
 			}
-		}
-			
-		int doubleCharengeFlag = 0;
-
-		for( int i = 0 ; i < m_selcModel.Length ; ++i ){
-			m_selcModel [i].m_CardNumber = random [i];
-			m_selcModel [i].SetSelect ();
-			m_selcModel [i].Init ( m_Position , HandOutSpeed);
-
-			if (random [i] == 1 || random [i] == 2 || random [i] == 3) {
-				++doubleCharengeFlag;
+		} else {
+			for (int i = 0; i < m_selcModel.Length; ++i) {
+				if (m_SelectNumber == i) {
+					m_selcModel [i].End ();
+				} else if (m_selcModel [i].GetUsed () == true) {
+					m_selcModel [i].SetSelect ();
+					m_selcModel [i].Init (m_Position, HandOutSpeed);
+				}
 			}
-		}
 
-		if (doubleCharengeFlag == 3) {
-			m_DoubleBattle = true;
+			m_SelectNumber = -1;
 		}
 	}
 
-	public void EditCard(){
+	public bool EditCard(){
 		m_bcModel.Init ();
 
 		if (DeckCheck () == true) {
@@ -135,9 +148,30 @@ public class cDeckModel : ScriptableObject {
 					} while(m_selcModel [i].m_CardNumber == DeckMax);
 				}
 			}
-		}
 
-		m_selcModel [m_SelectNumber].Init (m_Position, HandOutSpeed);
+			int doubleCharengeFlag = 0;
+			for (int i = 0; i < m_selcModel.Length; ++i) {
+				if (m_selcModel [i].m_CardNumber == 2 || m_selcModel [i].m_CardNumber == 3 || m_selcModel [i].m_CardNumber == 4) {
+					++doubleCharengeFlag;
+				}
+			}
+
+			if (doubleCharengeFlag == 3) {
+				m_DoubleBattle = true;
+			}
+
+			m_selcModel [m_SelectNumber].Init (m_Position, HandOutSpeed);
+
+			return true;
+		} else {
+			for (int i = 0; i < m_selcModel.Length; ++i) {
+				m_selcModel [i].SetSelect ();
+			}
+
+			m_selcModel [m_SelectNumber].End ();
+
+			return false;
+		}
 	}
 
 	public bool CardCheck(){
@@ -146,7 +180,9 @@ public class cDeckModel : ScriptableObject {
 		bool selectFlag = false;
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
-			m_selcModel [i].m_MoveFlag = true;
+			if (m_selcModel [i].GetUsed () == true) {
+				m_selcModel [i].m_MoveFlag = true;
+			}
 		}
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
@@ -166,12 +202,16 @@ public class cDeckModel : ScriptableObject {
 		} else if (number >= 0) {
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				if (number != i) {
-					m_selcModel [i].NotSelectCard ();
+					if (m_selcModel [i].GetUsed () == true) {
+						m_selcModel [i].NotSelectCard ();
+					}
 				}
 			}
 		} else {
 			for (int i = 0; i < m_selcModel.Length; ++i) {
-				m_selcModel [i].InitSelectCard ();
+				if (m_selcModel [i].GetUsed () == true) {
+					m_selcModel [i].InitSelectCard ();
+				}
 			}
 		}
 
@@ -230,11 +270,13 @@ public class cDeckModel : ScriptableObject {
 		bool endFlag = true;
 
 		for (int i = m_selcModel.Length - 1; i >= 0; --i) {
-			if (m_selcModel [i].Open() == true) {
-				endFlag &= m_selcModel [i].GetOpen ();
-			} else {
-				endFlag = false;
-				break;
+			if (m_selcModel [i].GetUsed () == true) {
+				if (m_selcModel [i].Open () == true) {
+					endFlag &= m_selcModel [i].GetOpen ();
+				} else {
+					endFlag = false;
+					break;
+				}
 			}
 		}
 

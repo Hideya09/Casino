@@ -8,6 +8,8 @@ public class cSelectCardModel : cCardModel {
 	private bool m_TapFlag;
 	private bool m_SelectFlag;
 
+	private bool m_UsedFlag;
+
 	private Vector2 m_BufPosition;
 
 	private Vector2 m_BasePosition;
@@ -26,12 +28,16 @@ public class cSelectCardModel : cCardModel {
 		m_SelectFlag = false;
 
 		m_MoveFlag = false;
+
+		m_UsedFlag = true;
 	}
 
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 
 		m_Rotation = Vector3.zero;
+
+		m_UsedFlag = true;
 	}
 
 	public void Init( Vector2 setPosition , float speed ){
@@ -49,12 +55,27 @@ public class cSelectCardModel : cCardModel {
 		m_Movement = ( m_BasePosition - m_Position ) / m_MaxCount;
 
 		m_Count = 0;
+
+		m_UsedFlag = true;
+	}
+
+	public void End(){
+		m_DrawMode = eDrawMode.eDrawMode_None;
+		m_Size = eSize.eSize_Medium;
+
+		//m_CardNumber = cCardSpriteManager.Back;
+
+		m_Position = m_BufPosition;
+
+		m_UsedFlag = false;
 	}
 
 	public void SetSelect(){
 		CardInit ();
 
-		m_DrawMode = eDrawMode.eDrawMode_Front;
+		if (m_UsedFlag == true) {
+			m_DrawMode = eDrawMode.eDrawMode_Front;
+		}
 
 		m_TapFlag = false;
 
@@ -92,7 +113,7 @@ public class cSelectCardModel : cCardModel {
 				m_Position = m_BasePosition;
 				m_BufPosition = m_Position;
 			}
-		} else if (m_MoveFlag == true) {
+		} else if (m_MoveFlag == true && m_UsedFlag == true) {
 			m_TapFlag = true;
 
 			m_DrawMode = eDrawMode.eDrawMode_Front;
@@ -103,7 +124,7 @@ public class cSelectCardModel : cCardModel {
 	public void SetPosition( Vector2 position ){
 		m_BufPosition = position;
 
-		if (m_MoveFlag == true) {
+		if (m_MoveFlag == true && m_UsedFlag == true) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
 		}
 	}
@@ -156,5 +177,9 @@ public class cSelectCardModel : cCardModel {
 
 	public bool GetSelect(){
 		return m_SelectFlag;
+	}
+
+	public bool GetUsed(){
+		return m_UsedFlag;
 	}
 }
