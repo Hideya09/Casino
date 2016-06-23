@@ -106,7 +106,7 @@ public class cGameScene : cSceneBase {
 
 				m_DeleteEnd = false;
 
-				if (m_gData.GetWin () == 5 || m_DuelStateManager.GetWinNow() == false) {
+				if( m_DuelStateManager.GetWinNow() == false || m_gData.GetWin() == 4 || m_DuelStateManager.GetLast() == true ) {
 					m_PayBackDialog.Init ();
 
 					GameObject obj = (GameObject)Resources.Load ("Prefab/PayBackDialog");
@@ -114,7 +114,7 @@ public class cGameScene : cSceneBase {
 					m_Dialog.transform.SetParent (m_DialogParent.transform, false);
 
 					m_State = eGameSceneList.eGameSceneList_Pay;
-				} else {
+				}else {
 					m_NextDialog.Init ();
 
 					GameObject obj = (GameObject)Resources.Load ("Prefab/NextDialog");
@@ -122,7 +122,7 @@ public class cGameScene : cSceneBase {
 					m_Dialog.transform.SetParent (m_DialogParent.transform, false);
 
 					m_State = eGameSceneList.eGameSceneList_Next;
-				}
+				} 
 			}
 
 			if (m_DuelStateManager.GetButton () == true) {
@@ -283,6 +283,10 @@ public class cGameScene : cSceneBase {
 			if (m_DeleteEnd == false) {
 				if (m_DuelStateManager.End () == true) {
 					m_DuelStateManager.DeleteText ();
+
+					if (m_DuelStateManager.GetWinNow () == true) {
+						m_gData.AddWin ();
+					}
 
 					m_DeleteEnd = true;
 				}

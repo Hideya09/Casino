@@ -245,7 +245,11 @@ public class cDeckModel : ScriptableObject {
 			}
 		}
 
-		if (deckCheck > 0) {
+		if (deckCheck == 1) {
+			m_LastBattle = true;
+		}
+
+		if (deckCheck > 2) {
 			return true;
 		}
 

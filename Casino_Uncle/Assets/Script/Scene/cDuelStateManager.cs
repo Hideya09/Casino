@@ -150,6 +150,10 @@ public class cDuelStateManager : ScriptableObject {
 		return m_Win;
 	}
 
+	public bool GetLast(){
+		return m_dModel.m_LastBattle;
+	}
+
 	public void FadeInHalf(){
 		m_fadeHModel.FadeExec ();
 	}
