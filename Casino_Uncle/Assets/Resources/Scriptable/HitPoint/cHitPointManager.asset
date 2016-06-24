@@ -15,4 +15,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a8dfb71e69c520f4faf6d01c4869709c, type: 2}
   - {fileID: 11400000, guid: a2a8ce4d1ba99b143a09e02acb5b5abc, type: 2}
   - {fileID: 11400000, guid: ac924e3c4bb14314a86f8d1413c43e1b, type: 2}
-  m_HitPointMax: 99
+  m_HitPointMax: 1

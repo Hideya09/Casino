@@ -136,8 +136,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5e1f7a0e6dd1c3646b3cbc9870488525, type: 3}
   - {fileID: 8300000, guid: 16b60b97882c2a949a51670cce7e5680, type: 3}
   - {fileID: 8300000, guid: 24e6485e31bb7324e962956d18abe788, type: 3}
-  m_LoopStart: 12
-  m_LoopEnd: 13
+  m_LoopStart: 1
+  m_LoopEnd: 73
 --- !u!82 &34078951
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2578,10 +2578,6 @@ Prefab:
     - target: {fileID: 22485828, guid: f98c606393fd03f4cbb30f5fa8c6063d, type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 174834, guid: f98c606393fd03f4cbb30f5fa8c6063d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f98c606393fd03f4cbb30f5fa8c6063d, type: 2}
