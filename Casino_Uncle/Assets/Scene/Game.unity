@@ -1375,6 +1375,50 @@ Prefab:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19890104, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: lengthInSec
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19890104, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19890104, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19890104, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: EmissionModule.rate.scalar
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: EmissionModule.m_BurstCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: EmissionModule.rate.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: EmissionModule.cnt0
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19816546, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
+      propertyPath: EmissionModule.cntmax0
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 50ad25db4fc05ec4d8959a33b984e295, type: 2}
   m_IsPrefabParent: 0
