@@ -15,3 +15,5 @@ MonoBehaviour:
   m_ReturnPosition: {x: -60, y: 255, z: 0}
   m_MaxReturnCount: 1
   m_EndCount: 1
+  m_MaxCount: 0.75
+  m_Speed: 7.5
