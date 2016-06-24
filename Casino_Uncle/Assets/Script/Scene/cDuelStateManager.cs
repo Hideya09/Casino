@@ -404,6 +404,7 @@ public class cDuelStateManager : ScriptableObject {
 			} else if (m_dModel.m_LastBattle == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.BGMVolumeDown ();
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else {
 				m_State = eDuelState.eDuelState_NextButtle;
@@ -423,10 +424,12 @@ public class cDuelStateManager : ScriptableObject {
 			if (m_hpPManager.HitPointCheck () == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.BGMVolumeDown ();
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else if (m_dModel.m_LastBattle == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.BGMVolumeDown ();
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 			} else {
 				m_State = eDuelState.eDuelState_NextButtle;
@@ -441,6 +444,8 @@ public class cDuelStateManager : ScriptableObject {
 		if (m_dModel.m_LastBattle == true) {
 			m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 			m_State = eDuelState.eDuelState_Lose;
+			cSoundManager.BGMVolumeDown ();
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
 		} else {
 			m_State = eDuelState.eDuelState_NextButtle;
 		}

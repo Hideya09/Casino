@@ -31,7 +31,8 @@ public class cDialogView : MonoBehaviour {
 			if (m_MoneyFlag[i] == true) {
 				char[] text = data [i].ToString ("C0", new System.Globalization.CultureInfo ("ja-jp")).ToCharArray ();
 				if (data [i] < 0) {
-					text[1] = '¥';
+					text[0] = '¥';
+					text[1] = '-';
 				} else {
 					text [0] = '¥';
 				}

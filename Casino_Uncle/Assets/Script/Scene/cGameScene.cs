@@ -75,6 +75,7 @@ public class cGameScene : cSceneBase {
 			}
 			break;
 		case eGameSceneList.eGameSceneList_BetDialog:
+			cSoundManager.BGMVolumeUp ();
 			m_DuelStateManager.FadeInHalf ();
 			m_State = m_BetDialog.DialogExec ();
 

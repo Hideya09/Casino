@@ -33,11 +33,17 @@ public class cSoundManager : MonoBehaviour {
 	public AudioClip m_BGMSound;
 	public AudioClip[] m_SESound;
 
+	private float m_LoopCount;
+	public float m_LoopStart;
+	public float m_LoopEnd;
+
 	private static ArrayList m_SENumber = new ArrayList ();
 
 	private static bool m_BGMPlayFlag = false;
 
 	private static bool m_BGMDown = false;
+
+	private static bool m_BGMVolume = true;
 
 	//private static int m_SoundNumber = 0;
 
@@ -45,17 +51,33 @@ public class cSoundManager : MonoBehaviour {
 	void Start () {
 		m_BGM.volume = 1.0f;
 
+		m_LoopCount = 0;
+
 		m_BGMPlayFlag = false;
 		m_BGMDown = false;
+
+		m_BGMVolume = true;
 
 		m_BGM.Stop ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+
 		if (m_BGMPlayFlag == true) {
 			m_BGM.Play ();
 			m_BGMPlayFlag = false;
+		}
+
+		if (m_BGM.isPlaying == true) {
+			m_LoopCount += Time.deltaTime;
+
+			if (m_LoopCount >= m_LoopEnd) {
+				m_LoopCount -= m_LoopEnd;
+				m_LoopCount += m_LoopStart;
+				m_BGM.time = m_LoopCount;
+			}
 		}
 
 		if (m_BGMDown == true) {
@@ -64,8 +86,11 @@ public class cSoundManager : MonoBehaviour {
 			if (m_BGM.volume <= 0.0f) {
 				m_BGM.volume = 0.0f;
 				m_BGM.Stop ();
-				m_BGMDown = false;
 			}
+		} else if (m_BGMVolume == true) {
+			m_BGM.volume = 1.0f;
+		} else {
+			m_BGM.volume = 0.4f;
 		}
 
 		for (int i = 0; i < m_SENumber.Count; ++i) {
@@ -85,5 +110,13 @@ public class cSoundManager : MonoBehaviour {
 
 	public static void BGMDown(){
 		m_BGMDown = true;
+	}
+
+	public static void BGMVolumeDown(){
+		m_BGMVolume = false;
+	}
+
+	public static void BGMVolumeUp(){
+		m_BGMVolume = true;
 	}
 }
