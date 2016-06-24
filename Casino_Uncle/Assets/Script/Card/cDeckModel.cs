@@ -403,4 +403,18 @@ public class cDeckModel : ScriptableObject {
 			m_selcModel [i].m_MoveFlag = false;
 		}
 	}
+
+	public int[] GetSelect(){
+		int[] select = new int[3];
+
+		for (int i = 0; i < 3; ++i) {
+			if (m_selcModel [i].GetUsed () == true) {
+				select [i] = m_selcModel [i].m_CardNumber;
+			} else {
+				select [i] = -1;
+			}
+		}
+
+		return select;
+	}
 }

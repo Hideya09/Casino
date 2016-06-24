@@ -21,11 +21,6 @@ public class cNextDialogModel : cDialogModel {
 	public override cGameScene.eGameSceneList DialogExec(){
 		switch (m_State) {
 		case eNextState.eNextState_Start:
-			m_NumberData [0] = m_GameData.GetWin ();
-			m_NumberData [1] = m_GameData.GetCard ();
-			m_NumberData [2] = m_GameData.m_PlayerHitPoint;
-			m_NumberData [3] = m_GameData.m_Money;
-			m_NumberData [4] = m_GameData.GetPayBackNext();
 			if (StartDown () == true) {
 				m_State = eNextState.eNextState_Blink;
 				for (int i = 0; i < m_buttonModel.Length; ++i) {
@@ -34,12 +29,6 @@ public class cNextDialogModel : cDialogModel {
 			}
 			break;
 		case eNextState.eNextState_Blink:
-			m_NumberData [0] = m_GameData.GetWin ();
-			m_NumberData [1] = m_GameData.GetCard ();
-			m_NumberData [2] = m_GameData.m_PlayerHitPoint;
-			m_NumberData [3] = m_GameData.m_Money;
-			m_NumberData [4] = m_GameData.GetPayBack();
-
 			if (m_blinkModel.Blink () == true) {
 				m_State = eNextState.eNextState_Main;
 			}
@@ -98,6 +87,6 @@ public class cNextDialogModel : cDialogModel {
 		m_NumberData [1] = m_GameData.GetCard ();
 		m_NumberData [2] = m_GameData.m_PlayerHitPoint;
 		m_NumberData [3] = m_GameData.m_Money;
-		m_NumberData [4] = m_GameData.GetPayBackNext();
+		m_NumberData [4] = m_GameData.GetPayBack();
 	}
 }

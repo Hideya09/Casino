@@ -47,18 +47,6 @@ public class cGameData : ScriptableObject {
 		}
 	}
 
-	public int GetPayBackNext(){
-		if( m_WinningStreak < 5 ){
-			if (m_DoubleFlag == true) {
-				return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak] * 2));
-			} else {
-				return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak]));
-			}
-		}
-
-		return Mathf.RoundToInt ((m_Bet * m_PayBack [4]));
-	}
-
 	public void AddWin(){
 		++m_WinningStreak;
 		if (m_DoubleFlag == true) {

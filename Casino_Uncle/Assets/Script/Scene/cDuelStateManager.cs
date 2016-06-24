@@ -273,7 +273,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void EnemyShuffle(){
-		m_edModel.Select ( cSwingDownTime );
+		m_edModel.Select (cSwingDownTime, m_dModel.GetSelect (), m_gData.GetWin ());
 		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cock);
 		++m_State;
 	}
