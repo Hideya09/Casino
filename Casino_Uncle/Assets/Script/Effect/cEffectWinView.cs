@@ -7,22 +7,32 @@ public class cEffectWinView : MonoBehaviour {
 
 	public Transform m_TextTransform;
 
-	private SpriteRenderer m_Sprite;
+	private ParticleSystem m_Particle;
 
 	public SpriteRenderer m_TextSprite;
 
+	private bool m_PlayOnFlag;
+
 	// Use this for initialization
 	void Start () {
-		m_Sprite = GetComponent< SpriteRenderer> ();
+		m_Particle = GetComponent< ParticleSystem> ();
+
+		m_PlayOnFlag = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localScale = m_effectWinModel.GetLightScale ();
-		transform.rotation = Quaternion.AngleAxis (m_effectWinModel.GetAngle (), Vector3.forward);
-		m_TextTransform.localScale = m_effectWinModel.GetTextScale ();
+		if (m_effectWinModel.GetParthicle () == true && m_PlayOnFlag == false) {
+			m_Particle.Play ();
 
-		m_Sprite.enabled = m_effectWinModel.GetDraw ();
+			m_PlayOnFlag = true;
+		} else if (m_effectWinModel.GetParthicle () == false && m_PlayOnFlag == true) {
+			m_Particle.Stop ();
+
+			m_PlayOnFlag = false;
+		}
+
+		m_TextTransform.localScale = m_effectWinModel.GetTextScale ();
 		m_TextSprite.enabled = m_effectWinModel.GetDraw ();
 	}
 }

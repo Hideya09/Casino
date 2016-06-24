@@ -2,21 +2,20 @@
 using System.Collections;
 
 public class cEffectWinModel : ScriptableObject {
-
-	private Vector3 m_LightScale;
+	
 	private Vector3 m_TextScale;
 
 	public float m_MaxScale;
 
-	private float m_Angle;
-	public float m_AngleAdd;
+	private float m_Count;
+	public float m_MaxCount;
 
+	private bool m_ParthicleFlag;
 	private bool m_DrawFlag;
 
 	private bool m_TapFlag;
 	private bool m_EffectEndFlag;
 
-	public float m_LightSpeed;
 	public float m_TextSpeed;
 
 	public float m_TextOnScale;
@@ -27,26 +26,22 @@ public class cEffectWinModel : ScriptableObject {
 
 	public void Init(){
 		m_DrawFlag = false;
+		m_ParthicleFlag = false;
 
-		m_Angle = 0.0f;
+		m_Count = 0.0f;
 
 		m_TapFlag = false;
 		m_EffectEndFlag = false;
 
-		m_LightScale = Vector3.zero;
 		m_TextScale = Vector3.zero;
-	}
-
-	public Vector3 GetLightScale(){
-		return m_LightScale;
 	}
 
 	public Vector3 GetTextScale(){
 		return m_TextScale;
 	}
 
-	public float GetAngle(){
-		return m_Angle;
+	public bool GetParthicle(){
+		return m_ParthicleFlag;
 	}
 
 	public bool GetDraw(){
@@ -56,25 +51,18 @@ public class cEffectWinModel : ScriptableObject {
 	public bool EffectOn(){
 
 		m_DrawFlag = true;
+		m_ParthicleFlag = true;
 
 		float secound = Time.deltaTime;
 
-		m_LightScale += new Vector3 (m_LightSpeed * secound, m_LightSpeed * secound, 1.0f);
+		m_Count +=  Time.deltaTime;
 
-		m_Angle += m_AngleAdd * Time.deltaTime;
-
-		m_Angle %= 360;
-
-		if (m_TextOnScale <= m_LightScale.x) {
+		if (m_Count >= m_MaxCount) {
+			m_Count = m_MaxCount;
 			if (m_TextScale == Vector3.zero) {
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Win);
 			}
 			m_TextScale += new Vector3 (m_TextSpeed * secound, m_TextSpeed * secound, 1.0f);
-		}
-
-		if (m_LightScale.x >= m_MaxScale) {
-			m_LightScale = new Vector3 (m_MaxScale, m_MaxScale, 1.0f);
-
 			if (m_TextScale.x >= m_MaxScale) {
 				m_TextScale = new Vector3 (m_MaxScale, m_MaxScale, 1.0f);
 
@@ -83,6 +71,8 @@ public class cEffectWinModel : ScriptableObject {
 
 				return true;
 			}
+		}else{
+			m_ParthicleFlag = true;
 		}
 
 		return false;
@@ -93,6 +83,11 @@ public class cEffectWinModel : ScriptableObject {
 	}
 
 	public bool GetTapFlag(){
-		return m_TapFlag & m_EffectEndFlag;
+		if( m_TapFlag & m_EffectEndFlag == true ){
+			m_ParthicleFlag = false;
+			return true;
+		}
+
+		return false;
 	}
 }

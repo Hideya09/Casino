@@ -159,7 +159,7 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		do {
 			select2 = Random.Range( 0 , 14 );
-		} while(m_Deck [select1] == true || select1 == select2);
+		} while(m_Deck [select2] == true || select1 == select2);
 
 		int randomSelectNumber;
 

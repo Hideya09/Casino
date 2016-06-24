@@ -26,6 +26,10 @@ public class cGameData : ScriptableObject {
 
 	private bool m_DoubleFlag;
 
+	void OnEnable(){
+		m_Money = 100;
+	}
+
 	public void StartMoneySet(){
 		m_StartMoney = m_Money;
 	}
