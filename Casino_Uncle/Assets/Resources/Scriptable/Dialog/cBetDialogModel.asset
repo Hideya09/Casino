@@ -13,8 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_StartPosition: 600
   m_RotationStart: 15
-  m_StartCountMax: 1
-  m_EndCountMax: 1
+  m_StartCountMax: 0.75
+  m_EndCountMax: 0.75
   m_buttonModel:
   - {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
   - {fileID: 11400000, guid: a7280761fa1144b4b88e74567ce92208, type: 2}

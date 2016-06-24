@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf9edd79f313f347bcba956eec41a43, type: 3}
   m_Name: cShowDialogModel
   m_EditorClassIdentifier: 
+  m_StartPosition: 600
   m_RotationStart: 15
-  m_StartCountMax: 1
-  m_EndCountMax: 1
+  m_StartCountMax: 0.8
+  m_EndCountMax: 0.75
   m_buttonModel:
   - {fileID: 11400000, guid: e45577f015a78ed45a8f5836758f38e8, type: 2}
   m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}

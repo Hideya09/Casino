@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxScale: 2
   m_AngleAdd: 60
-  m_LightSpeed: 0.25
-  m_TextSpeed: 0.5
+  m_LightSpeed: 5
+  m_TextSpeed: 2
   m_TextOnScale: 0.5
