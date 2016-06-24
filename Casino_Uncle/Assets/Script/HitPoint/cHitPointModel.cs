@@ -15,9 +15,9 @@ public class cHitPointModel : ScriptableObject {
 	public float m_EndCount;
 
 	private float m_Count;
-	private const float m_MaxCount = 1.5f;
+	public float m_MaxCount = 1.5f;
 
-	private const float m_Speed = 3.0f;
+	public float m_Speed = 3.0f;
 
 	public float m_Color{ get; private set; }
 	public float m_Fade{ get; private set; }
