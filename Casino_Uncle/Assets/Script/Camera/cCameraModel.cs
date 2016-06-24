@@ -63,7 +63,9 @@ public class cCameraModel : ScriptableObject {
 		if (m_Second >= m_SecondMoveMax) {
 			m_Position += ((m_ReturnAdd += (m_ReturnAcceleration * Time.deltaTime)) * Time.deltaTime);
 
-
+			if (Vector3.Distance (m_ReturnPosition, m_Position) >= Vector3.Distance (m_ReturnPosition, m_BasePosition)) {
+				m_Position = m_BasePosition;
+			}
 			if (m_Second >= m_SecondReturnMax) {
 				endFlag = true;
 

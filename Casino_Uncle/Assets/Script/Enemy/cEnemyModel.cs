@@ -13,6 +13,9 @@ public class cEnemyModel : ScriptableObject {
 	private float m_Fade;
 	private float m_Black;
 
+	public float m_FadeSpeed;
+	public float m_BlackSpeed;
+
 	private float m_RunbleCount;
 	private float m_RunbleMaxPower;
 	private float m_RunblePower;
@@ -112,10 +115,10 @@ public class cEnemyModel : ScriptableObject {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_In);
 		}
 
-		m_Fade += Time.deltaTime;
+		m_Fade += Time.deltaTime * m_FadeSpeed;
 		if (m_Fade >= 1.0f) {
 			m_Fade = 1.0f;
-			m_Black += Time.deltaTime;
+			m_Black += Time.deltaTime * m_BlackSpeed;
 			if (m_Black >= 1.0f) {
 				m_Black = 1.0f;
 				return true;
@@ -126,10 +129,10 @@ public class cEnemyModel : ScriptableObject {
 	}
 
 	public bool End(){
-		m_Black -= Time.deltaTime;
+		m_Black -= Time.deltaTime * m_FadeSpeed;
 		if (m_Black <= 0.5f) {
 			m_Black = 0.5f;
-			m_Fade -= Time.deltaTime;
+			m_Fade -= Time.deltaTime * m_BlackSpeed;
 			if (m_Fade <= 0.0f) {
 				m_Fade = 0.0f;
 				return true;
