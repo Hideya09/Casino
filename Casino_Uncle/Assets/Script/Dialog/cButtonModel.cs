@@ -12,6 +12,10 @@ public class cButtonModel : ScriptableObject {
 
 	public int m_ButtonNumber;
 
+	public void Black(){
+		m_TapFlag = true;
+	}
+
 	public void Init(){
 		m_Start = false;
 

@@ -143,6 +143,7 @@ public class cDuelStateManager : ScriptableObject {
 		m_effectModel.Init ();
 		m_eModel.Init ();
 		m_buttonModel.Init ();
+		m_buttonModel.Black ();
 
 		m_Win = false;
 
@@ -271,6 +272,7 @@ public class cDuelStateManager : ScriptableObject {
 
 		if (m_dModel.CardCheck ()) {
 			m_buttonModel.End ();
+			m_buttonModel.Black ();
 			++m_State;
 		}
 	}

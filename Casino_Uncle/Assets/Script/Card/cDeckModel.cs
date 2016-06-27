@@ -279,7 +279,7 @@ public class cDeckModel : ScriptableObject {
 			}
 		}
 
-		if (deckCheck > 3) {
+		if (deckCheck <= 3) {
 			m_DeckViewFlag = false;
 		}
 
