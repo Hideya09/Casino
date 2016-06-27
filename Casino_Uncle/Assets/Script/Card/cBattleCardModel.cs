@@ -19,14 +19,17 @@ public class cBattleCardModel : cCardModel {
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 
-		m_Rotation = Vector3.zero;
+		m_RotationY = 0.0f;
+
+		m_RotationZ = 0.0f;
 	}
 
 	//初期化処理
 	public void Init(){
 		m_Position = m_BasePosition;
 
-		m_Rotation = Vector3.zero;
+		m_RotationY = 0.0f;
+		m_RotationZ = 0.0f;
 
 		m_DrawMode = eDrawMode.eDrawMode_None;
 		m_OutLineMode = eOutLineMode.eOutLineMode_None;
@@ -56,22 +59,22 @@ public class cBattleCardModel : cCardModel {
 
 	//振り上げ回転
 	public void MoveAngle(){
-		m_Rotation.z +=( m_AngleSpeed += ( m_AngleAcceleration * Time.deltaTime )) * Time.deltaTime;
+		m_RotationZ +=( m_AngleSpeed += ( m_AngleAcceleration * Time.deltaTime )) * Time.deltaTime;
 	}
 
 	//振り下ろし回転
 	public void ReturnAngle(){
-		m_Rotation.z += ( m_ReturnAngleSpeed += ( m_ReturnAngleAcceleration * Time.deltaTime )) * Time.deltaTime;
+		m_RotationZ += ( m_ReturnAngleSpeed += ( m_ReturnAngleAcceleration * Time.deltaTime )) * Time.deltaTime;
 	}
 
 	//角度を正常に戻す
 	public void SetAngle(){
-		m_Rotation.z = m_MaxAngle;
+		m_RotationZ = m_MaxAngle;
 	}
 
 	//負けた時の回転と移動
 	public void SnapMove(){
-		m_Rotation.z = -m_MaxAngle;
+		m_RotationZ = -m_MaxAngle;
 
 		m_Position.x += m_Speed * Time.deltaTime;
 

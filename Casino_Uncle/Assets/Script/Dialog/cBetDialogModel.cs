@@ -90,7 +90,7 @@ public class cBetDialogModel : cDialogModel {
 				}
 			}
 
-			if (m_betMoneyModel.GetNumber () == 0) {
+			if (m_betMoneyModel.GetNumber () < 100 || m_betMoneyModel.GetNumber () > m_NumberData [0]) {
 				m_State = eBetState.eBetState_Bet;
 			}
 

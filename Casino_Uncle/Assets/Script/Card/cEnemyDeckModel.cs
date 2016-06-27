@@ -39,6 +39,30 @@ public class cEnemyDeckModel : ScriptableObject {
 
 	//カードのパターン調整
 	public int CardAI(int[] playerSelectCard , int duelNumber){
+
+		int count = 0;
+
+		int bufNumber1 = -1;
+		int bufNumber2 = -1;
+
+		for (int i = 0; i < m_Deck.Length; ++i) {
+			if (m_Deck [i] == false) {
+				bufNumber2 = bufNumber1;
+				bufNumber1 = i;
+				++count;
+			}
+		}
+
+		if (count == 1) {
+			return bufNumber1;
+		} else if (count == 2) {
+			if (Random.Range (0, 2) == 0) {
+				return bufNumber1;
+			} else {
+				return bufNumber2;
+			}
+		}
+
 		bool doubleMode = true;
 		int highMode = 0;
 		int noneMode = 0;
@@ -152,7 +176,7 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		int select1;
 		int select2;
-	
+
 		do {
 			select1 = Random.Range( 0 , 14 );
 		} while(m_Deck [select1] == true);

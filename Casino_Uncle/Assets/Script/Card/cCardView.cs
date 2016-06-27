@@ -8,8 +8,8 @@ public class cCardView : MonoBehaviour {
 
 	public cCardSpriteManager m_Sprite;
 
-	private Image m_Renderer;
-	private Outline m_OutLine;
+	public Image m_Renderer;
+	public Outline m_OutLine;
 
 	private static int m_Back = 14;
 	private int m_Number;
@@ -20,10 +20,6 @@ public class cCardView : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_Renderer = GetComponent< Image > ();
-
-		m_OutLine = GetComponent< Outline > ();
-
 		m_Number = m_Back;
 	}
 	
@@ -32,7 +28,10 @@ public class cCardView : MonoBehaviour {
 		//位置設定
 
 		transform.localPosition = m_cModel.GetPosition ();
-		transform.rotation = Quaternion.Euler (m_cModel.GetRotation ());
+
+		transform.rotation = Quaternion.AngleAxis (m_cModel.GetRotationZ (), Vector3.forward);
+
+		transform.rotation *= Quaternion.AngleAxis (m_cModel.GetRotationY (), Vector3.up);
 
 		float fade = m_cModel.GetFade ();
 

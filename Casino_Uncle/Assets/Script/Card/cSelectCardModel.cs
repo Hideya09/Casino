@@ -35,7 +35,7 @@ public class cSelectCardModel : cCardModel {
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 
-		m_Rotation = Vector3.zero;
+		m_RotationY = 0.0f;
 
 		m_UsedFlag = true;
 	}
@@ -68,6 +68,10 @@ public class cSelectCardModel : cCardModel {
 		m_Position = m_BufPosition;
 
 		m_UsedFlag = false;
+
+		m_TapFlag = false;
+
+		m_SelectFlag = false;
 	}
 
 	public void SetSelect(){
