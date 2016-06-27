@@ -5,6 +5,20 @@
 --------------------------------------------------------------
 
 高：
+【未】山札が0枚の状態で、手札の左二枚を残して勝利し、次のデュエルを
+　　　開始すると手札を配り表にした時点でフリーズされる。
+      以下エラー内容です
+　　　IndexOutOfRangeException: Array index is out of range.
+	cDeckModel.CardMove () (at Assets/Script/Card/cDeckModel.cs:225)
+
+	cDuelStateManager.Move () (at Assets/Script/Scene/cDuelStateManager.cs:266)
+
+	cDuelStateManager.DuelExec () (at Assets/Script/Scene/cDuelStateManager.cs:86)
+
+	cGameScene.SceneExec () (at Assets/Script/Scene/cGameScene.cs:105)
+
+	cGameSceneManager.Update () (at Assets/Script/Scene/cGameSceneManager.cs:44)
+
 【済】四連勝するとペイバックが行われる（5戦目に挑戦できない）
 
 【済】勝負時の演出スクロールで、背景を飛び越えてしまう。
@@ -30,8 +44,8 @@
 ----------------------------------------------------------------
 中：
 【未】残りデッキ枚数が0枚、かつカード枚数が3以下のときに
-継続画面から次のデュエルに挑んだときにデッキの表示がなく、
-何もないところからカードが出ているように見られる。
+      継続画面から次のデュエルに挑んだときにデッキの表示がなく、
+      何もないところからカードが出ているように見られる。
 
 【済】ドラッグしたカードが他のUIの下に来る
 　　  (一番上のレイヤーに来ない)
