@@ -136,12 +136,12 @@ public class cHitPointModel : ScriptableObject {
 		m_ReturnCount = 0.0f;
 	}
 
-	public bool Back(){
+	public bool Back( float m_FadeTime ){
 		m_ReturnCount += Time.deltaTime;
 
 		m_Position += m_Movement * Time.deltaTime;
 
-		m_Fade -= (Time.deltaTime * 2);
+		m_Fade -= (Time.deltaTime * m_FadeTime);
 
 		if (m_Color >= m_Fade) {
 			m_Color = m_Fade;

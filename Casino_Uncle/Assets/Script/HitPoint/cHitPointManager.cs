@@ -97,11 +97,11 @@ public class cHitPointManager : ScriptableObject {
 		}
 	}
 
-	public bool Back(){
+	public bool Back( float m_FadeTime ){
 		bool ret = true;
 
 		for (int i = 0; i < m_hpModel.Length; ++i) {
-			ret &= m_hpModel [i].Back ();
+			ret &= m_hpModel [i].Back (m_FadeTime);
 		}
 
 		return ret;

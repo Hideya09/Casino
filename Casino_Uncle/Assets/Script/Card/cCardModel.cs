@@ -124,8 +124,8 @@ public class cCardModel : ScriptableObject {
 	}
 
 	//退去処理
-	public bool Back(){
-		m_Fade -= (Time.deltaTime * 2);
+	public bool Back( float m_FadeTime ){
+		m_Fade -= (Time.deltaTime * m_FadeTime);
 		m_Position.y -= Time.deltaTime * 10;
 		if (m_Fade <= 0.0f) {
 			return true;

@@ -318,20 +318,20 @@ public class cDeckModel : ScriptableObject {
 		m_bcModel.SnapMove ();
 	}
 
-	public bool MoveBack(){
-		bool endFlag = Back ();
+	public bool MoveBack( float m_FadeTime ){
+		bool endFlag = Back (m_FadeTime);
 
-		endFlag &= m_bcModel.Back ();
+		endFlag &= m_bcModel.Back (m_FadeTime);
 
 		for (int i = 0; i < m_selcModel.Length; ++i) {
-			endFlag = m_selcModel [i].Back ();
+			endFlag = m_selcModel [i].Back ( m_FadeTime );
 		}
 
 		return endFlag;
 	}
 
-	public bool ButtleCardBack(){
-		return m_bcModel.Back ();
+	public bool ButtleCardBack( float m_FadeTime ){
+		return m_bcModel.Back ( m_FadeTime );
 	}
 
 	public void MoveSet(){
@@ -391,12 +391,12 @@ public class cDeckModel : ScriptableObject {
 		m_ReturnCount = 0.0f;
 	}
 
-	public bool Back(){
+	public bool Back( float m_FadeTime ){
 		m_ReturnCount += Time.deltaTime;
 
 		m_Position += m_Movement * Time.deltaTime;
 
-		m_Fade -= (Time.deltaTime * 2);
+		m_Fade -= (Time.deltaTime * m_FadeTime);
 
 		if (m_Fade <= 0.0f) {
 			m_Position = m_StartPosition;

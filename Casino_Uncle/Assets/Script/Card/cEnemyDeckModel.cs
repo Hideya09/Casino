@@ -231,7 +231,7 @@ public class cEnemyDeckModel : ScriptableObject {
 		m_bcModel.SnapMove ();
 	}
 
-	public bool Back(){
-		return m_bcModel.Back ();
+	public bool Back( float m_FadeTime ){
+		return m_bcModel.Back (m_FadeTime);
 	}
 }

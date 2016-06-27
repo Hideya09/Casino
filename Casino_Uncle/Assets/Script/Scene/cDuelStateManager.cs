@@ -18,8 +18,11 @@ public class cDuelStateManager : ScriptableObject {
 	public cEffectStartModel m_startModel;
 	public cButtonModel m_buttonModel;
 
-	public float cSwingTime;
-	public float cSwingDownTime;
+	public float m_SwingTime;
+	public float m_SwingDownTime;
+
+	public float m_ButtleCardFadeTime;
+	public float m_FadeTime;
 
 	private int m_Damage;
 
@@ -141,8 +144,6 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public void DeleteText(){
-		m_gData.AddStartWin ();
-
 		m_Win = false;
 
 		m_winModel.Init ();
@@ -264,8 +265,8 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Move(){
 		m_dModel.CardMove ();
-		m_cameraModel.MoveSet (cSwingTime, cSwingDownTime);
-		m_dModel.MoveAngleSet (cSwingTime, cSwingDownTime);
+		m_cameraModel.MoveSet (m_SwingTime, m_SwingDownTime);
+		m_dModel.MoveAngleSet (m_SwingTime, m_SwingDownTime);
 
 		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Confirm);
 
@@ -273,7 +274,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void EnemyShuffle(){
-		m_edModel.Select (cSwingDownTime, m_dModel.GetSelect (), m_gData.GetWin ());
+		m_edModel.Select (m_SwingDownTime, m_dModel.GetSelect (), m_gData.GetWin ());
 		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cock);
 		++m_State;
 	}
@@ -489,8 +490,8 @@ public class cDuelStateManager : ScriptableObject {
 	private void NextButtle(){
 		bool endFlag = true;
 
-		endFlag = m_dModel.ButtleCardBack ();
-		endFlag = m_edModel.Back ();
+		endFlag = m_dModel.ButtleCardBack (m_ButtleCardFadeTime);
+		endFlag = m_edModel.Back (m_ButtleCardFadeTime);
 
 		if (endFlag == true) {
 			m_State = eDuelState.eDuelState_CardEdit;
@@ -500,11 +501,14 @@ public class cDuelStateManager : ScriptableObject {
 	public bool End(){
 		bool endFlag = true;
 
-		endFlag &= m_dModel.MoveBack ();
-		endFlag &= m_edModel.Back ();
-		endFlag &= m_hpPManager.Back ();
-		endFlag &= m_hpEManager.Back ();
+		endFlag &= m_dModel.MoveBack (m_FadeTime);
+		endFlag &= m_edModel.Back (m_FadeTime);
+		endFlag &= m_hpPManager.Back (m_FadeTime);
+		endFlag &= m_hpEManager.Back (m_FadeTime);
 
+		if (endFlag == true) {
+			m_gData.AddStartWin ();
+		}
 		return endFlag;
 	}
 
