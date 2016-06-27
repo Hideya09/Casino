@@ -25,7 +25,7 @@ MonoBehaviour:
   m_loseModel: {fileID: 11400000, guid: 5515d7b25a208fa48ad41141167ca7ee, type: 2}
   m_startModel: {fileID: 11400000, guid: 9bb51425caf1ccb4facae7fc76dc439a, type: 2}
   m_buttonModel: {fileID: 11400000, guid: 899d391ae83ab4146aff29f1489594cc, type: 2}
-  m_SwingTime: 0
-  m_SwingDownTime: 0
+  m_SwingTime: 1
+  m_SwingDownTime: 0.3
   m_ButtleCardFadeTime: 1
   m_FadeTime: 0.8
