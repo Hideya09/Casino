@@ -39,6 +39,9 @@ public class cPayBackDialogModel : cDialogModel {
 		case ePayBackState.ePayBackState_Blink:
 			if (m_blinkModel.Blink () == true) {
 				m_State = ePayBackState.ePayBackState_Money;
+			} else if (m_buttonModel [0].GetTouch ()) {
+				m_blinkModel.Init ();
+				m_State = ePayBackState.ePayBackState_Money;
 			}
 			break;
 		case ePayBackState.ePayBackState_Money:

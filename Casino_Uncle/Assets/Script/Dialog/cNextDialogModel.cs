@@ -31,6 +31,9 @@ public class cNextDialogModel : cDialogModel {
 		case eNextState.eNextState_Blink:
 			if (m_blinkModel.Blink () == true) {
 				m_State = eNextState.eNextState_Main;
+			} else if (m_buttonModel [0].GetTouch ()) {
+				m_blinkModel.Init ();
+				m_State = eNextState.eNextState_Main;
 			}
 			break;
 		case eNextState.eNextState_Main:

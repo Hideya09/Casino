@@ -27,7 +27,7 @@ public class cButtonControl : MonoBehaviour {
 			m_buttonModel.UnTapButton ();
 		}
 
-		if (Input.GetMouseButton (0)) {
+		if (Input.GetMouseButtonUp (0)) {
 			m_buttonModel.Touch ();
 		} else {
 			m_buttonModel.UnTouch ();

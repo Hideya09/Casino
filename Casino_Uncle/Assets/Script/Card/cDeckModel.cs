@@ -110,8 +110,6 @@ public class cDeckModel : ScriptableObject {
 				m_DoubleBattle = true;
 			}
 		} else {
-			m_DeckViewFlag = true;
-
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				if (m_SelectNumber == i) {
 					m_selcModel [i].End ();
@@ -170,8 +168,6 @@ public class cDeckModel : ScriptableObject {
 
 			return true;
 		} else {
-			m_DeckViewFlag = true;
-
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].SetSelect ();
 			}
@@ -258,6 +254,10 @@ public class cDeckModel : ScriptableObject {
 			if (m_Deck [i] == false) {
 				++deckCheck;
 			}
+		}
+
+		if (deckCheck > 3) {
+			m_DeckViewFlag = false;
 		}
 
 		if (deckCheck == 1) {

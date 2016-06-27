@@ -36,6 +36,9 @@ public class cShowDialogModel : cDialogModel {
 			if (m_blinkModel.Blink () == true) {
 				m_State = eShowState.eShowState_Main;
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
+			} else if (m_buttonModel [0].GetTouch ()) {
+				m_blinkModel.Init ();
+				m_State = eShowState.eShowState_Main;
 			}
 			break;
 		case eShowState.eShowState_Main:
