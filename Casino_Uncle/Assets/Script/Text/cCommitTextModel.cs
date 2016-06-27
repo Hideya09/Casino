@@ -71,6 +71,8 @@ public class cCommitTextModel : ScriptableObject {
 				++m_State;
 
 				m_Time = 0.0f;
+
+				m_Progression = 0.0f;
 			}
 			break;
 		case eCommitState.eCommitState_End:

@@ -20,6 +20,9 @@ public class cPayBackDialogModel : cDialogModel {
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
+		m_NumberData [0] = m_GameData.m_Money;
+		m_NumberData [1] = m_GameData.m_Prise;
+
 		switch (m_State) {
 		case ePayBackState.ePayBackState_Start:
 			if (StartDown () == true) {
@@ -48,9 +51,6 @@ public class cPayBackDialogModel : cDialogModel {
 				m_State = ePayBackState.ePayBackState_Main;
 			}
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Count);
-			m_NumberData [0] = m_GameData.m_Money;
-			m_NumberData [1] = m_GameData.m_Prise;
-
 			break;
 		case ePayBackState.ePayBackState_Main:
 			for (int i = 0; i < m_buttonModel.Length; ++i) {

@@ -20,8 +20,8 @@ public class cButtonControl : MonoBehaviour {
 			}
 
 			if (Input.GetMouseButtonUp (0)) {
-				m_buttonModel.UnTapButton ();
 				m_buttonModel.SelectButton ();
+				m_buttonModel.UnTapButton ();
 			}
 		} else {
 			m_buttonModel.UnTapButton ();

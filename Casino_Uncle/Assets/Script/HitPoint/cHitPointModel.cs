@@ -141,7 +141,7 @@ public class cHitPointModel : ScriptableObject {
 
 		m_Position += m_Movement * Time.deltaTime;
 
-		m_Fade -= Time.deltaTime;
+		m_Fade -= (Time.deltaTime * 2);
 
 		if (m_Color >= m_Fade) {
 			m_Color = m_Fade;

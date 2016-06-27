@@ -5,6 +5,8 @@ public class cDeckModel : ScriptableObject {
 
 	public float HandOutSpeed;
 
+	private bool m_DeckViewFlag;
+
 	private Vector3 m_Position;
 
 	private Vector3 m_BasePosition;
@@ -56,6 +58,8 @@ public class cDeckModel : ScriptableObject {
 		m_Position = m_StartPosition;
 
 		m_DoubleBattle = false;
+
+		m_DeckViewFlag = true;
 	}
 
 	public void RandomSet(){
@@ -106,6 +110,8 @@ public class cDeckModel : ScriptableObject {
 				m_DoubleBattle = true;
 			}
 		} else {
+			m_DeckViewFlag = true;
+
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				if (m_SelectNumber == i) {
 					m_selcModel [i].End ();
@@ -164,6 +170,8 @@ public class cDeckModel : ScriptableObject {
 
 			return true;
 		} else {
+			m_DeckViewFlag = true;
+
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].SetSelect ();
 			}
@@ -237,6 +245,10 @@ public class cDeckModel : ScriptableObject {
 
 	public int GetBattleCardNumber(){
 		return m_bcModel.m_CardNumber;
+	}
+
+	public bool GetDeckView(){
+		return m_DeckViewFlag;
 	}
 
 	private bool DeckCheck(){
@@ -384,10 +396,12 @@ public class cDeckModel : ScriptableObject {
 
 		m_Position += m_Movement * Time.deltaTime;
 
-		m_Fade -= Time.deltaTime;
+		m_Fade -= (Time.deltaTime * 2);
 
 		if (m_Fade <= 0.0f) {
 			m_Position = m_StartPosition;
+
+			m_DeckViewFlag = true;
 			return true;
 		}
 

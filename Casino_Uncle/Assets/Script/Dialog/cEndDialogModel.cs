@@ -85,11 +85,15 @@ public class cEndDialogModel : cDialogModel {
 				if (number == 1) {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Show;
 
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
+
 					m_State = eEndState.eEndState_End;
 
 					break;
 				} else if (number == 2) {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Back;
+
+					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
 
 					m_State = eEndState.eEndState_UpEnd;
 

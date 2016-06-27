@@ -5,6 +5,7 @@ public class cSelectCardModel : cCardModel {
 
 	public bool m_MoveFlag{ set; private get; }
 
+	private bool m_FixedFlag;
 	private bool m_TapFlag;
 	private bool m_SelectFlag;
 
@@ -30,8 +31,11 @@ public class cSelectCardModel : cCardModel {
 		m_MoveFlag = false;
 
 		m_UsedFlag = true;
+
+		m_FixedFlag = false;
 	}
 
+	//初期位置取得
 	public override void InitPosition( Vector2 position ){
 		m_BasePosition = position;
 
@@ -40,6 +44,7 @@ public class cSelectCardModel : cCardModel {
 		m_UsedFlag = true;
 	}
 
+	//初期化
 	public void Init( Vector2 setPosition , float speed ){
 		m_DrawMode = eDrawMode.eDrawMode_Back;
 		m_Size = eSize.eSize_Medium;
@@ -59,6 +64,7 @@ public class cSelectCardModel : cCardModel {
 		m_UsedFlag = true;
 	}
 
+	//もうその５戦では使わない時
 	public void End(){
 		m_DrawMode = eDrawMode.eDrawMode_None;
 		m_Size = eSize.eSize_Medium;
@@ -74,6 +80,7 @@ public class cSelectCardModel : cCardModel {
 		m_SelectFlag = false;
 	}
 
+	//選択可能状態にする
 	public void SetSelect(){
 		CardInit ();
 
@@ -84,8 +91,11 @@ public class cSelectCardModel : cCardModel {
 		m_TapFlag = false;
 
 		m_SelectFlag = false;
+
+		m_FixedFlag = false;
 	}
 
+	//カード配り
 	public bool Move(){
 
 		m_Fade = 1.0f;
@@ -107,6 +117,7 @@ public class cSelectCardModel : cCardModel {
 		}
 	}
 
+	//カードを選択した時
 	public void ConfirmCard(){
 		if (m_TapFlag == true) {
 			m_OutLineMode = eOutLineMode.eOutLineMode_None;
@@ -117,7 +128,7 @@ public class cSelectCardModel : cCardModel {
 				m_Position = m_BasePosition;
 				m_BufPosition = m_Position;
 			}
-		} else if (m_MoveFlag == true && m_UsedFlag == true) {
+		} else if (m_MoveFlag == true && m_UsedFlag == true && m_FixedFlag == true) {
 			m_TapFlag = true;
 
 			m_DrawMode = eDrawMode.eDrawMode_Front;
@@ -125,14 +136,22 @@ public class cSelectCardModel : cCardModel {
 		}
 	}
 
+	//位置を設定
 	public void SetPosition( Vector2 position ){
 		m_BufPosition = position;
+
+		m_FixedFlag = true;
 
 		if (m_MoveFlag == true && m_UsedFlag == true) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
 		}
 	}
 
+	public void FixedEnd(){
+		m_FixedFlag = false;
+	}
+
+	//カードの状態を戻す
 	public void UnTapCard(){
 		if (m_TapFlag == true) {
 			m_TapFlag = false;
@@ -140,6 +159,7 @@ public class cSelectCardModel : cCardModel {
 		}
 	}
 
+	//カードを所定の位置に移動させる
 	public bool MoveSelectCard( Vector2 position ){
 		m_Position = position;
 
@@ -150,16 +170,19 @@ public class cSelectCardModel : cCardModel {
 		return true;
 	}
 
+	//カードが選択されていない時
 	public void NotSelectCard(){
 		m_DrawMode = eDrawMode.eDrawMode_Dark;
 		m_Size = eSize.eSize_Small;
 	}
 
+	//カードの状態を普通にする
 	public void InitSelectCard(){
 		m_DrawMode = eDrawMode.eDrawMode_Front;
 		m_Size = eSize.eSize_Medium;
 	}
 
+	//カードの位置をマウスと連動させる
 	public void SelectCard( Vector2 position ){
 		if (m_TapFlag == true) {
 

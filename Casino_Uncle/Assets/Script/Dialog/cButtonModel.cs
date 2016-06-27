@@ -43,7 +43,7 @@ public class cButtonModel : ScriptableObject {
 	}
 
 	public void SelectButton(){
-		if (m_Start == true) {
+		if (m_Start == true && m_TapFlag == true) {
 			m_Select ^= true;
 		}
 	}

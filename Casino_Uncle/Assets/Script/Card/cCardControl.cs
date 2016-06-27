@@ -42,6 +42,10 @@ public class cCardControl : MonoBehaviour {
 			if (m_TouchFlag == true) {
 				m_cModel.SelectCard (Input.mousePosition);
 			}
+
+			if (m_HitFlag == false) {
+				m_cModel.FixedEnd ();
+			}
 		}
 	}
 
