@@ -45,6 +45,7 @@ public class cEnemyDeckModel : ScriptableObject {
 		int bufNumber1 = -1;
 		int bufNumber2 = -1;
 
+		//カード枚数が少ないか調べる
 		for (int i = 0; i < m_Deck.Length; ++i) {
 			if (m_Deck [i] == false) {
 				bufNumber2 = bufNumber1;
@@ -53,6 +54,7 @@ public class cEnemyDeckModel : ScriptableObject {
 			}
 		}
 
+		//少ないとき用選択処理
 		if (count == 1) {
 			return bufNumber1;
 		} else if (count == 2) {
@@ -136,11 +138,7 @@ public class cEnemyDeckModel : ScriptableObject {
 
 			if (m_Deck [1] == false) {
 				int selectRandom;
-				if (duelNumber == 4 && ( highMode + noneMode ) >= 3) {
-					selectRandom = Random.Range (0, 1);
-				} else {
-					selectRandom = Random.Range (0, 6 - highMode);
-				}
+				selectRandom = Random.Range (0, 6 - highMode);
 
 				if (selectRandom == 0) {
 					return 1;
@@ -148,6 +146,7 @@ public class cEnemyDeckModel : ScriptableObject {
 			}
 		}
 
+		//プレイヤーが１を持っていたら11~13をランダムで出す
 		if (oneMode == true) {
 			
 			int random = Random.Range (0, 3 + (duelNumber * 2));
@@ -176,7 +175,7 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		int select1;
 		int select2;
-
+		//通常時カード選択処理
 		do {
 			select1 = Random.Range( 0 , 14 );
 		} while(m_Deck [select1] == true);
@@ -187,6 +186,7 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		int randomSelectNumber;
 
+		//勝利数に応じ、選択するカードを変更
 		if (duelNumber == 4) {
 			randomSelectNumber = Mathf.Max (select1, select2);
 		} else if (duelNumber == 0) {

@@ -11,7 +11,6 @@ public class cCardView : MonoBehaviour {
 	public Image m_Renderer;
 	public Outline m_OutLine;
 
-	private static int m_Back = 14;
 	private int m_Number;
 
 	void Awake(){
@@ -20,7 +19,7 @@ public class cCardView : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		m_Number = m_Back;
+		m_Number = cCardSpriteManager.Back;
 	}
 	
 	// Update is called once per frame
@@ -73,7 +72,7 @@ public class cCardView : MonoBehaviour {
 
 		//描画モードに応じた変更
 		if (m_cModel.m_DrawMode == cCardModel.eDrawMode.eDrawMode_Back) {
-			m_Number = m_Back;
+			m_Number = cCardSpriteManager.Back;
 			m_Renderer.sprite = m_Sprite.sprite [m_Number];
 		} else if (m_Number != m_cModel.m_CardNumber) {
 			m_Number = m_cModel.m_CardNumber;

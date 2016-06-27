@@ -5,6 +5,7 @@ public class cBattleCardModel : cCardModel {
 
 	private Vector2 m_BasePosition;
 
+	//カードの傾け処理用
 	public float m_MaxAngle;
 	public float m_CookAngle;
 	public float m_Speed;

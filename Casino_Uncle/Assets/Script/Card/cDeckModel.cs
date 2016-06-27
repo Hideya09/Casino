@@ -3,10 +3,13 @@ using System.Collections;
 
 public class cDeckModel : ScriptableObject {
 
+	//カードを配る速さ
 	public float HandOutSpeed;
 
+	//デッキを描画するかどうか
 	private bool m_DeckViewFlag;
 
+	//位置情報
 	private Vector3 m_Position;
 
 	private Vector3 m_BasePosition;
@@ -23,21 +26,28 @@ public class cDeckModel : ScriptableObject {
 
 	public int DeckMax;
 
+	//選択用カード
 	public cSelectCardModel[] m_selcModel;
 
+	//バトル用カード
 	public cBattleCardModel m_bcModel;
 
+	//使用したかどうか
 	private bool[] m_Deck;
 
+	//どの手札を選択したか
 	private int m_SelectNumber;
 
+	//カードが残り一枚の時
 	public bool m_LastBattle{ get; private set; }
+	//賞金が２倍になるかどうか
 	public bool m_DoubleBattle{ get; private set; }
 
 	public void SetPosition( Vector3 setPosition ){
 		m_BasePosition = setPosition;
 	}
 
+	//５戦開始前初期化処理
 	public void Init(){
 		m_bcModel.Init ();
 
@@ -62,6 +72,7 @@ public class cDeckModel : ScriptableObject {
 		m_DeckViewFlag = true;
 	}
 
+	//ランダムに３枚のカードを選ぶ
 	public void RandomSet(){
 		m_bcModel.Init ();
 
@@ -76,6 +87,7 @@ public class cDeckModel : ScriptableObject {
 		if (DeckCheck () == true) {
 			m_SelectNumber = -1;
 
+			//カードをランダムに選び出す
 			while (setNumber < m_selcModel.Length) {
 				int number = Random.Range (0, DeckMax);
 
@@ -110,6 +122,7 @@ public class cDeckModel : ScriptableObject {
 				m_DoubleBattle = true;
 			}
 		} else {
+			//デッキに３枚ない時は初期化のみ
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				if (m_SelectNumber == i) {
 					m_selcModel [i].End ();
@@ -127,6 +140,8 @@ public class cDeckModel : ScriptableObject {
 		m_bcModel.Init ();
 
 		if (DeckCheck () == true) {
+			//使用した部分に新しいカードを設定し、他は選択可能にする
+
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 
 				m_selcModel [i].SetSelect ();
@@ -168,6 +183,8 @@ public class cDeckModel : ScriptableObject {
 
 			return true;
 		} else {
+			//初期化のみ行う
+
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].SetSelect ();
 			}
@@ -178,6 +195,7 @@ public class cDeckModel : ScriptableObject {
 		}
 	}
 
+	//カード選択処理
 	public bool CardCheck(){
 		int number = -1;
 
@@ -225,6 +243,7 @@ public class cDeckModel : ScriptableObject {
 		return false;
 	}
 
+	//カード選択後の処理
 	public bool CardMove(){
 		if (m_selcModel [m_SelectNumber].MoveSelectCard (m_bcModel.GetPosition())) {
 			m_bcModel.m_CardNumber = m_selcModel [m_SelectNumber].m_CardNumber;
@@ -234,19 +253,23 @@ public class cDeckModel : ScriptableObject {
 		return false;
 	}
 
+	//カード使用後処理
 	public void CardEnd(){
 		m_Deck [m_bcModel.m_CardNumber] = true;
 		m_selcModel [m_SelectNumber].m_CardNumber = DeckMax;
 	}
 
+	//バトルに使うカードの番号
 	public int GetBattleCardNumber(){
 		return m_bcModel.m_CardNumber;
 	}
 
+	//デッキを描画するかどうか
 	public bool GetDeckView(){
 		return m_DeckViewFlag;
 	}
 
+	//デッキ枚数による処理
 	private bool DeckCheck(){
 		int deckCheck = 0;
 
@@ -271,6 +294,7 @@ public class cDeckModel : ScriptableObject {
 		return false;
 	}
 
+	//カード配り演出
 	public bool HandOnCard(){
 		bool endFlag = true;
 
@@ -281,6 +305,7 @@ public class cDeckModel : ScriptableObject {
 		return endFlag;
 	}
 
+	//カードを開く演出
 	public bool CardOpen(){
 		bool endFlag = true;
 
@@ -412,12 +437,23 @@ public class cDeckModel : ScriptableObject {
 		return m_Position;
 	}
 
+	public bool SelectStart(){
+		bool endFlag = true;
+		for (int i = 0; i < m_selcModel.Length; ++i) {
+			endFlag &= m_selcModel [i].OutLineBlink ();
+		}
+
+		return endFlag;
+	}
+
+	//選択を止める
 	public void SelectStop(){
 		for (int i = 0; i < m_selcModel.Length; ++i) {
 			m_selcModel [i].m_MoveFlag = false;
 		}
 	}
 
+	//プレイヤーの手札のカードの番号を取得
 	public int[] GetSelect(){
 		int[] select = new int[3];
 

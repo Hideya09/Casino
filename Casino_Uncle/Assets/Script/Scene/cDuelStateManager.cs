@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cDuelStateManager : ScriptableObject {
 
+	//使用する要素
 	public cDeckModel m_dModel;
 	public cEnemyDeckModel m_edModel;
 	public cGameData m_gData;
@@ -18,6 +19,7 @@ public class cDuelStateManager : ScriptableObject {
 	public cEffectStartModel m_startModel;
 	public cButtonModel m_buttonModel;
 
+	//
 	public float m_SwingTime;
 	public float m_SwingDownTime;
 
@@ -36,6 +38,7 @@ public class cDuelStateManager : ScriptableObject {
 		eDuelState_HandOut,
 		eDuelState_CardOpen,
 		eDuelState_CardEdit,
+		eDuelState_SelectStart,
 		eDuelState_Select,
 		eDuelState_Move,
 		eDuelState_EnemyShuffle,
@@ -81,6 +84,9 @@ public class cDuelStateManager : ScriptableObject {
 			break;
 		case eDuelState.eDuelState_CardEdit:
 			CardEdit ();
+			break;
+		case eDuelState.eDuelState_SelectStart:
+			SelectStart ();
 			break;
 		case eDuelState.eDuelState_Select:
 			Select ();
@@ -232,7 +238,7 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void CardOpen(){
 		if (m_dModel.CardOpen () == true) {
-			m_State = eDuelState.eDuelState_Select;
+			m_State = eDuelState.eDuelState_SelectStart;
 		}
 	}
 
@@ -250,6 +256,12 @@ public class cDuelStateManager : ScriptableObject {
 		if (edit == true) {
 			m_State = eDuelState.eDuelState_HandOut;
 		} else {
+			m_State = eDuelState.eDuelState_SelectStart;
+		}
+	}
+
+	private void SelectStart(){
+		if (m_dModel.SelectStart () == true) {
 			m_State = eDuelState.eDuelState_Select;
 		}
 	}

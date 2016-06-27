@@ -11,3 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 185bdf0bae89e0d48bec73ce7178dfd3, type: 3}
   m_Name: cSelectCardModel3
   m_EditorClassIdentifier: 
+  m_BlinkMaxCount: 0.2
+  m_BlinkMaxNumber: 3

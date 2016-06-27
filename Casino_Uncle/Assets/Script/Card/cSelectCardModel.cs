@@ -5,19 +5,29 @@ public class cSelectCardModel : cCardModel {
 
 	public bool m_MoveFlag{ set; private get; }
 
+	//選択処理用フラグ
 	private bool m_FixedFlag;
 	private bool m_TapFlag;
 	private bool m_SelectFlag;
 
+	//使用フラグ
 	private bool m_UsedFlag;
 
+	//前回位置
 	private Vector2 m_BufPosition;
 
+	//基準となる位置
 	private Vector2 m_BasePosition;
 
 	private Vector2 m_Movement;
 	private float m_Count;
 	private float m_MaxCount;
+
+	//明滅関連
+	private float m_BlinkCount;
+	public float m_BlinkMaxCount;
+	private int m_BlinkNumber;
+	public int m_BlinkMaxNumber;
 
 	public static float m_Line = 0.0f;
 
@@ -62,6 +72,9 @@ public class cSelectCardModel : cCardModel {
 		m_Count = 0;
 
 		m_UsedFlag = true;
+
+		m_BlinkCount = 0.0f;
+		m_BlinkNumber = 0;
 	}
 
 	//もうその５戦では使わない時
@@ -78,6 +91,9 @@ public class cSelectCardModel : cCardModel {
 		m_TapFlag = false;
 
 		m_SelectFlag = false;
+
+		m_BlinkCount = 0.0f;
+		m_BlinkNumber = 0;
 	}
 
 	//選択可能状態にする
@@ -93,6 +109,9 @@ public class cSelectCardModel : cCardModel {
 		m_SelectFlag = false;
 
 		m_FixedFlag = false;
+
+		m_BlinkCount = 0.0f;
+		m_BlinkNumber = 0;
 	}
 
 	//カード配り
@@ -115,6 +134,34 @@ public class cSelectCardModel : cCardModel {
 
 			return true;
 		}
+	}
+
+	public bool OutLineBlink(){
+		if (m_UsedFlag == false) {
+			return true;
+		}
+
+		m_BlinkCount += Time.deltaTime;
+
+		if (m_OutLineMode == eOutLineMode.eOutLineMode_None) {
+			if (m_BlinkCount >= m_BlinkMaxCount) {
+				m_OutLineMode = eOutLineMode.eOutLineMode_Yellow;
+				m_BlinkCount -= m_BlinkMaxCount;
+			}
+		} else if (m_OutLineMode == eOutLineMode.eOutLineMode_Yellow) {
+			if (m_BlinkCount >= m_BlinkMaxCount) {
+				m_OutLineMode = eOutLineMode.eOutLineMode_None;
+				m_BlinkCount -= m_BlinkMaxCount;
+
+				++m_BlinkNumber;
+			}
+		}
+
+		if (m_BlinkNumber >= m_BlinkMaxNumber) {
+			return true;
+		}
+
+		return false;
 	}
 
 	//カードを選択した時

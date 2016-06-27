@@ -26,6 +26,7 @@ public class cDeckView : MonoBehaviour {
 
 		m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);
 
+		//デッキ描画を行うかどうか
 		if (m_GameData.GetCard () - 2 > 0 || m_dModel.GetDeckView () == true) {
 			m_Image.sprite = m_ThereSprite;
 		} else {
