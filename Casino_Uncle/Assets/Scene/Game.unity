@@ -512,7 +512,6 @@ GameObject:
   - 114: {fileID: 214934903}
   - 50: {fileID: 214934902}
   - 61: {fileID: 214934901}
-  - 114: {fileID: 214934900}
   - 114: {fileID: 214934899}
   m_Layer: 5
   m_Name: SelectCardEnemy3
@@ -553,18 +552,6 @@ MonoBehaviour:
   m_Sprite: {fileID: 11400000, guid: 0487766a3325e20489b885b02210fd35, type: 2}
   m_Renderer: {fileID: 214934904}
   m_OutLine: {fileID: 214934903}
---- !u!114 &214934900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 214934897}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb880392d9b160c448ff148b13ec1bd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_cModel: {fileID: 11400000, guid: c6875a2f6cfa90f49bcb55189ee9ddef, type: 2}
 --- !u!61 &214934901
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1578,7 +1565,6 @@ GameObject:
   - 114: {fileID: 735855623}
   - 50: {fileID: 735855622}
   - 61: {fileID: 735855621}
-  - 114: {fileID: 735855620}
   - 114: {fileID: 735855619}
   m_Layer: 5
   m_Name: SelectCardEnemy1
@@ -1619,18 +1605,6 @@ MonoBehaviour:
   m_Sprite: {fileID: 11400000, guid: 0487766a3325e20489b885b02210fd35, type: 2}
   m_Renderer: {fileID: 735855624}
   m_OutLine: {fileID: 735855623}
---- !u!114 &735855620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 735855617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb880392d9b160c448ff148b13ec1bd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_cModel: {fileID: 11400000, guid: c6875a2f6cfa90f49bcb55189ee9ddef, type: 2}
 --- !u!61 &735855621
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8177,7 +8151,6 @@ GameObject:
   - 114: {fileID: 1837980821}
   - 50: {fileID: 1837980820}
   - 61: {fileID: 1837980819}
-  - 114: {fileID: 1837980818}
   - 114: {fileID: 1837980817}
   m_Layer: 5
   m_Name: SelectCardEnemy2
@@ -8218,18 +8191,6 @@ MonoBehaviour:
   m_Sprite: {fileID: 11400000, guid: 0487766a3325e20489b885b02210fd35, type: 2}
   m_Renderer: {fileID: 1837980822}
   m_OutLine: {fileID: 1837980821}
---- !u!114 &1837980818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1837980815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb880392d9b160c448ff148b13ec1bd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_cModel: {fileID: 11400000, guid: c6875a2f6cfa90f49bcb55189ee9ddef, type: 2}
 --- !u!61 &1837980819
 BoxCollider2D:
   m_ObjectHideFlags: 0
