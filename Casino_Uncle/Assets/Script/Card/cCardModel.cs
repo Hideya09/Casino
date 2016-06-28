@@ -28,6 +28,7 @@ public class cCardModel : ScriptableObject {
 
 	//カードの描画サイズ
 	public enum eSize{
+		eSize_MostSmall,
 		eSize_Small,
 		eSize_Medium,
 		eSize_Large
@@ -124,9 +125,14 @@ public class cCardModel : ScriptableObject {
 	}
 
 	//退去処理
-	public bool Back( float m_FadeTime ){
+	public bool Back( float m_FadeTime , bool up = false ){
 		m_Fade -= (Time.deltaTime * m_FadeTime);
-		m_Position.y -= Time.deltaTime * 10;
+
+		if (up == true) {
+			m_Position.y += Time.deltaTime * 10;
+		} else {
+			m_Position.y -= Time.deltaTime * 10;
+		}
 		if (m_Fade <= 0.0f) {
 			return true;
 		}
@@ -140,5 +146,9 @@ public class cCardModel : ScriptableObject {
 
 	public bool GetOpen(){
 		return m_EndOpen;
+	}
+
+	public void CardMostSmall(){
+		m_Size = eSize.eSize_MostSmall;
 	}
 }

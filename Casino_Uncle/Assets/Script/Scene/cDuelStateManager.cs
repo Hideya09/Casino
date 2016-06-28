@@ -41,7 +41,8 @@ public class cDuelStateManager : ScriptableObject {
 		eDuelState_SelectStart,
 		eDuelState_Select,
 		eDuelState_Move,
-		eDuelState_EnemyShuffle,
+		eDuelState_EnemySelect,
+		eDuelState_EnemyMove,
 		eDuelState_BattleEffect,
 		eDuelState_EnemyCardOpen,
 		eDuelState_Calc,
@@ -94,8 +95,11 @@ public class cDuelStateManager : ScriptableObject {
 		case eDuelState.eDuelState_Move:
 			Move ();
 			break;
-		case eDuelState.eDuelState_EnemyShuffle:
-			EnemyShuffle ();
+		case eDuelState.eDuelState_EnemySelect:
+			EnemySelect ();
+			break;
+		case eDuelState.eDuelState_EnemyMove:
+			EnemyMove ();
 			break;
 		case eDuelState.eDuelState_BattleEffect:
 			BattleEffect ();
@@ -223,6 +227,7 @@ public class cDuelStateManager : ScriptableObject {
 	private void Shuffle(){
 		m_dModel.RandomSet ();
 		m_edModel.Hind ();
+		m_edModel.RandomSet ();
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
@@ -232,7 +237,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void HandOut(){
-		if (m_dModel.HandOnCard () == true) {
+		if ((m_dModel.HandOnCard () & m_edModel.SelectCardMove ()) == true) {
 			++m_State;
 		}
 	}
@@ -245,9 +250,9 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void CardEdit(){
 
-
-		bool edit = m_dModel.EditCard () == true;
+		bool edit = m_dModel.EditCard ();
 		m_edModel.Hind ();
+		edit &= m_edModel.EditCard ();
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
@@ -287,10 +292,16 @@ public class cDuelStateManager : ScriptableObject {
 		++m_State;
 	}
 
-	private void EnemyShuffle(){
+	private void EnemySelect(){
 		m_edModel.Select (m_SwingDownTime, m_dModel.GetSelect (), m_gData.GetWin ());
-		cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cock);
 		++m_State;
+	}
+
+	private void EnemyMove(){
+		if (m_edModel.SelectMove () == true) {
+			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cock);
+			++m_State;
+		}
 	}
 
 	private void BattleEffect(){
@@ -467,6 +478,8 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Win(){
+		m_edModel.SelectCardOpen ();
+
 		if (m_eModel.End () == true) {
 			if (m_winModel.GetTapFlag () == true) {
 				m_gData.m_PlayerHitPoint = m_hpPManager.GetHitPoint ();
@@ -484,6 +497,8 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Lose(){
+		m_edModel.SelectCardOpen ();
+
 		m_fadeHModel.FadeExec ();
 		if (m_loseModel.GetTapFlag () == true && m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 			m_gData.InitWin ();
