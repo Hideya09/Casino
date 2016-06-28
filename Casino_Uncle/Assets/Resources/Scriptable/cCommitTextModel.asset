@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApperanceTime: 0.1
   m_StopTime: 0.85
-  m_DisappearanceTime: 0.75
+  m_DisappearanceTime: 0.3
