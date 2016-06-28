@@ -531,7 +531,7 @@ public class cDuelStateManager : ScriptableObject {
 		bool endFlag = true;
 
 		endFlag &= m_dModel.MoveBack (m_FadeTime);
-		endFlag &= m_edModel.Back (m_FadeTime);
+		endFlag &= m_edModel.Back (m_FadeTime , true);
 		endFlag &= m_hpPManager.Back (m_FadeTime);
 		endFlag &= m_hpEManager.Back (m_FadeTime);
 

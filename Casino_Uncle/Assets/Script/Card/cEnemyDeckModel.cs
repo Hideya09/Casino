@@ -181,12 +181,14 @@ public class cEnemyDeckModel : ScriptableObject {
 	public bool EditCard(){
 		m_bcModel.Init ();
 
+		m_selcModel [m_SelectNumber].m_CardNumber = cCardSpriteManager.Back;
+
 		if (DeckCheck () == true) {
 			//使用した部分に新しいカードを設定し、他は選択可能にする
 
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 
-				m_selcModel [i].SetSelect ();
+				m_selcModel [i].CardMostSmall ();
 
 				if (m_selcModel [i].m_CardNumber == cCardSpriteManager.Back) {
 					do {
@@ -208,11 +210,10 @@ public class cEnemyDeckModel : ScriptableObject {
 						}
 					} while(m_selcModel [i].m_CardNumber == cCardSpriteManager.Back);
 				}
-
-				m_selcModel [i].CardMostSmall ();
 			}
 
 			m_selcModel [m_SelectNumber].Init (m_Position, m_Speed);
+			m_selcModel [m_SelectNumber].CardMostSmall ();
 
 			return true;
 		} else {
@@ -270,7 +271,7 @@ public class cEnemyDeckModel : ScriptableObject {
 	}
 
 	public bool SelectMove(){
-		return m_selcModel [m_SelectNumber].Back (0.5f,true);
+		return m_selcModel [m_SelectNumber].Back (3.0f,true);
 	}
 
 	public bool SelectCardOpen(){
@@ -291,11 +292,13 @@ public class cEnemyDeckModel : ScriptableObject {
 		m_bcModel.SnapMove ();
 	}
 
-	public bool Back( float m_FadeTime ){
+	public bool Back( float m_FadeTime , bool all = false ){
 		bool endFlag = true;
 
-		for (int i = 0; i < m_selcModel.Length; ++i) {
-			endFlag &= m_selcModel [i].Back (m_FadeTime,true);
+		if (all == true) {
+			for (int i = 0; i < m_selcModel.Length; ++i) {
+				endFlag &= m_selcModel [i].Back (m_FadeTime, true);
+			}
 		}
 
 		endFlag &= m_bcModel.Back (m_FadeTime);
