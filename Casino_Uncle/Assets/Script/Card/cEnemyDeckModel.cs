@@ -43,19 +43,27 @@ public class cEnemyDeckModel : ScriptableObject {
 	}
 
 	public void Select( float setSecond , int duelNumber ){
+		int selectNumber = 0;
+
 		do {
 			float random = Random.Range (0.0f, 1.0f);
 
-			int selectNumber = m_selcModel[0].m_CardNumber;
+			selectNumber = m_selcModel[0].m_CardNumber;
+
+			m_SelectNumber = 0;
 
 			if (random < m_LowProbability [duelNumber]) {
 				for (int i = 1; i < m_selcModel.Length; ++i) {
 					if (selectNumber > m_selcModel [i].m_CardNumber) {
+						m_SelectNumber = i;
+
 						selectNumber = m_selcModel [i].m_CardNumber;
 					}
 				}
 			} else if (random < m_MiddleProbability [duelNumber]) {
 				for (int i = 0; i < m_selcModel.Length; ++i) {
+					m_SelectNumber = i;
+
 					int number1 = i + 1;
 					if (number1 >= m_selcModel.Length) {
 						number1 -= m_selcModel.Length;
@@ -82,12 +90,12 @@ public class cEnemyDeckModel : ScriptableObject {
 			} else {
 				for (int i = 1; i < m_selcModel.Length; ++i) {
 					if (selectNumber < m_selcModel [i].m_CardNumber) {
+						m_SelectNumber = i;
+
 						selectNumber = m_selcModel [i].m_CardNumber;
 					}
 				}
 			}
-
-			m_SelectNumber = selectNumber;
 		} while(m_selcModel [m_SelectNumber].GetUsed () == false);
 
 		m_Deck [m_selcModel [m_SelectNumber].m_CardNumber] = true;
