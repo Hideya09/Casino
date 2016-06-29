@@ -227,7 +227,7 @@ public class cDuelStateManager : ScriptableObject {
 	private void Shuffle(){
 		m_dModel.RandomSet ();
 		m_edModel.Hind ();
-		m_edModel.RandomSet ();
+		m_edModel.RandomSet (m_dModel.GetSelect (), m_gData.GetWin ());
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
@@ -293,7 +293,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void EnemySelect(){
-		m_edModel.Select (m_SwingDownTime, m_dModel.GetSelect (), m_gData.GetWin ());
+		m_edModel.Select (m_SwingDownTime, m_gData.GetWin ());
 		++m_State;
 	}
 

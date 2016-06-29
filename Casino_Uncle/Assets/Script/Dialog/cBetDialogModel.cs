@@ -7,7 +7,6 @@ public class cBetDialogModel : cDialogModel {
 		eBetState_Start,
 		eBetState_StartUp,
 		eBetState_Bet,
-		eBetState_Lock,
 		eBetState_Main,
 		eBetState_Money,
 		eBetState_End,
@@ -16,6 +15,8 @@ public class cBetDialogModel : cDialogModel {
 	public cGameData m_GameData;
 
 	public cBetMoneyModel m_betMoneyModel;
+
+	public cTableModel m_tModel;
 
 	private eBetState m_State;
 
@@ -43,8 +44,11 @@ public class cBetDialogModel : cDialogModel {
 			break;
 		case eBetState.eBetState_Bet:
 			if (m_betMoneyModel.GetNumber () >= 100 && m_betMoneyModel.GetNumber () <= m_NumberData [0]) {
-				m_State = eBetState.eBetState_Lock;
+				m_State = eBetState.eBetState_Main;
 			}
+
+			m_tModel.FadeIn ();
+
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
@@ -58,45 +62,11 @@ public class cBetDialogModel : cDialogModel {
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
 					break;
-				} else if (number == 3) {
-					m_buttonModel [i].Init ();
-					m_buttonModel [i].Start ();
-					break;
 				}
 			}
-			break;
-		case eBetState.eBetState_Lock:
-			for (int i = 0; i < m_buttonModel.Length; ++i) {
-				int number = m_buttonModel [i].GetSelect ();
-				if (number == 1) {
-					m_buttonModel [i].Init ();
-					m_buttonModel [i].Start ();
-				}
-				else if (number == 2) {
-					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_MoveTitle;
-
-					m_State = eBetState.eBetState_End;
-
-					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
-					break;
-				} else if (number == 3) {
-					m_State = eBetState.eBetState_Main; 
-
-					m_betMoneyModel.SetInput (false);
-
-					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lock);
-
-					break;
-				}
-			}
-
-			if (m_betMoneyModel.GetNumber () < 100 || m_betMoneyModel.GetNumber () > m_NumberData [0]) {
-				m_State = eBetState.eBetState_Bet;
-			}
-
 			break;
 		case eBetState.eBetState_Main:
-			bool m_Select = false;
+			m_tModel.FadeOut ();
 
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
@@ -107,8 +77,6 @@ public class cBetDialogModel : cDialogModel {
 
 					m_GameData.MoneyBet( m_betMoneyModel.GetNumber () );
 
-					m_Select = true;
-
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
 
 					break;
@@ -117,24 +85,16 @@ public class cBetDialogModel : cDialogModel {
 
 					m_State = eBetState.eBetState_End;
 
-					m_Select = true;
-
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);
-
-					break;
-				} else if (number == 3) {
-					m_Select = true;
 
 					break;
 				}
 			}
 
-			if (m_Select == false) {
-				m_State = eBetState.eBetState_Lock;
-				m_betMoneyModel.SetInput (true);
-
-				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_UnLock);
+			if (m_betMoneyModel.GetNumber () < 100 || m_betMoneyModel.GetNumber () > m_NumberData [0]) {
+				m_State = eBetState.eBetState_Bet;
 			}
+
 			break;
 		case eBetState.eBetState_Money:
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Count);
@@ -185,5 +145,6 @@ public class cBetDialogModel : cDialogModel {
 			m_NumberData2 [i] = m_GameData.m_PayBack [i];
 		}
 
+		m_tModel.Init ();
 	}
 }

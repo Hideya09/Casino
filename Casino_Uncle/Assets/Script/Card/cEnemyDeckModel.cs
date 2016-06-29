@@ -18,6 +18,9 @@ public class cEnemyDeckModel : ScriptableObject {
 	public Vector3 m_Position;
 	public float m_Speed;
 
+	public float[] m_LowProbability;
+	public float[] m_MiddleProbability;
+
 	public void Init(){
 		m_Deck = new bool[14];
 		for (int i = 0; i < 14; ++i) {
@@ -37,14 +40,55 @@ public class cEnemyDeckModel : ScriptableObject {
 		m_bcModel.Init ();
 	}
 
-	public void Select( float setSecond , int[] PlayerSelectCard , int duelNumber ){
-		//int number = CardAI (PlayerSelectCard, duelNumber);
+	public void Select( float setSecond , int duelNumber ){
+		int selectNumber = m_selcModel[0].m_CardNumber;
 
 		do {
+			float random = Random.Range (0.0f, 1.0f);
+
+			if (random < m_LowProbability [duelNumber]) {
+				for (int i = 1; i < m_selcModel.Length; ++i) {
+					if (selectNumber > m_selcModel [i].m_CardNumber) {
+						selectNumber = m_selcModel [i].m_CardNumber;
+					}
+				}
+			} else if (random < m_MiddleProbability [duelNumber]) {
+				for (int i = 0; i < m_selcModel.Length; ++i) {
+					int number1 = i + 1;
+					if (number1 >= m_selcModel.Length) {
+						number1 -= m_selcModel.Length;
+					}
+					int number2 = i + 2;
+					if (number2 >= m_selcModel.Length) {
+						number2 -= m_selcModel.Length;
+					}
+
+					if (m_selcModel [number1].m_CardNumber > m_selcModel [i].m_CardNumber) {
+						if (m_selcModel [i].m_CardNumber > m_selcModel [number2].m_CardNumber) {
+							selectNumber = m_selcModel [i].m_CardNumber;
+							break;
+						}
+					}
+
+					if (m_selcModel [number2].m_CardNumber > m_selcModel [i].m_CardNumber) {
+						if (m_selcModel [i].m_CardNumber > m_selcModel [number1].m_CardNumber) {
+							selectNumber = m_selcModel [i].m_CardNumber;
+							break;
+						}
+					}
+				}
+			} else {
+				for (int i = 1; i < m_selcModel.Length; ++i) {
+					if (selectNumber < m_selcModel [i].m_CardNumber) {
+						selectNumber = m_selcModel [i].m_CardNumber;
+					}
+				}
+			}
+
 			m_SelectNumber = Random.Range (0, 3);
 		} while(m_selcModel [m_SelectNumber].GetUsed () == false);
 
-		m_Deck [m_SelectNumber] = true;
+		m_Deck [m_selcModel [m_SelectNumber].m_CardNumber] = true;
 
 		--m_DeckMax;
 
@@ -55,69 +99,81 @@ public class cEnemyDeckModel : ScriptableObject {
 	}
 
 	//カードのパターン調整
-	public int CardAI(int[] playerSelectCard , int duelNumber){
-
+	public void CardAI(int[] playerSelectCard, int duelNumber){
 		bool doubleMode = true;
-		int highMode = 0;
-		int noneMode = 0;
-		bool oneMode = false;
+		bool maxChangeMode = true;
 
-		ArrayList array = new ArrayList ();
-		int doubleNumber = 0;
-		int oneNumber = 0;
+		int enemyMin = m_selcModel [0].m_CardNumber;
+		int playerMax = 0;
+
+		for (int i = 1; i < m_selcModel.Length; ++i) {
+			if (enemyMin < m_selcModel [i].m_CardNumber) {
+				enemyMin = m_selcModel [i].m_CardNumber;
+			}
+		}
 
 		//プレイヤーカードをチェック
 		for (int i = 0; i < playerSelectCard.Length; ++i) {
 			if (playerSelectCard [i] > 1 && playerSelectCard [i] < 5) {
 				doubleMode &= true;
+				continue;
 			} else {
 				doubleMode = false;
 			}
 
-			if (playerSelectCard [i] > 10) {
-				++highMode;
-			}
-
-			if (playerSelectCard [i] == 1) {
-				oneMode = true;
+			if (playerSelectCard [i] > enemyMin) {
+				maxChangeMode = false;
 			}
 
 			if (playerSelectCard [i] == -1) {
-				++noneMode;
+				return;
 			}
 		}
 
-		//プレイヤーの手が最弱の場合、一定の確率で勝てるようにする
-		if (doubleMode == true) {
-			int random = Random.Range (0, 3 + ( duelNumber * 3 ));
-			if (random == 0) {
-				if (m_Deck [1] == false) {
-					array.Add (1);
-					++doubleNumber;
-				}
-				if (m_Deck [2] == false) {
-					array.Add (2);
-					++doubleNumber;
-				}
-				if (m_Deck [3] == false) {
-					array.Add (3);
-					++doubleNumber;
-				}
+		//プレイヤーの手が弱い場合、一定の確率で勝ち目を作る
 
-				if (doubleNumber > 0) {
-					int selectRandom = Random.Range (0, array.Count);
-					int selectNumber = (int)array [selectRandom];
-
-					return selectNumber;
-				}
+		int count;
+		for (count = playerMax - 1; count >= 0; --count) {
+			if (m_Deck [count] == false) {
+				break;
 			}
 		}
 
-		return 0;
+		if (count == 0) {
+			return;
+		}
+
+		if (maxChangeMode == true) {
+			if (doubleMode == true || duelNumber < 2) {
+				int random = Random.Range (0, 3);
+				if (random == 0) {
+					int change = Random.Range (0, m_selcModel.Length);
+
+					do {
+						int number = Random.Range (0, playerMax);
+
+						if (m_Deck [number] == true) {
+							continue;
+						}
+
+						int j;
+
+						for (j = 0; j < m_selcModel.Length; ++j) {
+							if (m_selcModel [j].m_CardNumber == number) {
+								break;
+							}
+						}
+						if (j == m_selcModel.Length) {
+							m_selcModel [change].m_CardNumber = number;
+						}
+					} while(m_selcModel [change].m_CardNumber >= playerMax);
+				}
+			}
+		}
 	}
 
 	//ランダムに３枚のカードを選ぶ
-	public void RandomSet(){
+	public void RandomSet(int[] playerSelectCard, int duelNumber){
 		m_bcModel.Init ();
 
 		int[] random = new int[m_selcModel.Length];
@@ -151,6 +207,9 @@ public class cEnemyDeckModel : ScriptableObject {
 					++setNumber;
 				}
 			}
+
+			CardAI (playerSelectCard, duelNumber);
+
 			m_TotalNumber = 0;
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].m_CardNumber = random [i];

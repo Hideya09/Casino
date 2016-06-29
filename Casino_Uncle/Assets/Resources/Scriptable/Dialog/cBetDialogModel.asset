@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 24844db6695a17248a8486089827bb59, type: 2}
   m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
   m_betMoneyModel: {fileID: 11400000, guid: b16362f020dee2541861b48abaf31c9c, type: 2}
+  m_tModel: {fileID: 11400000, guid: 7d59f145b7fc3a849bde35eccfe472fb, type: 2}
