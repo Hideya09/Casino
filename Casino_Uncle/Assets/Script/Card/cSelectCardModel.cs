@@ -169,12 +169,14 @@ public class cSelectCardModel : cCardModel {
 		if (m_TapFlag == true) {
 			m_OutLineMode = eOutLineMode.eOutLineMode_None;
 
-			if (m_Line < m_Position.y) {
-				m_SelectFlag = true;
-			} else {
-				m_Position = m_BasePosition;
-				m_BufPosition = m_Position;
-			}
+			m_SelectFlag = true;
+
+			//if (m_Line < m_Position.y) {
+			//	m_SelectFlag = true;
+			//} else {
+			//	m_Position = m_BasePosition;
+			//	m_BufPosition = m_Position;
+			//}
 		} else if (m_MoveFlag == true && m_UsedFlag == true && m_FixedFlag == true) {
 			m_TapFlag = true;
 
@@ -231,18 +233,18 @@ public class cSelectCardModel : cCardModel {
 
 	//カードの位置をマウスと連動させる
 	public void SelectCard( Vector2 position ){
-		if (m_TapFlag == true) {
-
-			m_Position += ( position - m_BufPosition );
-
-			m_BufPosition = position;
-
-			if (m_Line < m_Position.y) {
-				m_OutLineMode = eOutLineMode.eOutLineMode_Yellow;
-			} else {
-				m_OutLineMode = eOutLineMode.eOutLineMode_Blue;
-			}
-		}
+		//if (m_TapFlag == true) {
+		//
+		//	m_Position += ( position - m_BufPosition );
+		//
+		//	m_BufPosition = position;
+		//
+		//	if (m_Line < m_Position.y) {
+		//		m_OutLineMode = eOutLineMode.eOutLineMode_Yellow;
+		//	} else {
+		//		m_OutLineMode = eOutLineMode.eOutLineMode_Blue;
+		//	}
+		//}
 	}
 
 	public bool GetTap(){

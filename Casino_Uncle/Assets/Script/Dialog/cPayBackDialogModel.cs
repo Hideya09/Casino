@@ -46,7 +46,7 @@ public class cPayBackDialogModel : cDialogModel {
 			break;
 		case ePayBackState.ePayBackState_Money:
 
-			if (m_GameData.PriseReturn () == true) {
+			if (m_GameData.PriseReturn ( m_GameData.m_WinLose ) == true) {
 				m_State = ePayBackState.ePayBackState_Main;
 				break;
 			} else if (m_buttonModel [0].GetTouch ()) {

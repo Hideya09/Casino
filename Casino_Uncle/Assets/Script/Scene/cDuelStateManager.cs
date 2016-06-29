@@ -157,6 +157,8 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public void DeleteText(){
+		m_gData.m_WinLose = m_Win;
+
 		m_Win = false;
 
 		m_winModel.Init ();
@@ -190,6 +192,8 @@ public class cDuelStateManager : ScriptableObject {
 		m_dModel.MoveSet ();
 		m_hpPManager.MoveSet ();
 		m_hpEManager.FadeInit ();
+
+		m_gData.AddWin ();
 
 		m_Win = false;
 
@@ -503,7 +507,6 @@ public class cDuelStateManager : ScriptableObject {
 
 		m_fadeHModel.FadeExec ();
 		if (m_loseModel.GetTapFlag () == true && m_fadeHModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
-			m_gData.InitWin ();
 			m_dModel.BackSet ();
 			m_hpPManager.BackSet ();
 			m_hpEManager.BackSet ();
