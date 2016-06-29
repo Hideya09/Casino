@@ -28,6 +28,7 @@ public class cWinTextView : MonoBehaviour {
 			m_Image.enabled = true;
 
 			m_Image.sprite = m_Sprite [m_GameData.GetStartWin ()];
+			m_Image.SetNativeSize ();
 
 			if (m_dModel != null) {
 				m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);

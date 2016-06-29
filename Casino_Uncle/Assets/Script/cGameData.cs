@@ -47,60 +47,58 @@ public class cGameData : ScriptableObject {
 		}
 
 		if (m_DoubleFlag == true) {
-			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak] * 2));
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		} else {
-			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak]));
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1]));
 		}
 	}
 
 	public int GetPayBack( int winningStreak ){
-		if (winningStreak < 0 || winningStreak > 4) {
+		if (winningStreak <= 0 || winningStreak > 5) {
 			return 0;
 		}
 
 		if (m_DoubleFlag == true) {
-			return Mathf.RoundToInt ((m_Bet * m_PayBack [winningStreak] * 2));
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [winningStreak - 1] * 2));
 		} else {
-			return Mathf.RoundToInt ((m_Bet * m_PayBack [winningStreak]));
+			return Mathf.RoundToInt ((m_Bet * m_PayBack [winningStreak - 1]));
 		}
 	}
 
 	public void AddWin(){
 		++m_WinningStreak;
 		if (m_DoubleFlag == true) {
-			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak] * 2));
+			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		} else {
-			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak]));
+			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1]));
 		}
 	}
 
 	public void SubWin(){
 		--m_WinningStreak;
 
-		if (m_WinningStreak < 0) {
+		if (m_WinningStreak <= 0) {
 			m_Prise = 0;
-		}
-
-		if (m_DoubleFlag == true) {
-			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak] * 2));
+		} else if (m_DoubleFlag == true) {
+			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1] * 2));
 		} else {
-			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak]));
+			m_Prise = Mathf.RoundToInt ((m_Bet * m_PayBack [m_WinningStreak - 1]));
 		}
 	}
 
 	public int GetWin(){
-		if (m_WinLose == true) {
-			return m_WinningStreak;
-		} else {
-			return m_WinningStreak + 5;
-		}
+		return m_WinningStreak;
 	}
 
 	public void AddStartWin(){
 		m_DuelStartWinningStreak = m_WinningStreak;
 	}
 	public int GetStartWin(){
-		return m_DuelStartWinningStreak;
+		if (m_WinLose == true) {
+			return m_DuelStartWinningStreak;
+		} else {
+			return m_DuelStartWinningStreak + 5;
+		}
 	}
 
 	public void InitWin(){

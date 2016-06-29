@@ -193,7 +193,7 @@ public class cDuelStateManager : ScriptableObject {
 		m_hpPManager.MoveSet ();
 		m_hpEManager.FadeInit ();
 
-		m_gData.AddWin ();
+		m_gData.AddStartWin ();
 
 		m_Win = false;
 
@@ -495,6 +495,7 @@ public class cDuelStateManager : ScriptableObject {
 				m_State = eDuelState.eDuelState_End;
 
 				m_gData.AddWin ();
+
 				m_Win = true;
 			}
 
@@ -540,9 +541,6 @@ public class cDuelStateManager : ScriptableObject {
 		endFlag &= m_hpPManager.Back (m_FadeTime);
 		endFlag &= m_hpEManager.Back (m_FadeTime);
 
-		if (endFlag == true) {
-			m_gData.AddStartWin ();
-		}
 		return endFlag;
 	}
 
