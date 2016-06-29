@@ -14,6 +14,12 @@ public class cEnemyDeckView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		m_Text.text = m_edModel.m_TotalNumber.ToString ();
+		if (m_edModel.m_TotalNumber != 0) {
+			m_Text.enabled = true;
+
+			m_Text.text = m_edModel.m_TotalNumber.ToString ();
+		} else {
+			m_Text.enabled = false;
+		}
 	}
 }

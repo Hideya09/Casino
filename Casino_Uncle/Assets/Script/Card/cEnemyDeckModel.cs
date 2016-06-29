@@ -33,6 +33,8 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		m_SelectNumber = -1;
 
+		m_TotalNumber = 0;
+
 		m_selcModel.Initialize ();
 	}
 
@@ -41,10 +43,10 @@ public class cEnemyDeckModel : ScriptableObject {
 	}
 
 	public void Select( float setSecond , int duelNumber ){
-		int selectNumber = m_selcModel[0].m_CardNumber;
-
 		do {
 			float random = Random.Range (0.0f, 1.0f);
+
+			int selectNumber = m_selcModel[0].m_CardNumber;
 
 			if (random < m_LowProbability [duelNumber]) {
 				for (int i = 1; i < m_selcModel.Length; ++i) {
@@ -85,7 +87,7 @@ public class cEnemyDeckModel : ScriptableObject {
 				}
 			}
 
-			m_SelectNumber = Random.Range (0, 3);
+			m_SelectNumber = selectNumber;
 		} while(m_selcModel [m_SelectNumber].GetUsed () == false);
 
 		m_Deck [m_selcModel [m_SelectNumber].m_CardNumber] = true;
@@ -107,13 +109,17 @@ public class cEnemyDeckModel : ScriptableObject {
 		int playerMax = 0;
 
 		for (int i = 1; i < m_selcModel.Length; ++i) {
-			if (enemyMin < m_selcModel [i].m_CardNumber) {
+			if (enemyMin > m_selcModel [i].m_CardNumber) {
 				enemyMin = m_selcModel [i].m_CardNumber;
 			}
 		}
 
 		//プレイヤーカードをチェック
 		for (int i = 0; i < playerSelectCard.Length; ++i) {
+			if (playerMax < playerSelectCard [i]) {
+				playerMax = playerSelectCard [i];
+			}
+
 			if (playerSelectCard [i] > 1 && playerSelectCard [i] < 5) {
 				doubleMode &= true;
 				continue;
@@ -355,6 +361,8 @@ public class cEnemyDeckModel : ScriptableObject {
 		bool endFlag = true;
 
 		if (all == true) {
+			m_TotalNumber = 0;
+
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				endFlag &= m_selcModel [i].Back (m_FadeTime, true);
 			}
