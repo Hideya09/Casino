@@ -254,6 +254,8 @@ public class cEnemyDeckModel : ScriptableObject {
 	public bool EditCard(){
 		m_bcModel.Init ();
 
+		m_TotalNumber = 0;
+
 		m_selcModel [m_SelectNumber].m_CardNumber = cCardSpriteManager.Back;
 
 		if (DeckCheck () == true) {
