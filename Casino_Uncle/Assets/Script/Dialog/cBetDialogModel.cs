@@ -45,9 +45,11 @@ public class cBetDialogModel : cDialogModel {
 		case eBetState.eBetState_Bet:
 			if (m_betMoneyModel.GetNumber () >= 100 && m_betMoneyModel.GetNumber () <= m_NumberData [0]) {
 				m_State = eBetState.eBetState_Main;
+			} else if (m_betMoneyModel.GetNumber () <= 0) {
+				m_tModel.TableIn ();
+			} else {
+				m_tModel.NoncomformityIn ();
 			}
-
-			m_tModel.FadeIn ();
 
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
@@ -66,7 +68,7 @@ public class cBetDialogModel : cDialogModel {
 			}
 			break;
 		case eBetState.eBetState_Main:
-			m_tModel.FadeOut ();
+			m_tModel.WarningIn ();
 
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();

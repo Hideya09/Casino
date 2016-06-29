@@ -140,6 +140,8 @@ public class cDuelStateManager : ScriptableObject {
 
 	public void Init(){
 		m_dModel.Init ();
+		m_edModel.JokerInit ();
+		m_edModel.Init ();
 		m_hpPManager.Init ();
 		m_hpEManager.Init ();
 		m_gData.InitWin ();

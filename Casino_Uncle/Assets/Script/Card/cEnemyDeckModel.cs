@@ -5,6 +5,8 @@ public class cEnemyDeckModel : ScriptableObject {
 
 	private bool[] m_Deck;
 
+	private bool m_Joker;
+
 	private int m_DeckMax;
 
 	public cSelectCardModel[] m_selcModel;
@@ -27,6 +29,10 @@ public class cEnemyDeckModel : ScriptableObject {
 			m_Deck [i] = false;
 		}
 
+		if (m_Joker == true) {
+			m_Deck [0] = true;
+		}
+
 		m_bcModel.Init ();
 
 		m_DeckMax = 14;
@@ -35,7 +41,13 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		m_TotalNumber = 0;
 
-		m_selcModel.Initialize ();
+		for( int i = 0 ; i < m_selcModel.Length ; ++i ){
+			m_selcModel [i].CardInit ();
+		}
+	}
+
+	public void JokerInit(){
+		m_Joker = false;
 	}
 
 	public void Hind(){
@@ -99,6 +111,10 @@ public class cEnemyDeckModel : ScriptableObject {
 		} while(m_selcModel [m_SelectNumber].GetUsed () == false);
 
 		m_Deck [m_selcModel [m_SelectNumber].m_CardNumber] = true;
+
+		if (m_selcModel [m_SelectNumber].m_CardNumber == 0) {
+			m_Joker = true;
+		}
 
 		--m_DeckMax;
 

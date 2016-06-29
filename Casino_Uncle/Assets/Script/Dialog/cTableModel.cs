@@ -7,19 +7,25 @@ public class cTableModel : ScriptableObject {
 
 	public float m_AddFade;
 
-	private bool m_TableDrawFlag;
+	public enum eDrawType{
+		eDrawType_Table,
+		eDrawType_Warning,
+		eDrawType_Noncomformity
+	};
+
+	private eDrawType m_TableDrawType;
 
 	public void Init(){
 		m_Fade = 1.0f;
-		m_TableDrawFlag = true;
+		m_TableDrawType = eDrawType.eDrawType_Table;
 	}
 
-	public void FadeIn(){
-		if (m_TableDrawFlag == false) {
+	public void TableIn(){
+		if (m_TableDrawType != eDrawType.eDrawType_Table) {
 			m_Fade -= (Time.deltaTime * m_AddFade);
 			if (m_Fade <= 0.0f) {
 				m_Fade = 0.0f;
-				m_TableDrawFlag = true;
+				m_TableDrawType = eDrawType.eDrawType_Table;
 			}
 		} else {
 			m_Fade += (Time.deltaTime * m_AddFade);
@@ -29,12 +35,27 @@ public class cTableModel : ScriptableObject {
 		}
 	}
 
-	public void FadeOut(){
-		if (m_TableDrawFlag == true) {
+	public void WarningIn(){
+		if (m_TableDrawType != eDrawType.eDrawType_Warning) {
 			m_Fade -= (Time.deltaTime * m_AddFade);
 			if (m_Fade <= 0.0f) {
 				m_Fade = 0.0f;
-				m_TableDrawFlag = false;
+				m_TableDrawType = eDrawType.eDrawType_Warning;
+			}
+		} else {
+			m_Fade += (Time.deltaTime * m_AddFade);
+			if (m_Fade >= 1.0f) {
+				m_Fade = 1.0f;
+			}
+		}
+	}
+
+	public void NoncomformityIn(){
+		if (m_TableDrawType != eDrawType.eDrawType_Noncomformity) {
+			m_Fade -= (Time.deltaTime * m_AddFade);
+			if (m_Fade <= 0.0f) {
+				m_Fade = 0.0f;
+				m_TableDrawType = eDrawType.eDrawType_Noncomformity;
 			}
 		} else {
 			m_Fade += (Time.deltaTime * m_AddFade);
@@ -48,7 +69,7 @@ public class cTableModel : ScriptableObject {
 		return m_Fade;
 	}
 
-	public bool GetDrawFlag(){
-		return m_TableDrawFlag;
+	public eDrawType GetDrawFlag(){
+		return m_TableDrawType;
 	}
 }
