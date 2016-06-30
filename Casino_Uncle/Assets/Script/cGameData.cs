@@ -41,6 +41,14 @@ public class cGameData : ScriptableObject {
 		m_BufBet = m_Bet;
 	}
 
+	public int GetBet(){
+		if (m_Bet > m_Money) {
+			m_Bet = 100;
+		}
+
+		return m_Bet;
+	}
+
 	public int GetPayBack(){
 		if (m_WinningStreak < 0) {
 			return 0;
@@ -124,6 +132,8 @@ public class cGameData : ScriptableObject {
 
 		m_MaxMoney = int.Parse (moneyData[0]);
 		m_Money = int.Parse (moneyData[1]);
+
+		m_Bet = 100;
 	}
 
 	public void Save(){

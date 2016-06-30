@@ -15,5 +15,10 @@ public class cBetMoneyView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		m_Input.interactable = m_betMoneyModel.GetIput();
+
+		int number = m_betMoneyModel.GetStartText ();
+		if (number != -1) {
+			m_Input.text = number.ToString ();
+		}
 	}
 }

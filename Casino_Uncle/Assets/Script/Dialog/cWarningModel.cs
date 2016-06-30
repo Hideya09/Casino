@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cTableModel : ScriptableObject {
+public class cWarningModel : ScriptableObject {
 
 	private float m_Fade;
 
 	public float m_AddFade;
 
 	public enum eDrawType{
-		eDrawType_Table,
 		eDrawType_Warning,
 		eDrawType_Noncomformity
 	};
@@ -17,22 +16,7 @@ public class cTableModel : ScriptableObject {
 
 	public void Init(){
 		m_Fade = 1.0f;
-		m_TableDrawType = eDrawType.eDrawType_Table;
-	}
-
-	public void TableIn(){
-		if (m_TableDrawType != eDrawType.eDrawType_Table) {
-			m_Fade -= (Time.deltaTime * m_AddFade);
-			if (m_Fade <= 0.0f) {
-				m_Fade = 0.0f;
-				m_TableDrawType = eDrawType.eDrawType_Table;
-			}
-		} else {
-			m_Fade += (Time.deltaTime * m_AddFade);
-			if (m_Fade >= 1.0f) {
-				m_Fade = 1.0f;
-			}
-		}
+		m_TableDrawType = eDrawType.eDrawType_Warning;
 	}
 
 	public void WarningIn(){

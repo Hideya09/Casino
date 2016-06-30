@@ -16,7 +16,7 @@ public class cBetDialogModel : cDialogModel {
 
 	public cBetMoneyModel m_betMoneyModel;
 
-	public cTableModel m_tModel;
+	public cWarningModel m_wModel;
 
 	private eBetState m_State;
 
@@ -44,11 +44,11 @@ public class cBetDialogModel : cDialogModel {
 			break;
 		case eBetState.eBetState_Bet:
 			if (m_betMoneyModel.GetNumber () >= 100 && m_betMoneyModel.GetNumber () <= m_NumberData [0]) {
+				m_GameData.MoneyBet (m_betMoneyModel.GetNumber ());
+				m_NumberData [1] = m_GameData.GetPayBack (5);
 				m_State = eBetState.eBetState_Main;
-			} else if (m_betMoneyModel.GetNumber () <= 0) {
-				m_tModel.TableIn ();
-			} else {
-				m_tModel.NoncomformityIn ();
+			}else {
+				m_wModel.NoncomformityIn ();
 			}
 
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
@@ -68,7 +68,7 @@ public class cBetDialogModel : cDialogModel {
 			}
 			break;
 		case eBetState.eBetState_Main:
-			m_tModel.WarningIn ();
+			m_wModel.WarningIn ();
 
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
@@ -95,6 +95,8 @@ public class cBetDialogModel : cDialogModel {
 
 			if (m_betMoneyModel.GetNumber () < 100 || m_betMoneyModel.GetNumber () > m_NumberData [0]) {
 				m_State = eBetState.eBetState_Bet;
+				m_GameData.MoneyBet (0);
+				m_NumberData [1] = m_GameData.GetPayBack (5);
 			}
 
 			break;
@@ -139,14 +141,17 @@ public class cBetDialogModel : cDialogModel {
 			m_buttonModel [i].Init ();
 		}
 
-		m_NumberData = new int[1];
+		m_betMoneyModel.SetNumber (m_GameData.GetBet ());
+
+		m_NumberData = new int[2];
 		m_NumberData [0] = m_GameData.m_Money;
+		m_NumberData [1] = m_GameData.GetPayBack (5);
 
 		m_NumberData2 = new float[5];
 		for (int i = 0; i < m_NumberData2.Length; ++i) {
 			m_NumberData2 [i] = m_GameData.m_PayBack [i];
 		}
 
-		m_tModel.Init ();
+		m_wModel.Init ();
 	}
 }

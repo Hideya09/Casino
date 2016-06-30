@@ -6,6 +6,9 @@ public class cBetMoneyModel : ScriptableObject {
 
 	private bool m_InputFlag;
 
+	private bool m_TextSetFlag;
+	private int m_SetNumber;
+
 	void OnEnable(){
 		Init ();
 	}
@@ -13,6 +16,23 @@ public class cBetMoneyModel : ScriptableObject {
 	public void Init(){
 		m_Number = 0;
 		m_InputFlag = true;
+
+		m_TextSetFlag = false;
+		m_SetNumber = 100;
+	}
+
+	public void SetNumber( int setNumber ){
+		m_SetNumber = setNumber;
+		m_TextSetFlag = true;
+	}
+
+	public int GetStartText(){
+		if (m_TextSetFlag == true) {
+			m_TextSetFlag = false;
+			return m_SetNumber;
+		}
+
+		return -1;
 	}
 
 	public void SetInput(bool setInput){
