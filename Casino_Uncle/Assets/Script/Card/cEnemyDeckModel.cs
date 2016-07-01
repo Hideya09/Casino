@@ -61,14 +61,19 @@ public class cEnemyDeckModel : ScriptableObject {
 			//どのカードを選ぶかの乱数生成
 			float random = Random.Range (0.0f, 1.0f);
 
-			selectNumber = m_selcModel[0].m_CardNumber;
-
 			m_SelectNumber = 0;
 
 			if (random < m_LowProbability [duelNumber]) {
 				//一番小さいカードを出す
-				for (int i = 1; i < m_selcModel.Length; ++i) {
+				selectNumber = 13;
+				for (int i = 0; i < m_selcModel.Length; ++i) {
 					if (selectNumber > m_selcModel [i].m_CardNumber) {
+
+						if( duelNumber == 0 ){
+							if( m_selcModel [i].m_CardNumber  <= 1 ){
+								continue;
+							}
+						}
 						m_SelectNumber = i;
 
 						selectNumber = m_selcModel [i].m_CardNumber;
@@ -77,6 +82,12 @@ public class cEnemyDeckModel : ScriptableObject {
 			} else if (random < m_MiddleProbability [duelNumber]) {
 				//中くらいのカードを出す
 				for (int i = 0; i < m_selcModel.Length; ++i) {
+					if( duelNumber == 0 ){
+						if( m_selcModel [i].m_CardNumber  <= 1 ){
+							continue;
+						}
+					}
+
 					m_SelectNumber = i;
 
 					int number1 = i + 1;
@@ -90,21 +101,20 @@ public class cEnemyDeckModel : ScriptableObject {
 
 					if (m_selcModel [number1].m_CardNumber > m_selcModel [i].m_CardNumber) {
 						if (m_selcModel [i].m_CardNumber > m_selcModel [number2].m_CardNumber) {
-							selectNumber = m_selcModel [i].m_CardNumber;
 							break;
 						}
 					}
 
 					if (m_selcModel [number2].m_CardNumber > m_selcModel [i].m_CardNumber) {
 						if (m_selcModel [i].m_CardNumber > m_selcModel [number1].m_CardNumber) {
-							selectNumber = m_selcModel [i].m_CardNumber;
 							break;
 						}
 					}
 				}
 			} else {
 				//一番強いカードを出す
-				for (int i = 1; i < m_selcModel.Length; ++i) {
+				selectNumber = 0; 
+				for (int i = 0; i < m_selcModel.Length; ++i) {
 					if (selectNumber < m_selcModel [i].m_CardNumber) {
 						m_SelectNumber = i;
 
