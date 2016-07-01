@@ -8,6 +8,7 @@ public class cPriseView : MonoBehaviour {
 	public Text m_Text;
 
 	private Color m_BaseColor;
+	public Color m_ChangeColor;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +20,7 @@ public class cPriseView : MonoBehaviour {
 		if (m_GameData.m_WinLose == true) {
 			m_Text.color = m_BaseColor;
 		} else {
-			m_Text.color = new Color (1.0f, 0.0f, 0.0f, 1.0f);
+			m_Text.color = m_ChangeColor;
 		}
 	}
 }

@@ -354,6 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GameData: {fileID: 11400000, guid: 887235cabe158a443bd2103b6f137673, type: 2}
   m_Text: {fileID: 11455020}
+  m_ChangeColor: {r: 0.7490196, g: 0, b: 0, a: 1}
 --- !u!114 &11450896
 MonoBehaviour:
   m_ObjectHideFlags: 1
