@@ -10,12 +10,15 @@ public class cEnemyModel : ScriptableObject {
 
 	public float m_Runble;
 
+	//出現時用
 	private float m_Fade;
 	private float m_Black;
 
+	//出現演出のスピード
 	public float m_FadeSpeed;
 	public float m_BlackSpeed;
 
+	//揺れるエフェクト用
 	private float m_RunbleCount;
 	private float m_RunbleMaxPower;
 	private float m_RunblePower;
@@ -44,6 +47,7 @@ public class cEnemyModel : ScriptableObject {
 		m_Damage.EffectStart ();
 	}
 
+	//ダメージを受けた際のエフェクト
 	public void Runble(){
 		if (m_RunbleMaxPower > 0.0f) {
 			m_RunbleCount += Time.deltaTime;
@@ -93,6 +97,7 @@ public class cEnemyModel : ScriptableObject {
 		}
 	}
 
+	//ダメージ演出が終わった時の処理
 	public void StopRunble(){
 		m_Position = m_BasePosition;
 
@@ -110,6 +115,7 @@ public class cEnemyModel : ScriptableObject {
 		return m_Black;
 	}
 
+	//出現時の処理
 	public bool Start(){
 		if (m_Fade == 0.0f) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_In);
@@ -128,6 +134,7 @@ public class cEnemyModel : ScriptableObject {
 		return false;
 	}
 
+	//退去時の処理
 	public bool End(){
 		m_Black -= Time.deltaTime * m_FadeSpeed;
 		if (m_Black <= 0.5f) {

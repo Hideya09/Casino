@@ -5,6 +5,7 @@ using System.Collections;
 public class cWarningView : MonoBehaviour {
 	public cWarningModel m_wModel;
 
+	//描画するもの
 	public Sprite m_Warning;
 	public Sprite m_Noncomformity;
 
@@ -17,6 +18,7 @@ public class cWarningView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//描画の切り替え
 		if (m_wModel.GetDrawFlag () == cWarningModel.eDrawType.eDrawType_Warning) {
 			m_Image.sprite = m_Warning;
 		} else {

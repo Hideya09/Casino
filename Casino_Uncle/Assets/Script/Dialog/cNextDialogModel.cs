@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cNextDialogModel : cDialogModel {
 
+	//ダイアログ内のステート
 	private enum eNextState{
 		eNextState_Start,
 		eNextState_Blink,
@@ -16,6 +17,7 @@ public class cNextDialogModel : cDialogModel {
 
 	private eNextState m_State;
 
+	//次に移動するシーン
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
@@ -37,9 +39,11 @@ public class cNextDialogModel : cDialogModel {
 			}
 			break;
 		case eNextState.eNextState_Main:
+			//ボタンが押されたか調べる
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
+					//ゲーム内ステートをデュエルに移動
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Duel;
 
 					m_State = eNextState.eNextState_End;
@@ -48,6 +52,7 @@ public class cNextDialogModel : cDialogModel {
 
 					break;
 				} else if (number == 2) {
+					//ゲーム内ステートを精算に移動
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Pay;
 
 					m_State = eNextState.eNextState_End;
@@ -85,6 +90,7 @@ public class cNextDialogModel : cDialogModel {
 			m_buttonModel [i].Init ();
 		}
 
+		//続行かの判断において必要な情報をセット
 		m_NumberData = new int[5];
 		m_NumberData [0] = m_GameData.GetWin ();
 		m_NumberData [1] = m_GameData.GetCard ();

@@ -15,6 +15,8 @@ public class cBlinkSpriteView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//画像を明滅させる
+
 		Color color = m_Image.color;
 		color.a = m_blinkModel.m_Alpha;
 		m_Image.color = color;

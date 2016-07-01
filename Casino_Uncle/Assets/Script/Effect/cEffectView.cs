@@ -18,6 +18,7 @@ public class cEffectView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//エフェクトが出てないときにフラグが立ったら、エフェクトを開始させる
 		if (m_effectModel.GetEffectOn () == true && m_PlayOnFlag == false) {
 			m_Particle.Play ();
 			m_PlayOnFlag = true;

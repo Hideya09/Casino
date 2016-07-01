@@ -13,6 +13,7 @@ public class cCheckBoxView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//押されるごとに描画を変える
 		if (m_ButtonModel.GetSelect () != 0) {
 			m_Sprite.enabled = true;
 		} else {

@@ -17,6 +17,8 @@ public class cHitPointView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//ヒットポイントの画像は二つある
+
 		transform.localPosition = m_hpModel.GetPosition ();
 
 		m_Image.color = new Color (m_hpModel.m_Black, m_hpModel.m_Black, m_hpModel.m_Black, m_hpModel.m_Color);

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cShowDialogModel : cDialogModel {
 
+	//ダイアログのステート
 	private enum eShowState{
 		eShowState_Start,
 		eShowState_Blink,
@@ -16,6 +17,7 @@ public class cShowDialogModel : cDialogModel {
 
 	private eShowState m_State;
 
+	//次に移動するシーン
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
@@ -23,6 +25,7 @@ public class cShowDialogModel : cDialogModel {
 		case eShowState.eShowState_Start:
 			if (StartDown () == true) {
 				if (m_GameData.m_Money < 100) {
+					//ゲームオーバー時のみ
 					m_State = eShowState.eShowState_Blink;
 				} else {
 					m_State = eShowState.eShowState_Main;
@@ -33,6 +36,7 @@ public class cShowDialogModel : cDialogModel {
 			}
 			break;
 		case eShowState.eShowState_Blink:
+			//ゲームオーバー文字を明滅
 			if (m_blinkModel.Blink () == true) {
 				m_State = eShowState.eShowState_Main;
 				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
@@ -42,6 +46,7 @@ public class cShowDialogModel : cDialogModel {
 			}
 			break;
 		case eShowState.eShowState_Main:
+			//ボタンが押されたらゲーム内ステートをフェードアウトに
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
@@ -79,6 +84,7 @@ public class cShowDialogModel : cDialogModel {
 			m_buttonModel [i].Init ();
 		}
 
+		//現在の所持金と戦果をセットする
 		m_NumberData = new int[2];
 		m_NumberData [0] = m_GameData.m_Money;
 		m_NumberData [1] = m_GameData.GetProfit ();

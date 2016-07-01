@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cTitleScene : cSceneBase {
 
+	//シーン内のステート
 	public enum eTitleSceneList{
 		eTitleSceneList_Init,
 		eTitleSceneList_Start,
@@ -49,6 +50,7 @@ public class cTitleScene : cSceneBase {
 			m_State = eTitleSceneList.eTitleSceneList_Start;
 			break;
 		case eTitleSceneList.eTitleSceneList_Start:
+			//起動時のみの開始処理
 			if (m_startModel.StartExec () == true) {
 				m_State = eTitleSceneList.eTitleSceneList_Main;
 				for (int i = 0; i < m_buttonModel.Length; ++i) {
@@ -60,6 +62,7 @@ public class cTitleScene : cSceneBase {
 			}
 			break;
 		case eTitleSceneList.eTitleSceneList_FadeIn:
+			//起動時以外でタイトルに来たときはフェード
 			m_fadeModel.FadeExec ();
 			m_blinkModel.Init ();
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeInStop) {
@@ -76,9 +79,11 @@ public class cTitleScene : cSceneBase {
 		case eTitleSceneList.eTitleSceneList_Main:
 			m_fadeHalfModel.FadeExec ();
 
+			//ボタンが押されたかを調べ宇r
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int button = m_buttonModel [i].GetSelect ();
 				if (button == 1) {
+					//フェードアウトステートに移動
 					m_State = eTitleSceneList.eTitleSceneList_FadeOut;
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Start);
@@ -91,6 +96,7 @@ public class cTitleScene : cSceneBase {
 				} else if (button == 2) {
 					m_fadeHalfModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 
+					//ダイアログ表示ステートに移動
 					m_State = eTitleSceneList.eTitleSceneList_Dialog;
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
@@ -104,6 +110,8 @@ public class cTitleScene : cSceneBase {
 			}
 			break;
 		case eTitleSceneList.eTitleSceneList_Dialog:
+			//ゲーム終了ダイアログを表示
+
 			m_fadeHalfModel.FadeExec ();
 
 			m_State = m_dialogModel.TitleDialogExec ();
@@ -118,6 +126,8 @@ public class cTitleScene : cSceneBase {
 			}
 			break;
 		case eTitleSceneList.eTitleSceneList_FadeOut:
+			//フェードアウト
+
 			m_blinkModel.Blink ();
 
 			m_fadeModel.FadeExec ();
@@ -126,6 +136,7 @@ public class cTitleScene : cSceneBase {
 
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 				m_State = eTitleSceneList.eTitleSceneList_FadeIn;
+				//シーンを切り替える
 				return cGameSceneManager.eGameScene.GameScene_Game;
 			}
 			break;
@@ -136,6 +147,7 @@ public class cTitleScene : cSceneBase {
 
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
 				m_State = eTitleSceneList.eTitleSceneList_FadeIn;
+				//ゲームを終了させる
 				Application.Quit ();
 			}
 			break;

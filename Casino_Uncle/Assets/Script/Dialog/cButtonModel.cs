@@ -34,18 +34,21 @@ public class cButtonModel : ScriptableObject {
 		m_Start = false;
 	}
 
+	//ボタンの入力受付中の時タップされたとする
 	public void TapButton(){
 		if (m_Start == true) {
 			m_TapFlag = true;
 		}
 	}
 
+	//タップされていない
 	public void UnTapButton(){
 		if (m_Start == true) {
 			m_TapFlag = false;
 		}
 	}
 
+	//ボタンが押された
 	public void SelectButton(){
 		if (m_Start == true && m_TapFlag == true) {
 			m_Select ^= true;
@@ -56,6 +59,7 @@ public class cButtonModel : ScriptableObject {
 		return m_Touch;
 	}
 
+	//画面がタッチされた
 	public void Touch(){
 		m_Touch = true;
 	}
@@ -67,6 +71,7 @@ public class cButtonModel : ScriptableObject {
 		return m_TapFlag;
 	}
 
+	//ボタンが押された際に自身に設定された値を返す
 	public int GetSelect(){
 		if (m_Select == true) {
 			return m_ButtonNumber;

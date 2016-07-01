@@ -23,12 +23,14 @@ public class cDialogView : MonoBehaviour {
 
 		transform.rotation = Quaternion.AngleAxis (m_dialogModel.GetRotation (), Vector3.forward);
 
+		//数値情報を取得しテキストとして表示させる
 		int[] data = m_dialogModel.GetNumberData ();
 
 		float[] data2 = m_dialogModel.GetNumberData2 ();
 
 		for (int i = 0; i < m_text.Length && i < data.Length; ++i) {
 			if (m_MoneyFlag[i] == true) {
+				//お金を表示する際の処理
 				char[] text = data [i].ToString ("C0", new System.Globalization.CultureInfo ("ja-jp")).ToCharArray ();
 				if (data [i] < 0) {
 					text[0] = '¥';

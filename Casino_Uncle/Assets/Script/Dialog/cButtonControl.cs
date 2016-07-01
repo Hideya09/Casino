@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cButtonControl : MonoBehaviour {
 
+	//マウスと当たっているかのフラグ
 	private bool m_HitFlag;
 
 	public cButtonModel m_buttonModel;
@@ -14,6 +15,9 @@ public class cButtonControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//入力処理
+
+		//ボタンが押された時と離れた時
 		if (m_HitFlag == true) {
 			if (Input.GetMouseButtonDown (0)) {
 				m_buttonModel.TapButton ();
@@ -27,6 +31,7 @@ public class cButtonControl : MonoBehaviour {
 			m_buttonModel.UnTapButton ();
 		}
 
+		//画面がタッチされたとき
 		if (Input.GetMouseButtonUp (0)) {
 			m_buttonModel.Touch ();
 		} else {

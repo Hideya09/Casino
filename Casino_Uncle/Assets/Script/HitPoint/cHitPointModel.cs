@@ -15,9 +15,9 @@ public class cHitPointModel : ScriptableObject {
 	public float m_EndCount;
 
 	private float m_Count;
-	public float m_MaxCount = 1.5f;
+	public float m_MaxCount;
 
-	public float m_Speed = 3.0f;
+	public float m_Speed;
 
 	public float m_Color{ get; private set; }
 	public float m_Fade{ get; private set; }
@@ -44,6 +44,7 @@ public class cHitPointModel : ScriptableObject {
 		m_AddFlag = false;
 	}
 
+	//特殊入場時用
 	public void FadeInit(){
 		m_Fade = 0.0f;
 		m_Color = 0.0f;
@@ -52,7 +53,10 @@ public class cHitPointModel : ScriptableObject {
 		m_Position = m_BasePosition;
 	}
 
+	//HP消失エフェクト
 	public bool CutBack(){
+
+		//何回か点滅させて消す
 
 		m_Count += Time.deltaTime;
 
@@ -78,6 +82,11 @@ public class cHitPointModel : ScriptableObject {
 		return false;
 	}
 
+	public Vector3 GetPosition(){
+		return m_Position;
+	}
+
+	//以下入退場処理
 	public void MoveSet(){
 		m_Movement = m_ReturnPosition - m_StartPosition;
 
@@ -171,10 +180,4 @@ public class cHitPointModel : ScriptableObject {
 
 		return false;
 	}
-
-	public Vector3 GetPosition(){
-		return m_Position;
-	}
-
-
 }

@@ -15,6 +15,7 @@ public class cBetMoneyControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//入力された文字をモデルに渡す
 		m_betMoneyModel.SetString (m_BetText.text);
 	}
 }

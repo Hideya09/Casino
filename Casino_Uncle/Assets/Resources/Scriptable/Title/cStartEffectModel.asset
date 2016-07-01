@@ -11,3 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4820a0fb00da15840b23881b63d6e6bb, type: 3}
   m_Name: cStartEffectModel
   m_EditorClassIdentifier: 
+  m_UpSpeed: 0.7
+  m_WaitTime: 1.2
+  m_DownSpeed: 1

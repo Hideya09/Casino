@@ -4,28 +4,40 @@ using System.IO;
 using System.Collections.Generic;
 
 public class cGameData : ScriptableObject {
+	//連勝数
 	private int m_WinningStreak;
 	private int m_DuelStartWinningStreak;
 
+	//倍率
 	public float[] m_PayBack = new float[5];
 
+	//勝敗フラグ
 	public bool m_WinLose{ get; set; }
 
+	//今までで一番稼いでいた時の金額
 	public int m_MaxMoney{ get; private set; }
 
+	//所持金
 	public int m_Money{ get; private set; }
+	//ゲーム開始時の所持金
 	private int m_StartMoney;
 
+	//ベットしたお金
 	private int m_Bet;
 
+	//所持金を減らす際に使用
 	private int m_BufBet;
 
+	//帰ってくるお金
 	public int m_Prise{ get; private set; }
 
+	//現在のカード枚数
 	private int m_Card;//{ get; set; }
 
+	//プレイヤーのヒットポイント
 	public int m_PlayerHitPoint{ get; set; }
 
+	//帰ってくるお金が二倍になるかどうか
 	private bool m_DoubleFlag;
 
 	void OnEnable(){
@@ -42,6 +54,8 @@ public class cGameData : ScriptableObject {
 	}
 
 	public int GetBet(){
+
+		//初期ベット額の調整
 		if (m_Bet > m_Money) {
 			m_Bet = 100;
 		}
@@ -49,6 +63,7 @@ public class cGameData : ScriptableObject {
 		return m_Bet;
 	}
 
+	//現在の連勝数から帰ってくるお金を計算する
 	public int GetPayBack(){
 		if (m_WinningStreak < 0) {
 			return 0;
@@ -61,6 +76,7 @@ public class cGameData : ScriptableObject {
 		}
 	}
 
+	//指定勝利数で帰ってくるお金を計算する
 	public int GetPayBack( int winningStreak ){
 		if (winningStreak <= 0 || winningStreak > 5) {
 			return 0;
@@ -73,6 +89,7 @@ public class cGameData : ScriptableObject {
 		}
 	}
 
+	//勝利数を増やし、帰ってくるお金を計算する
 	public void AddWin(){
 		++m_WinningStreak;
 		if (m_DoubleFlag == true) {
@@ -82,6 +99,7 @@ public class cGameData : ScriptableObject {
 		}
 	}
 
+	//勝利数を減らし、帰ってくるお金を計算する
 	public void SubWin(){
 		--m_WinningStreak;
 
@@ -119,6 +137,7 @@ public class cGameData : ScriptableObject {
 		m_DoubleFlag = false;
 	}
 
+	//今までで一番稼いだ金額と現在の金額をロード
 	public void Load(){
 		m_DoubleFlag = false;
 
@@ -136,6 +155,7 @@ public class cGameData : ScriptableObject {
 		m_Bet = 100;
 	}
 
+	//今までで一番稼いだ金額と現在の金額をセーブ
 	public void Save(){
 		if (m_Money < 100) {
 			m_Money = 100;
@@ -177,6 +197,7 @@ public class cGameData : ScriptableObject {
 		--m_Card;
 	}
 
+	//徐々に所持金を返ってくるくるお金分増やす
 	public bool PriseReturn( bool returnMoney = true ){
 		int secound = Mathf.RoundToInt (Time.deltaTime * 1000);
 		if (m_Prise - secound <= 0) {
@@ -205,6 +226,7 @@ public class cGameData : ScriptableObject {
 		return false;
 	}
 
+	//一気に所持金を返ってくるくるお金分増やす
 	public void PriseReturnSoon( bool returnMoney = true ){
 		if (returnMoney == true) {
 			m_Money += m_Prise;
@@ -222,6 +244,7 @@ public class cGameData : ScriptableObject {
 
 	}
 
+	//徐々に所持金をベットするお金分減らす
 	public bool Bet(){
 		int secound = Mathf.RoundToInt (Time.deltaTime * 1000);
 		if (m_BufBet - secound <= 0) {
@@ -241,6 +264,7 @@ public class cGameData : ScriptableObject {
 		return false;
 	}
 
+	//一気に所持金をベットするお金分減らす
 	public void BetSoon(){
 		m_Money -= m_BufBet;
 

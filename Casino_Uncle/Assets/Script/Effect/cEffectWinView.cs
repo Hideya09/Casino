@@ -22,6 +22,7 @@ public class cEffectWinView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//エフェクトが出ておらず、エフェクトフラグが立ったらパーティクルを出す
 		if (m_effectWinModel.GetParthicle () == true && m_PlayOnFlag == false) {
 			m_Particle.Play ();
 

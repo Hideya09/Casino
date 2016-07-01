@@ -20,8 +20,11 @@ public class cCardNumberView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//デッキの枚数を表示する
+
 		m_Image.color = new Color (1.0f, 1.0f, 1.0f, m_dModel.m_Fade);
 
+		//手札分減らす
 		int number = m_GameData.GetCard() - 2;
 
 		if (number < 0) {

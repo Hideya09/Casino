@@ -19,7 +19,7 @@ public class cDuelStateManager : ScriptableObject {
 	public cEffectStartModel m_startModel;
 	public cButtonModel m_buttonModel;
 
-	//
+	//振り上げエフェクト用
 	public float m_SwingTime;
 	public float m_SwingDownTime;
 
@@ -30,6 +30,7 @@ public class cDuelStateManager : ScriptableObject {
 
 	private bool m_Win;
 
+	//デュエルの流れ
 	public enum eDuelState{
 		eDuelState_BattleInit,
 		eDuelState_Start,
@@ -139,6 +140,8 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public void Init(){
+		//１ベットごとに初期化しなければならないものを初期化
+
 		m_dModel.Init ();
 		m_edModel.JokerInit ();
 		m_edModel.Init ();
@@ -157,6 +160,8 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public void DeleteText(){
+		//UI撤去後に行う処理
+
 		m_gData.m_WinLose = m_Win;
 
 		m_Win = false;
@@ -170,19 +175,23 @@ public class cDuelStateManager : ScriptableObject {
 		return m_Win;
 	}
 
+	//もうカードがない場合
 	public bool GetLast(){
 		return m_dModel.m_LastBattle;
 	}
-
+		
 	public void FadeInHalf(){
 		m_fadeHModel.FadeExec ();
 	}
 
+	//動きを止める
 	public void SelectStop(){
 		m_dModel.SelectStop ();
 	}
-
+		
 	private void BattleInit(){
+		//１デュエルごとに初期化する部分
+
 		m_hpEManager.Init ();
 		m_edModel.Init ();
 		m_eModel.Init ();
@@ -201,6 +210,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Start(){
+		//プレイヤー用UIの出現
 		bool endFlag = true;
 
 		endFlag &= m_dModel.Move ();
@@ -215,6 +225,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Start2(){
+		//プレイヤー用UIの出現とエネミーの出現
 		bool endFlag = true;
 
 		endFlag &= m_dModel.Return ();
@@ -231,6 +242,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Shuffle(){
+		//三枚のカードをランダムで決定
 		m_dModel.RandomSet ();
 		m_edModel.Hind ();
 		m_edModel.RandomSet (m_dModel.GetSelect (), m_gData.GetWin ());
@@ -243,12 +255,14 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void HandOut(){
+		//カードを配る
 		if ((m_dModel.HandOnCard () & m_edModel.SelectCardMove ()) == true) {
 			++m_State;
 		}
 	}
 
 	private void CardOpen(){
+		//カードを表にする
 		if (m_dModel.CardOpen () == true) {
 			m_State = eDuelState.eDuelState_SelectStart;
 		}
@@ -256,6 +270,7 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void CardEdit(){
 
+		//カードを一枚手札に加える
 		bool edit = m_dModel.EditCard ();
 		m_edModel.Hind ();
 		edit &= m_edModel.EditCard ();
@@ -273,12 +288,14 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void SelectStart(){
+		//カードを選べるようになった合図
 		if (m_dModel.SelectStart () == true) {
 			m_State = eDuelState.eDuelState_Select;
 		}
 	}
 
 	private void Select(){
+		//カードを選ぶ
 		m_buttonModel.Start ();
 
 		if (m_dModel.CardCheck ()) {
@@ -289,6 +306,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Move(){
+		//選んだカードをバトル用カードにする
 		m_dModel.CardMove ();
 		m_cameraModel.MoveSet (m_SwingTime, m_SwingDownTime);
 		m_dModel.MoveAngleSet (m_SwingTime, m_SwingDownTime);
@@ -299,11 +317,13 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void EnemySelect(){
+		//敵の出すカードを選ぶ
 		m_edModel.Select (m_SwingDownTime, m_gData.GetWin ());
 		++m_State;
 	}
 
 	private void EnemyMove(){
+		//敵がカードを選ぶ演出
 		if (m_edModel.SelectMove () == true) {
 			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cock);
 			++m_State;
@@ -312,7 +332,7 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void BattleEffect(){
 		bool moveEndFlag;
-
+		//バトルエフェクトを表示
 		if (m_cameraModel.Move ( out moveEndFlag ) == true) {
 
 			m_dModel.ReturnAngle ();
@@ -330,6 +350,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void EnemyCardOpen(){
+		//敵のカードを開く
 		if (m_effectModel.EffectExec () == true) {
 			if (m_edModel.Open () == true) {
 				++m_State;
@@ -342,17 +363,23 @@ public class cDuelStateManager : ScriptableObject {
 
 		m_ctModel.Init ();
 
+		//どちらが勝ったかを計算する
+
 		int playerPower = m_dModel.GetBattleCardNumber ();
 		int enemyPower = m_edModel.GetBattleCardNumber ();
 
+		//同じカードの時
 		if (playerPower == enemyPower) {
+			//引き分けを表示
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Draw);
 			m_State = eDuelState.eDuelState_CommitEffect;
 
 			return;
 		}
 
+		//こちらがジョーカーを出した時
 		if (playerPower == 0) {
+			//１ダメージ与えて勝利
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Win);
 			m_hpEManager.m_Damage = 1;
 			m_State = eDuelState.eDuelState_CommitEffect;
@@ -360,7 +387,9 @@ public class cDuelStateManager : ScriptableObject {
 			return;
 		}
 
+		//相手がジョーカーを出した時
 		if (enemyPower == 0) {
+			//１ダメージ受けて敗北
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Lose);
 			m_hpPManager.m_Damage = 1;
 			m_State = eDuelState.eDuelState_CommitEffect;
@@ -368,8 +397,10 @@ public class cDuelStateManager : ScriptableObject {
 			return;
 		}
 
+		//こちらが１で相手が１１以上の時
 		if (playerPower == 1) {
 			if (enemyPower > 10) {
+				//１ダメージ与えて勝利
 				m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Win);
 				m_hpEManager.m_Damage = 1;
 				m_State = eDuelState.eDuelState_CommitEffect;
@@ -378,8 +409,10 @@ public class cDuelStateManager : ScriptableObject {
 			}
 		}
 
+		//相手が１でこちらが１１以上の時
 		if (enemyPower == 1) {
 			if (playerPower > 10) {
+				//１ダメージ受けて敗北
 				m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Lose);
 				m_hpPManager.m_Damage = 1;
 				m_State = eDuelState.eDuelState_CommitEffect;
@@ -388,6 +421,7 @@ public class cDuelStateManager : ScriptableObject {
 			}
 		}
 
+		//こちらと相手でどちらが大きい数字化調べ、差分をダメージにする
 		if (playerPower > enemyPower) {
 			m_ctModel.SetText (cCommitTextModel.eCommitText.eCommitText_Win);
 			m_hpEManager.m_Damage = playerPower - enemyPower;
@@ -401,6 +435,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffect(){
+		//どちらがダメージを受けたかを表示する
 		if (m_ctModel.Move () == true) {
 
 			m_effectModel.EffectEnd ();
@@ -423,6 +458,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffectWin(){
+		//勝利時演出
 		m_edModel.Snap ();
 
 		m_eModel.Runble ();
@@ -431,6 +467,7 @@ public class cDuelStateManager : ScriptableObject {
 
 			m_eModel.StopRunble ();
 
+			//デュエルが続くかを調べる
 			if (m_hpEManager.HitPointCheck () == true) {
 				m_State = eDuelState.eDuelState_Win;
 			} else if (m_dModel.m_LastBattle == true) {
@@ -445,6 +482,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffectLose(){
+		//敗北時演出
 		m_dModel.Snap ();
 
 		m_cameraModel.Runble ();
@@ -453,6 +491,7 @@ public class cDuelStateManager : ScriptableObject {
 
 			m_cameraModel.StopRunble ();
 
+			//デュエルが続くかを調べる
 			if (m_hpPManager.HitPointCheck () == true) {
 				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
 				m_State = eDuelState.eDuelState_Lose;
@@ -470,20 +509,26 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void CommitEffectDraw(){
-		m_dModel.Snap ();
-		m_edModel.Snap ();
+		//引き分け時演出
 
-		if (m_dModel.m_LastBattle == true) {
-			m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
-			m_State = eDuelState.eDuelState_Lose;
-			cSoundManager.BGMVolumeDown ();
-			cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
-		} else {
-			m_State = eDuelState.eDuelState_NextButtle;
+		bool endFlag = m_dModel.Snap ();
+		endFlag &= m_edModel.Snap ();
+
+		if (endFlag == true) {
+			//デュエルが続くかを調べる
+			if (m_dModel.m_LastBattle == true) {
+				m_fadeHModel.SetState (cFadeInOutModel.eFadeState.FadeOut);
+				m_State = eDuelState.eDuelState_Lose;
+				cSoundManager.BGMVolumeDown ();
+				cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Lose);
+			} else {
+				m_State = eDuelState.eDuelState_NextButtle;
+			}
 		}
 	}
 
 	private void Win(){
+		//デュエルに勝利した時
 		m_edModel.SelectCardOpen ();
 
 		if (m_eModel.End () == true) {
@@ -504,6 +549,7 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	private void Lose(){
+		//デュエルに敗北した時
 		m_edModel.SelectCardOpen ();
 
 		m_fadeHModel.FadeExec ();
@@ -525,6 +571,7 @@ public class cDuelStateManager : ScriptableObject {
 	private void NextButtle(){
 		bool endFlag = true;
 
+		//バトル用カードを片づける
 		endFlag = m_dModel.ButtleCardBack (m_ButtleCardFadeTime);
 		endFlag = m_edModel.Back (m_ButtleCardFadeTime);
 
@@ -536,6 +583,7 @@ public class cDuelStateManager : ScriptableObject {
 	public bool End(){
 		bool endFlag = true;
 
+		//UIの退去
 		endFlag &= m_dModel.MoveBack (m_FadeTime);
 		endFlag &= m_edModel.Back (m_FadeTime , true);
 		endFlag &= m_hpPManager.Back (m_FadeTime);
@@ -545,6 +593,8 @@ public class cDuelStateManager : ScriptableObject {
 	}
 
 	public bool GetButton(){
+		//ボタンが押されたかどうか
+
 		if (m_buttonModel.GetSelect () == 1) {
 			m_buttonModel.Init ();
 			return true;

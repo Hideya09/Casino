@@ -58,6 +58,7 @@ public class cEnemyDeckModel : ScriptableObject {
 		int selectNumber = 0;
 
 		do {
+			//どのカードを選ぶかの乱数生成
 			float random = Random.Range (0.0f, 1.0f);
 
 			selectNumber = m_selcModel[0].m_CardNumber;
@@ -65,6 +66,7 @@ public class cEnemyDeckModel : ScriptableObject {
 			m_SelectNumber = 0;
 
 			if (random < m_LowProbability [duelNumber]) {
+				//一番小さいカードを出す
 				for (int i = 1; i < m_selcModel.Length; ++i) {
 					if (selectNumber > m_selcModel [i].m_CardNumber) {
 						m_SelectNumber = i;
@@ -73,6 +75,7 @@ public class cEnemyDeckModel : ScriptableObject {
 					}
 				}
 			} else if (random < m_MiddleProbability [duelNumber]) {
+				//中くらいのカードを出す
 				for (int i = 0; i < m_selcModel.Length; ++i) {
 					m_SelectNumber = i;
 
@@ -100,6 +103,7 @@ public class cEnemyDeckModel : ScriptableObject {
 					}
 				}
 			} else {
+				//一番強いカードを出す
 				for (int i = 1; i < m_selcModel.Length; ++i) {
 					if (selectNumber < m_selcModel [i].m_CardNumber) {
 						m_SelectNumber = i;
@@ -112,6 +116,7 @@ public class cEnemyDeckModel : ScriptableObject {
 
 		m_Deck [m_selcModel [m_SelectNumber].m_CardNumber] = true;
 
+		//ジョーカーは全部の戦いで一枚のみ
 		if (m_selcModel [m_SelectNumber].m_CardNumber == 0) {
 			m_Joker = true;
 		}
@@ -343,6 +348,7 @@ public class cEnemyDeckModel : ScriptableObject {
 	}
 
 	public bool Open(){
+		//バトルカードを開く
 		m_bcModel.Open();
 		if (m_bcModel.GetOpen ()) {
 			return true;
@@ -379,13 +385,14 @@ public class cEnemyDeckModel : ScriptableObject {
 		return m_bcModel.m_CardNumber;
 	}
 
-	public void Snap(){
-		m_bcModel.SnapMove ();
+	public bool Snap(){
+		return m_bcModel.SnapMove ();
 	}
 
 	public bool Back( float m_FadeTime , bool all = false ){
 		bool endFlag = true;
 
+		//シーンを抜ける時のみ
 		if (all == true) {
 			m_TotalNumber = 0;
 

@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class cEnemyBattleCardModel : cCardModel {
-
 	private Vector2 m_BasePosition;
 	public Vector2 m_StartPosition;
 
@@ -73,14 +72,18 @@ public class cEnemyBattleCardModel : cCardModel {
 		}
 	}
 
-	public void SnapMove(){
+	public bool SnapMove(){
 		m_RotationZ = -m_MaxAngle;
 
 		m_Position.x -= m_Speed * Time.deltaTime;
 
 		if (m_Stop >= m_Position.x) {
 			m_Position.x = m_Stop;
+
+			return true;
 		}
+
+		return false;
 	}
 
 	public float GetAngle(){

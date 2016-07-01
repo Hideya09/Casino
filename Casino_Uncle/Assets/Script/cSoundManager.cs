@@ -4,6 +4,7 @@ using System.IO;
 
 public class cSoundManager : MonoBehaviour {
 
+	//使用するSEリスト
 	public enum eSoundSE{
 		eSoundSE_Cancel,
 		eSoundSE_Decision,
@@ -26,19 +27,25 @@ public class cSoundManager : MonoBehaviour {
 		eSoundSE_Max
 	}
 
+	//BGM用
 	public AudioSource m_BGM;
 
+	//SE用
 	public AudioSource m_SE;
 
+	//音
 	public AudioClip m_BGMSound;
 	public AudioClip[] m_SESound;
 
+	//ループ位置設定
 	private float m_LoopCount;
 	public float m_LoopStart;
 	public float m_LoopEnd;
 
+	//鳴らすSEのリスト
 	private static ArrayList m_SENumber = new ArrayList ();
 
+	//BGM用静的変数
 	private static bool m_BGMPlayFlag = false;
 
 	private static bool m_BGMDown = false;
@@ -65,12 +72,14 @@ public class cSoundManager : MonoBehaviour {
 	void Update () {
 
 
+		//BGMを鳴らす
 		if (m_BGMPlayFlag == true) {
 			m_BGM.Play ();
 			m_BGMPlayFlag = false;
 		}
 
 		if (m_BGM.isPlaying == true) {
+			//BGMのループ処理
 			m_LoopCount += Time.deltaTime;
 
 			if (m_LoopCount >= m_LoopEnd) {
@@ -81,6 +90,7 @@ public class cSoundManager : MonoBehaviour {
 		}
 
 		if (m_BGMDown == true) {
+			//BGMをフェードアウトさせる
 			m_BGM.volume -= Time.deltaTime * 0.25f;
 
 			if (m_BGM.volume <= 0.0f) {
@@ -88,11 +98,13 @@ public class cSoundManager : MonoBehaviour {
 				m_BGM.Stop ();
 			}
 		} else if (m_BGMVolume == true) {
+			//BGMの大きさを調整する
 			m_BGM.volume = 1.0f;
 		} else {
 			m_BGM.volume = 0.4f;
 		}
 
+		//鳴らす予定のSEを鳴らす
 		for (int i = 0; i < m_SENumber.Count; ++i) {
 			m_SE.PlayOneShot (m_SESound [(int)m_SENumber [i]]);
 		}
@@ -100,22 +112,27 @@ public class cSoundManager : MonoBehaviour {
 		m_SENumber.Clear ();
 	}
 
+	//BGMを鳴らす
 	public static void BGMPlay (){
 		m_BGMPlayFlag = true;
 	}
 
+	//SEを鳴らす
 	public static void SEPlay( eSoundSE playSE ){
 		m_SENumber.Add (playSE);
 	}
 
+	//BGMをフェードアウト
 	public static void BGMDown(){
 		m_BGMDown = true;
 	}
 
+	//BGMを大きく
 	public static void BGMVolumeDown(){
 		m_BGMVolume = false;
 	}
 
+	//BGMを小さく
 	public static void BGMVolumeUp(){
 		m_BGMVolume = true;
 	}

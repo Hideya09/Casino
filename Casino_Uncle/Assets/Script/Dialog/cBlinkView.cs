@@ -14,6 +14,8 @@ public class cBlinkView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//テキストを明滅させる
+
 		m_Text.color = new Color (0.0f, 0.0f, 0.0f, m_blinkModel.m_Alpha);
 	}
 }

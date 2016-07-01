@@ -25,6 +25,7 @@ public class cButtonView : MonoBehaviour {
 
 		setColor.a = m_SelectColor.a;
 
+		//押されている時とそうじゃない時とで色を変える
 		if (m_ButtonModel.GetTap () == true) {
 			m_Sprite.color = m_SelectColor;
 		} else {

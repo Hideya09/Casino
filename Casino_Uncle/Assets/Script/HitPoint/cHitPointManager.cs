@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//ヒットポイントオブジェクトの管理
 public class cHitPointManager : ScriptableObject {
 
 	public cHitPointModel[] m_hpModel;
 
+	//今まで受けた総ダメージ
 	private int m_CutBackTotalNumber;
 
+	//ヒットポイントの最大値
 	public int m_HitPointMax;
 
+	//受けるダメージ
 	public int m_Damage{ set; private get; }
 
 	public void Init(){
@@ -18,14 +22,16 @@ public class cHitPointManager : ScriptableObject {
 			m_hpModel [i].Init ();
 		}
 	}
-
+		
 	public bool CutBack(){
 		bool retFlag = true;
 
+		//受けたダメージ文HPオブジェクトを演出させる
 		for (int i = m_CutBackTotalNumber; i < (m_CutBackTotalNumber + m_Damage) && i < m_hpModel.Length; ++i) {
 			retFlag &= m_hpModel [i].CutBack ();
 		}
 
+		//演出が終わったら総ダメージを増やす
 		if (retFlag == true) {
 			m_CutBackTotalNumber += m_Damage;
 
@@ -35,14 +41,17 @@ public class cHitPointManager : ScriptableObject {
 		return retFlag;
 	}
 
+	//生死判定
 	public bool HitPointCheck(){
 		return m_CutBackTotalNumber >= m_HitPointMax;
 	}
 
+	//現在のヒットポイント
 	public int GetHitPoint(){
 		return m_HitPointMax - m_CutBackTotalNumber;
 	}
 
+	//以下入退場の処理
 	public void FadeInit(){
 		for (int i = 0; i < m_hpModel.Length; ++i) {
 			m_hpModel [i].FadeInit ();

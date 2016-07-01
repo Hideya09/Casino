@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cMenuDialogModel : cDialogModel {
 
+	//ダイアログ内のステート
 	private enum eMenuState{
 		eMenuState_Start,
 		eMenuState_DownStart,
@@ -13,6 +14,7 @@ public class cMenuDialogModel : cDialogModel {
 
 	private eMenuState m_State;
 
+	//次に移動するシーン
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
@@ -34,9 +36,11 @@ public class cMenuDialogModel : cDialogModel {
 			}
 			break;
 		case eMenuState.eMenuState_Main:
+			//ボタンが押されたかを調べる
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
+					//ゲーム内ステートをタイトルに移動させるか確認するステートに変える
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_MoveTitle;
 
 					m_State = eMenuState.eMenuState_End;
@@ -45,6 +49,7 @@ public class cMenuDialogModel : cDialogModel {
 
 					break;
 				} else if (number == 2) {
+					//ゲーム内ステートをゲーム終了させるか確認するステートに変える
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_MoveEnd;
 
 					m_State = eMenuState.eMenuState_End;
@@ -53,6 +58,7 @@ public class cMenuDialogModel : cDialogModel {
 
 					break;
 				} else if (number == 3) {
+					//ゲーム内ステートをデュエルに変える
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Duel;
 
 					m_State = eMenuState.eMenuState_UpEnd;

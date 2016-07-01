@@ -74,13 +74,17 @@ public class cBattleCardModel : cCardModel {
 	}
 
 	//負けた時の回転と移動
-	public void SnapMove(){
+	public bool SnapMove(){
 		m_RotationZ = -m_MaxAngle;
 
 		m_Position.x += m_Speed * Time.deltaTime;
 
 		if (m_Position.x >= m_Stop) {
 			m_Position.x = m_Stop;
+
+			return true;
 		}
+
+		return false;
 	}
 }

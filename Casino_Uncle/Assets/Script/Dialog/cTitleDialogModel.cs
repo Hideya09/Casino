@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cTitleDialogModel : cDialogModel {
 
+	//ダイアログのステート
 	private enum eTitleState{
 		eTitleState_Start,
 		eTitleState_DownStart,
@@ -13,6 +14,7 @@ public class cTitleDialogModel : cDialogModel {
 
 	private eTitleState m_State;
 
+	//次に移動するシーン
 	private cGameScene.eGameSceneList m_RetScene;
 
 	public override cGameScene.eGameSceneList DialogExec(){
@@ -34,9 +36,11 @@ public class cTitleDialogModel : cDialogModel {
 			}
 			break;
 		case eTitleState.eTitleState_Main:
+			//ボタンが押されたかを調べる
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
+					//終了時の戦果を表示するゲーム内ステートに移動
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Show;
 
 					m_State = eTitleState.eTitleState_End;
@@ -45,6 +49,7 @@ public class cTitleDialogModel : cDialogModel {
 
 					break;
 				} else if (number == 2) {
+					//元のゲーム内ステートに戻る
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Back;
 
 					m_State = eTitleState.eTitleState_UpEnd;
@@ -80,6 +85,8 @@ public class cTitleDialogModel : cDialogModel {
 
 		m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Menu;
 
+
+		//表示位置の変更
 		if (upPosition == true) {
 
 			m_State = eTitleState.eTitleState_Start;

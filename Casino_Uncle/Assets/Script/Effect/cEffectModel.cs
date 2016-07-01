@@ -13,12 +13,14 @@ public class cEffectModel : ScriptableObject {
 		m_EffectOn = false;
 	}
 
+	//エフェクトを開始させる
 	public void EffectStart(){
 		m_Count = 0;
 
 		m_EffectOn = true;
 	}
 
+	//時間を測る
 	public bool EffectExec(){
 		m_Count += Time.deltaTime;
 
@@ -29,6 +31,7 @@ public class cEffectModel : ScriptableObject {
 		return false;
 	}
 
+	//エフェクトを終わらせる
 	public void EffectEnd(){
 		m_Count = 0;
 

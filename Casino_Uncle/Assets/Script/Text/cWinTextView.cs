@@ -19,6 +19,8 @@ public class cWinTextView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//勝利数に応じて表示する画像を変える
+
 		int win = m_GameData.GetStartWin ();
 		if (win >= m_Sprite.Length) {
 			win = -1;

@@ -4,26 +4,34 @@ using System.Collections;
 public abstract class cDialogModel : ScriptableObject {
 	private Vector3 m_Position;
 
-	public float m_StartPosition = 600.0f;
+	//開始位置
+	public float m_StartPosition;
 
+	//初期回転量
 	public float m_RotationStart;
 
 	private float m_Rotation;
 
 	private float m_Count;
 
+	//開始と終わりの時間
 	public float m_StartCountMax;
 	public float m_EndCountMax;
 
+	//ダイアログ内で表示する数値のバッファ
 	protected int[] m_NumberData;
 	protected float[] m_NumberData2;
 
+	//使用するボタンのモデル
 	public cButtonModel[] m_buttonModel;
 
+	//ダイアログごとの処理
 	public abstract cGameScene.eGameSceneList DialogExec();
 
+	//ダイアログごとの初期化処理
 	public abstract void Init (bool upPosition = true);
 
+	//出現位置が上からの時の初期化
 	protected void InitPositionUp(){
 		m_Position = new Vector3 (0.0f, m_StartPosition , -705.0f);
 		m_Rotation = -m_RotationStart;
@@ -31,6 +39,7 @@ public abstract class cDialogModel : ScriptableObject {
 		m_Count = 0.0f;
 	}
 
+	//出現位置が下からの時の初期化
 	protected void InitPositionDpwn(){
 		m_Position = new Vector3 (0.0f, -m_StartPosition , -705.0f);
 		m_Rotation = -m_RotationStart;
@@ -38,6 +47,7 @@ public abstract class cDialogModel : ScriptableObject {
 		m_Count = 0.0f;
 	}
 
+	//下がりながら画面に入る
 	protected bool StartDown(){
 		m_Position.y -= m_StartPosition * (Time.deltaTime / m_StartCountMax);
 
@@ -60,6 +70,7 @@ public abstract class cDialogModel : ScriptableObject {
 		return false;
 	}
 
+	//上がりながら画面に入る
 	protected bool StartUp(){
 		m_Position.y += m_StartPosition * (Time.deltaTime / m_StartCountMax);
 
@@ -82,6 +93,7 @@ public abstract class cDialogModel : ScriptableObject {
 		return false;
 	}
 
+	//下がりながら画面から出る
 	protected bool EndDown(){
 		m_Position.y -= m_StartPosition * (Time.deltaTime / m_EndCountMax);
 
@@ -104,6 +116,7 @@ public abstract class cDialogModel : ScriptableObject {
 		return false;
 	}
 
+	//上がりながら画面から出る
 	protected bool EndUp (){
 		m_Position.y += m_StartPosition * (Time.deltaTime / m_EndCountMax);
 

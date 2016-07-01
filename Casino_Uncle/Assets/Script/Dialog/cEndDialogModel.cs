@@ -3,6 +3,7 @@ using System.Collections;
 
 public class cEndDialogModel : cDialogModel {
 
+	//ダイアログ内のステート
 	private enum eEndState{
 		eEndState_Start,
 		eEndState_DownStart,
@@ -13,8 +14,10 @@ public class cEndDialogModel : cDialogModel {
 
 	private eEndState m_State;
 
+	//次に移動するシーン
 	private cGameScene.eGameSceneList m_RetScene;
 
+	//タイトルシーンで使用された際に使用する
 	public cTitleScene.eTitleSceneList TitleDialogExec(){
 		switch (m_State) {
 		case eEndState.eEndState_Start:
@@ -26,6 +29,7 @@ public class cEndDialogModel : cDialogModel {
 			}
 			break;
 		case eEndState.eEndState_Main:
+			//ボタンが押されたかを調べる
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
@@ -47,12 +51,14 @@ public class cEndDialogModel : cDialogModel {
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				m_buttonModel [i].End ();
 			}
+			//タイトル内のステートをエンドにする
 			return cTitleScene.eTitleSceneList.eTitleSceneList_End;
 		case eEndState.eEndState_UpEnd:
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				m_buttonModel [i].End ();
 			}
 			if (EndUp () == true) {
+				//タイトル内のステートをメインにする
 				return cTitleScene.eTitleSceneList.eTitleSceneList_Main;
 			}
 			break;
@@ -83,6 +89,7 @@ public class cEndDialogModel : cDialogModel {
 			for (int i = 0; i < m_buttonModel.Length; ++i) {
 				int number = m_buttonModel [i].GetSelect ();
 				if (number == 1) {
+					//ゲーム内ステートを戦果を表示するするステートに変える
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Show;
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
@@ -91,6 +98,7 @@ public class cEndDialogModel : cDialogModel {
 
 					break;
 				} else if (number == 2) {
+					//ゲーム内ステートをメニューを表示するステートに変える
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_Back;
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Cancel);

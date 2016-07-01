@@ -3,12 +3,14 @@ using System.Collections;
 
 public class cCommitTextModel : ScriptableObject {
 
+	//表示する文字リスト
 	public enum eCommitText{
 		eCommitText_Win,
 		eCommitText_Lose,
 		eCommitText_Draw
 	};
 
+	//表示のステート
 	private enum eCommitState{
 		eCommitState_Apperance,
 		eCommitState_Stop,
@@ -16,10 +18,12 @@ public class cCommitTextModel : ScriptableObject {
 		eCommitState_End
 	};
 
+	//それぞれにかける時間
 	public float m_ApperanceTime;
 	public float m_StopTime;
 	public float m_DisappearanceTime;
 
+	//現在の経過時間
 	private float m_Time;
 
 	private eCommitText m_Text;

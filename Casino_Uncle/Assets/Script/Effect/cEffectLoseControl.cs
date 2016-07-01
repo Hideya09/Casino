@@ -12,6 +12,7 @@ public class cEffectLoseControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//入力処理
 		if (Input.GetMouseButtonUp (0) == true) {
 			m_effectLoseModel.Tap ();
 		}

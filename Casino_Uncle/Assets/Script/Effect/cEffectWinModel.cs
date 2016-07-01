@@ -48,6 +48,7 @@ public class cEffectWinModel : ScriptableObject {
 		return m_DrawFlag;
 	}
 
+	//文字を拡大しつつ表示する
 	public bool EffectOn(){
 
 		m_DrawFlag = true;
@@ -82,6 +83,7 @@ public class cEffectWinModel : ScriptableObject {
 		m_TapFlag = true;
 	}
 
+	//拡大が終わった状態で、タップされたらパーティクルを終わらせtrueを返す
 	public bool GetTapFlag(){
 		if( m_TapFlag & m_EffectEndFlag == true ){
 			m_ParthicleFlag = false;

@@ -339,8 +339,8 @@ public class cDeckModel : ScriptableObject {
 		m_bcModel.SetAngle ();
 	}
 
-	public void Snap(){
-		m_bcModel.SnapMove ();
+	public bool Snap(){
+		return m_bcModel.SnapMove ();
 	}
 
 	public bool MoveBack( float m_FadeTime ){

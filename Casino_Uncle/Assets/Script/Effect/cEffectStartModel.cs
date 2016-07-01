@@ -9,8 +9,10 @@ public class cEffectStartModel : ScriptableObject {
 
 	public Vector3 m_StartPosition;
 
+	//テキストの流れる速さ
 	public float m_Speed;
 
+	//テキストが止まる時間
 	public float m_StopCount;
 
 	private Vector3 m_TextPosition;
@@ -42,6 +44,7 @@ public class cEffectStartModel : ScriptableObject {
 	}
 
 	public bool Exec(){
+		//黒帯を大きくしてテキストを流す
 		switch (m_State) {
 		case eEffectStartState.eEffectStartState_Start:
 			m_Size += Time.deltaTime / m_SizeCount;

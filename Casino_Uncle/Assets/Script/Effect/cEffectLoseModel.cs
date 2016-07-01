@@ -32,6 +32,7 @@ public class cEffectLoseModel : ScriptableObject {
 		return m_DrawFlag;
 	}
 
+	//徐々に文字を出させる
 	public bool EffectOn(){
 
 		m_DrawFlag = true;
@@ -57,6 +58,7 @@ public class cEffectLoseModel : ScriptableObject {
 		m_TapFlag = true;
 	}
 
+	//文字が出きっている状態で、タップされた時にtrue
 	public bool GetTapFlag(){
 		return m_TapFlag & m_EffectEndFlag;
 	}

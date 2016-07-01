@@ -5,8 +5,10 @@ public class cWarningModel : ScriptableObject {
 
 	private float m_Fade;
 
+	//切り替わりの速さ
 	public float m_AddFade;
 
+	//表示する文字
 	public enum eDrawType{
 		eDrawType_Warning,
 		eDrawType_Noncomformity
@@ -19,6 +21,7 @@ public class cWarningModel : ScriptableObject {
 		m_TableDrawType = eDrawType.eDrawType_Warning;
 	}
 
+	//文字を切り替える
 	public void WarningIn(){
 		if (m_TableDrawType != eDrawType.eDrawType_Warning) {
 			m_Fade -= (Time.deltaTime * m_AddFade);
@@ -33,7 +36,6 @@ public class cWarningModel : ScriptableObject {
 			}
 		}
 	}
-
 	public void NoncomformityIn(){
 		if (m_TableDrawType != eDrawType.eDrawType_Noncomformity) {
 			m_Fade -= (Time.deltaTime * m_AddFade);

@@ -16,6 +16,7 @@ public class cBetMoneyView : MonoBehaviour {
 	void Update () {
 		m_Input.interactable = m_betMoneyModel.GetIput();
 
+		//初期数値が更新されていたらセットする
 		int number = m_betMoneyModel.GetStartText ();
 		if (number != -1) {
 			m_Input.text = number.ToString ();

@@ -17,6 +17,8 @@ public class cMaxMoneyView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//今までで一番稼いだお金を表示
+
 		string maxMoney = m_GameData.m_MaxMoney.ToString ();
 
 		int i;

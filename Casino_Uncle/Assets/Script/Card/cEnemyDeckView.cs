@@ -14,6 +14,7 @@ public class cEnemyDeckView : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//敵の合計枚数の表示
 		if (m_edModel.m_TotalNumber != 0) {
 			m_Text.enabled = true;
 
