@@ -162,7 +162,7 @@ public class cDuelStateManager : ScriptableObject {
 	public void DeleteText(){
 		//UI撤去後に行う処理
 
-		m_gData.m_WinLose = m_Win;
+		//m_gData.m_WinLose = m_Win;
 
 		m_Win = false;
 
@@ -542,6 +542,7 @@ public class cDuelStateManager : ScriptableObject {
 				m_gData.AddWin ();
 
 				m_Win = true;
+				m_gData.m_WinLose = m_Win;
 			}
 
 			m_winModel.EffectOn ();
@@ -563,6 +564,7 @@ public class cDuelStateManager : ScriptableObject {
 			m_State = eDuelState.eDuelState_End;
 
 			m_Win = false;
+			m_gData.m_WinLose = m_Win;
 		}
 
 		m_loseModel.EffectOn ();

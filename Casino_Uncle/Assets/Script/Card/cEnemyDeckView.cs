@@ -18,7 +18,7 @@ public class cEnemyDeckView : MonoBehaviour {
 		if (m_edModel.m_TotalNumber != 0) {
 			m_Text.enabled = true;
 
-			m_Text.text = m_edModel.m_TotalNumber.ToString ();
+			m_Text.text = "気力\n          " + m_edModel.m_TotalNumber.ToString ();
 		} else {
 			m_Text.enabled = false;
 		}

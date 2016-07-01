@@ -289,7 +289,7 @@ GameObject:
   - 114: {fileID: 164455323}
   - 114: {fileID: 164455324}
   m_Layer: 5
-  m_Name: Text
+  m_Name: EnemyDeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,8 +309,8 @@ RectTransform:
   m_RootOrder: 19
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 380, y: 229}
-  m_SizeDelta: {x: 120, y: 60}
+  m_AnchoredPosition: {x: 334.4, y: 233.2}
+  m_SizeDelta: {x: 160, y: 73}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &164455321
 MonoBehaviour:
@@ -333,20 +333,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 60
-    m_Alignment: 4
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '0
-
-'
+  m_Text: "\u6C17\u529B\n          1"
 --- !u!222 &164455322
 CanvasRenderer:
   m_ObjectHideFlags: 0

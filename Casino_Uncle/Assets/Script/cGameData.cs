@@ -220,6 +220,7 @@ public class cGameData : ScriptableObject {
 			if (m_Money > m_MaxMoney) {
 				m_MaxMoney = m_Money;
 			}
+			m_DoubleFlag = false;
 			return true;
 		}
 
@@ -240,6 +241,7 @@ public class cGameData : ScriptableObject {
 			m_MaxMoney = m_Money;
 		}
 
+		m_DoubleFlag = false;
 		m_Prise = 0;
 
 	}
