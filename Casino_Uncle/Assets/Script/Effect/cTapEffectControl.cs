@@ -12,7 +12,7 @@ public class cTapEffectControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButtonUp (0)) {
+		if (Input.GetMouseButtonDown (0)) {
 			Vector3 position = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 			position.z = 50;
 			m_tapModel.EffectOn (position);
