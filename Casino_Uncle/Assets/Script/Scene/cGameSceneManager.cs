@@ -17,12 +17,16 @@ public class cGameSceneManager : MonoBehaviour {
 	//シーン
 	public cSceneBase[] m_Scene;
 
+	private cTapEffectModel m_tapModel;
+
 	void Awake(){
 		//ゲームシーンマネージャーは一つだけしか作らない
 		if (m_SceneManager == null) {
 			DontDestroyOnLoad (gameObject);
 
 			m_SceneManager = gameObject;
+
+			m_tapModel = (cTapEffectModel)Resources.Load ("Scriptable/Effect/cTapEffectModel");
 		} else {
 			Destroy (gameObject);
 			return;
@@ -42,6 +46,8 @@ public class cGameSceneManager : MonoBehaviour {
 		//返り値が現在のシーン番号と違う場合はシーンを切り替える
 
 		eGameScene nextScene = m_Scene [(int)m_GameScene].SceneExec ();
+
+		m_tapModel.CountUp ();
 
 		if (nextScene != m_GameScene) {
 			UnityEngine.SceneManagement.SceneManager.LoadScene ((int)nextScene);

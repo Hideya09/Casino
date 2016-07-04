@@ -140,10 +140,11 @@ public class cGameData : ScriptableObject {
 	//今までで一番稼いだ金額と現在の金額をロード
 	public void Load(){
 		m_DoubleFlag = false;
+		StreamReader reader = new StreamReader(Application.dataPath + "/Resources/SaveFile/save.csv");
 
-		TextAsset file = (TextAsset)Resources.Load ("SaveFile/save");
+		//TextAsset file = (TextAsset)Resources.Load ("SaveFile/save");
 
-		StringReader reader = new StringReader (file.text);
+		//StringReader reader = new StringReader (file.text);
 
 		string data = reader.ReadLine ();
 
@@ -151,6 +152,8 @@ public class cGameData : ScriptableObject {
 
 		m_MaxMoney = int.Parse (moneyData[0]);
 		m_Money = int.Parse (moneyData[1]);
+
+		reader.Close ();
 
 		m_Bet = 100;
 	}
