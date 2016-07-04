@@ -16,6 +16,8 @@ public class cPayBackDialogModel : cDialogModel {
 
 	public cBlinkModel m_blinkModel;
 
+	public cEffectModel m_effectModel;
+
 	private ePayBackState m_State;
 
 	//次に移動するシーン
@@ -35,6 +37,7 @@ public class cPayBackDialogModel : cDialogModel {
 
 					if (m_GameData.GetWin () == 5) {
 						cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_FiveWin);
+						m_effectModel.EffectStart ();
 					}
 				}
 			}
@@ -67,6 +70,8 @@ public class cPayBackDialogModel : cDialogModel {
 					m_RetScene = cGameScene.eGameSceneList.eGameSceneList_BetDialog;
 
 					m_State = ePayBackState.ePayBackState_End;
+
+					m_effectModel.EffectEnd ();
 
 					cSoundManager.SEPlay (cSoundManager.eSoundSE.eSoundSE_Decision);
 

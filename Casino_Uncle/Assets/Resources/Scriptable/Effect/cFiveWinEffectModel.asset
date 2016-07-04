@@ -8,10 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 965459e39cbcb6a44b456363db674d92, type: 3}
-  m_Name: cEnemyModel
+  m_Script: {fileID: 11500000, guid: 0ea1594ec5243e74fb4ffbb020eadbc4, type: 3}
+  m_Name: cFiveWinEffectModel
   m_EditorClassIdentifier: 
-  m_Damage: {fileID: 11400000, guid: 6d5a857fa634f4141bea2fb6d44db072, type: 2}
-  m_Runble: 50
-  m_FadeSpeed: 3
-  m_BlackSpeed: 2
+  m_MaxCount: 1
