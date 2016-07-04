@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Name: cTapEffectModel
   m_EditorClassIdentifier: 
   m_MaxTapCount: 0.1
+  m_EffectParent: {fileID: 0}

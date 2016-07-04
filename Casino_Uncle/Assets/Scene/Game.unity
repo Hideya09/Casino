@@ -2047,6 +2047,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 912126122}
   - 114: {fileID: 912126121}
+  - 114: {fileID: 912126123}
   m_Layer: 0
   m_Name: TapEffect
   m_TagString: Untagged
@@ -2073,11 +2074,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 912126120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.450313, y: 3.5920136, z: 86.32031}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -419.14108, y: 87.26041, z: -460.5281}
+  m_LocalScale: {x: 33.665104, y: 33.665104, z: 33.665104}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_Father: {fileID: 1031357117}
+  m_RootOrder: 20
+--- !u!114 &912126123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 912126120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a6595056d67504da2b64ea86bc4cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_tapModel: {fileID: 11400000, guid: 9560516fea5dc714faa4306888f057c9, type: 2}
 --- !u!1 &943217660
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,6 +2551,7 @@ RectTransform:
   - {fileID: 1837980816}
   - {fileID: 214934898}
   - {fileID: 1027188948}
+  - {fileID: 912126122}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_AnchorMin: {x: 0, y: 0}

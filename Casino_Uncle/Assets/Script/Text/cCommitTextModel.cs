@@ -35,6 +35,10 @@ public class cCommitTextModel : ScriptableObject {
 
 	private float m_Progression;
 
+	public void OnEnable(){
+		Init ();
+	}
+
 	public void Init(){
 		m_Progression = 0.0f;
 
