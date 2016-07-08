@@ -39,7 +39,7 @@ public class cCardModel : ScriptableObject {
 	public eSize m_Size{ get; protected set; }
 
 	//カードのナンバー
-	public int m_CardNumber{ set; get; }
+	public int m_CardNumber;
 
 	void OnEnable(){
 		m_DrawMode = eDrawMode.eDrawMode_None;

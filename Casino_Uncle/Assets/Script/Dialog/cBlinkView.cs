@@ -16,6 +16,8 @@ public class cBlinkView : MonoBehaviour {
 	void Update () {
 		//テキストを明滅させる
 
-		m_Text.color = new Color (0.0f, 0.0f, 0.0f, m_blinkModel.m_Alpha);
+		Color color = m_Text.color;
+		color.a = m_blinkModel.m_Alpha;
+		m_Text.color = color;
 	}
 }

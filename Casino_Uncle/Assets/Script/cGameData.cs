@@ -155,12 +155,16 @@ public class cGameData : ScriptableObject {
 
 		reader.Close ();
 
+		if (m_Money < 100) {
+			m_Money = 100;
+		}
+
 		m_Bet = 100;
 	}
 
 	//今までで一番稼いだ金額と現在の金額をセーブ
-	public void Save(){
-		if (m_Money < 100) {
+	public void Save( bool end = false ){
+		if (m_Money < 100 && end == true) {
 			m_Money = 100;
 		}
 

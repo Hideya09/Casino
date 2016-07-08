@@ -33,6 +33,7 @@ public class cDeckModel : ScriptableObject {
 	public cBattleCardModel m_bcModel;
 
 	//使用したかどうか
+	[SerializeField]
 	private bool[] m_Deck;
 
 	//どの手札を選択したか
@@ -111,7 +112,7 @@ public class cDeckModel : ScriptableObject {
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].m_CardNumber = random [i];
 				m_selcModel [i].SetSelect ();
-				m_selcModel [i].Init (m_Position, HandOutSpeed);
+				m_selcModel [i].Init (m_BasePosition, HandOutSpeed);
 
 				if (random [i] == 2 || random [i] == 3 || random [i] == 4) {
 					++doubleCharengeFlag;
@@ -136,14 +137,26 @@ public class cDeckModel : ScriptableObject {
 		}
 	}
 
-	public bool EditCard(){
+	public bool EditCard(bool start = false){
 		m_bcModel.Init ();
 
 		if (DeckCheck () == true) {
 			//使用した部分に新しいカードを設定し、他は選択可能にする
 
+			int count = 0;
 			for (int i = 0; i < m_selcModel.Length; ++i) {
+				if (m_selcModel [i].m_CardNumber == DeckMax) {
+					break;
+				} else {
+					++count;
+				}
+			}
+			if (count == m_selcModel.Length) {
+				return false;
+			}
 
+
+			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].SetSelect ();
 
 				if (m_selcModel [i].m_CardNumber == DeckMax) {
@@ -165,6 +178,9 @@ public class cDeckModel : ScriptableObject {
 							m_selcModel [i].m_CardNumber = number;
 						}
 					} while(m_selcModel [i].m_CardNumber == DeckMax);
+					m_selcModel [i].Init (m_BasePosition, HandOutSpeed);
+				} else if (start == true) {
+					m_selcModel[i].Init (m_BasePosition, HandOutSpeed);
 				}
 			}
 
@@ -179,14 +195,18 @@ public class cDeckModel : ScriptableObject {
 				m_DoubleBattle = true;
 			}
 
-			m_selcModel [m_SelectNumber].Init (m_Position, HandOutSpeed);
-
 			return true;
 		} else {
 			//初期化のみ行う
 
+			m_selcModel [m_SelectNumber].End ();
+
 			for (int i = 0; i < m_selcModel.Length; ++i) {
 				m_selcModel [i].SetSelect ();
+
+				if (start == true) {
+					m_selcModel[i].Init (m_BasePosition, HandOutSpeed);
+				}
 			}
 
 			m_selcModel [m_SelectNumber].End ();

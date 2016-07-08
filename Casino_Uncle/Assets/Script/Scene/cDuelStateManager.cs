@@ -154,6 +154,8 @@ public class cDuelStateManager : ScriptableObject {
 		m_buttonModel.Init ();
 		m_buttonModel.Black ();
 
+		m_dModel.RandomSet ();
+
 		m_Win = false;
 
 		m_State = eDuelState.eDuelState_BattleInit;
@@ -243,9 +245,9 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void Shuffle(){
 		//三枚のカードをランダムで決定
-		m_dModel.RandomSet ();
+		m_dModel.EditCard (true);
 		m_edModel.Hind ();
-		m_edModel.RandomSet (m_dModel.GetSelect (), m_gData.GetWin ());
+		m_edModel.RandomSet (true);
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
@@ -271,20 +273,16 @@ public class cDuelStateManager : ScriptableObject {
 	private void CardEdit(){
 
 		//カードを一枚手札に加える
-		bool edit = m_dModel.EditCard ();
+		m_dModel.EditCard ();
 		m_edModel.Hind ();
-		edit &= m_edModel.EditCard ();
+		m_edModel.RandomSet ();
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
 			m_gData.SetDouble ();
 		}
-
-		if (edit == true) {
-			m_State = eDuelState.eDuelState_HandOut;
-		} else {
-			m_State = eDuelState.eDuelState_SelectStart;
-		}
+			
+		m_State = eDuelState.eDuelState_HandOut;
 	}
 
 	private void SelectStart(){

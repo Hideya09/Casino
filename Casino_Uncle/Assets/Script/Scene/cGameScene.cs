@@ -96,6 +96,8 @@ public class cGameScene : cSceneBase {
 				if (m_State == eGameSceneList.eGameSceneList_Duel) {
 					//デュエルステートの初期化
 					m_DuelStateManager.Init ();
+
+					m_gData.Save ();
 				} else {
 					//前回ステートにベットをセット
 					m_BufState = eGameSceneList.eGameSceneList_BetDialog;
@@ -323,6 +325,8 @@ public class cGameScene : cSceneBase {
 			}
 
 			if (m_State != eGameSceneList.eGameSceneList_Pay) {
+				m_gData.Save ();
+
 				m_BufState = eGameSceneList.eGameSceneList_Pay;
 
 				//自身を破棄
@@ -357,7 +361,7 @@ public class cGameScene : cSceneBase {
 
 			m_fadeModel.FadeExec ();
 			if (m_fadeModel.GetState () == cFadeInOutModel.eFadeState.FadeOutStop) {
-				m_gData.Save ();
+				m_gData.Save (true);
 
 				//修了確認ダイアログを経由してきた場合
 				if (m_BufState == eGameSceneList.eGameSceneList_MoveEnd) {
