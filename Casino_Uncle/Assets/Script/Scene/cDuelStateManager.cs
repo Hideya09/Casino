@@ -235,6 +235,7 @@ public class cDuelStateManager : ScriptableObject {
 		if (endFlag == true) {
 			endFlag &= m_eModel.Start ();
 			endFlag &= m_hpEManager.Fade ();
+			endFlag &= m_edModel.Up ();
 			if (endFlag == true) {
 				if (m_startModel.Exec () == true) {
 					++m_State;
@@ -247,7 +248,7 @@ public class cDuelStateManager : ScriptableObject {
 		//三枚のカードをランダムで決定
 		m_dModel.EditCard (true);
 		m_edModel.Hind ();
-		m_edModel.RandomSet (true);
+		m_edModel.RandomSet ();
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
@@ -275,7 +276,7 @@ public class cDuelStateManager : ScriptableObject {
 		//カードを一枚手札に加える
 		m_dModel.EditCard ();
 		m_edModel.Hind ();
-		m_edModel.RandomSet ();
+		m_edModel.EditCard ();
 		m_gData.CardMinus ();
 
 		if (m_dModel.m_DoubleBattle) {
@@ -316,7 +317,7 @@ public class cDuelStateManager : ScriptableObject {
 
 	private void EnemySelect(){
 		//敵の出すカードを選ぶ
-		m_edModel.Select (m_SwingDownTime, m_gData.GetWin ());
+		m_edModel.Select (m_SwingDownTime);
 		++m_State;
 	}
 
